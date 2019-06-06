@@ -1,0 +1,43 @@
+{% extends "core/base_layout_club.html" %}
+
+{%block title%}Miembros{%endblock%}
+{%block content%}     
+  <section class="page-section about-heading">
+    <div class="container">
+      <h2>Miembros del Club</h2>
+      <tr>
+      <a class="btn btn-primary btn-rounded" style="backgroundcolor:'blue';" href="{% url 'miembros:create' %}">Añadir Miembro</a>
+      <br/>
+      </tr>
+      <br/>
+      <table class="table table-striped" style="text-align:center;">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Rut</th>
+            <th scope="col">Genero</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido paterno</th>
+            <th scope="col">Fecha de nacimiento</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+          {%for miembro in miembro_list%}
+            <tr>
+              <th scope="row">{{miembro.rut}}</th>
+              <td>{{miembro.genero}}</td>
+              <td>{{miembro.nombres}}</td>
+              <td>{{miembro.apellido_p}}</td>
+              <td>{{miembro.fecha_nacimiento}}</td>
+              <td>{{miembro.direccion}}</td>                
+              <td><a href="{% url 'miembros:miembro' miembro.id %}" title="Ver Detalle">🔎</a>
+              <a href="{% url 'miembros:update' miembro.id %}" title="Modificar miembro">✍</a>
+              <a href="{% url 'miembros:delete' miembro.id %}" title="Eliminar miembro">❌</a></td>
+            </tr>
+          {%endfor%}
+        </tbody>
+      </table>  
+    </div>
+  </section>
+{%endblock%}

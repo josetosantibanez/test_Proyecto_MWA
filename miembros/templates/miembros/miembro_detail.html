@@ -1,0 +1,103 @@
+{% extends 'core/base_layout_club.html' %}
+{% load static %}
+{% block title %}Miembro{% endblock %}
+{% block content %}
+<main role="main">
+  <div class="container mt-4">
+    <h3>Detalle de {{miembro.nombres}} {{miembro.apellido_p}} {{miembro.apellido_m}}</h3>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="rut">Rut: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" readonly value="{{miembro.rut}}"></input>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="rut">Nombres: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" readonly value="{{miembro.nombres}}"></input>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="rut">Apellido paterno: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" readonly value="{{miembro.apellido_p}}"></input>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="rut">Apellido materno: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" readonly value="{{miembro.apellido_m}}"></input>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="rut">Fecha de nacimiento: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" readonly value="{{miembro.fecha_nacimiento}}"></input>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="rut">Correo electronico: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" readonly value="{{miembro.correo}}"></input>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="rut">Numero celular: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" readonly value="{{miembro.celular}}"></input>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="rut">Direccion: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" readonly value="{{miembro.direccion}}"></input>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label" for="rut">Género: </label>
+          <div class="col-sm-9">
+            <input class="form-control" type="text" readonly value="{{miembro.genero}}"></input>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group row">
+        {% if request.user.is_staff %}
+          <a class="btn btn-primary btn-rounded ml-auto" href="{% url 'miembros:update' miembro.id %}">Modificar Miembro</a>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

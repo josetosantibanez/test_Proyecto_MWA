@@ -1,0 +1,48 @@
+{%extends "core/base_layout_club.html"%}
+{%block title%}Noticias{%endblock%}
+{%load static%}
+{%block content%}
+
+    <section class="page-section cta  ">
+      <div class="container" >
+        <div style="display:center" >
+          <tr >
+            {% if request.user.is_authenticated %}
+              {% include 'noticias/includes/noticias_menu.html' %}
+            {% endif %}
+            <br/>
+          </tr>
+        </div>
+        {%for noticia in noticia_list%}
+        <div class="row">
+          <div class="col-xl-9 mx-auto">
+            <div class="cta-innerv text-center rounded">
+              <h2 class="section-heading mb-5">
+                <span class="section-heading-upper">{{noticia.titulo}}</span>
+                <span class="section-heading-lower">{{noticia.subtitulo}}</span>
+              </h2>
+              <p class="mb-0">
+                <img style="width:400px; height:200px" class="mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{noticia.imagen.url}}" alt="">
+              </p>
+              <p class="mb-0 mbt">
+                {{noticia.cuerpo|safe}}
+              </p>
+              {%if noticia.url_noticia %}
+              <p class="mb-0 mbt">
+                <a class="link" href = {{noticia.url_noticia}}>Ver fuente original</a>
+              </p>
+              {%endif%}
+            <a class="btn btn-primary " href="{% url 'noticias:noticia' noticia.id noticia.titulo|slugify %}" >Leer más</a>
+            {% if request.user.is_staff %}
+            <a class="btn btn-primary " href="{% url 'noticias:update' noticia.id %}" >Modificar Noticia</a>
+            <a class="btn btn-primary " href="{% url 'noticias:delete' noticia.id %}" >Eliminar Noticia</a>
+            {% endif %}
+            </div>
+          </div>
+        </div>
+        {%endfor%}
+      </div>
+    </section>
+  
+{%endblock%}
+

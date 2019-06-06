@@ -1,0 +1,33 @@
+{% extends 'core/base_layout_club.html' %}
+{% load static %}
+{% block title %}Evento {{evento.nombre}}{% endblock %}
+{% block content %}
+<main role="main">
+  <div class="container mt-4">
+    <h3>Detalle de {{evento.nombre}}</h3>
+    <br/>
+        <div class="product-item">
+          <div class="product-item-title d-flex">
+            <div class="bg-faded p-5 d-flex mr-auto rounded">
+              <h2 class="section-heading mb-0">
+                <span class="section-heading-upper">{{evento.fecha}}</span>
+                <span class="section-heading-lower">{{evento.nombre}}</span>
+              </h2>
+            </div>
+          </div>
+          <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{evento.imagen.url}}" width = 600 heigth = 1200 alt="">
+          <div class="product-item-description d-flex ml-auto">
+            <div class="bg-faded p-5 rounded">
+              <p class="mb-0">Cupos: {{evento.cupos}}<br>{{evento.descripcion|safe}}<br>Ubicacion: {{evento.ubicacion}}<br>Te esperamos</p>
+            </div>
+          </div>
+          
+            {% if request.user.is_staff %}
+            <a class="btn btn-primary " href="{% url 'eventos:update' evento.id %}" >Modificar Evento</a>
+            <a class="btn btn-primary " href="{% url 'eventos:delete' evento.id %}" >Eliminar Evento</a>
+            {% endif %}
+          <hr size="10" style="color: #0056b2;" width="75%"/>
+        </div>
+  </div>
+</main>
+{% endblock %}

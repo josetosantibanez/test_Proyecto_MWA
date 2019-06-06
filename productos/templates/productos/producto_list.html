@@ -1,0 +1,40 @@
+
+{% extends "core/base_layout_club.html" %}
+_club
+{%block title%}Productos{%endblock%}
+{%block content%}
+    <section class="page-section about-heading">
+    
+      <div class="container">
+      
+      <tr>
+        <a class="btn btn-primary mt-3" href="{%url 'productos:create'%}" >Añadir Productos</a>
+      </tr>
+      <br/>
+      
+      <div class="bg-faded rounded p-5">
+      <h2>Productos</h2>
+        <ul class="list-unstyled">
+          {%for producto in producto_list%}
+            <li class="media">
+              <img class="mr-3" src="{{producto.imagen.url}}" alt="Generic placeholder image" style="height:250px; width:200px;">
+              <div class="media-body">
+                <h5 class="mt-0 mb-1">{{producto.nombre}}</h5>
+                {{producto.descripcion|safe}}<br>
+                <strong>{{producto.proporcion}}<br></strong>
+                <strong>Disponible: {{producto.stock}} gramos.</strong>
+            <a style="width:150px; height:50px;" height=50 class="btn btn-primary " href="{% url 'productos:producto' producto.id producto.nombre|slugify %}" >Leer más</a>
+            {% if request.user.is_staff %}
+            <a style="width:150px; height:50px;" height=50 class="btn btn-primary " href="{% url 'productos:update' producto.id %}" >Modificar Producto</a>
+            <a style="width:150px; height:50px;" height=50 class="btn btn-primary " href="{% url 'productos:delete' producto.id %}" >Eliminar Producto</a>
+            {% endif %}
+              </div>
+            
+            </li><hr>
+          {%endfor%}
+        </ul>  
+      </div>
+      
+      </div>
+    </section>
+{%endblock%}

@@ -1,0 +1,120 @@
+{% comment %} 
+{% extends 'core/base_layout_club.html' %}
+{% load static %}
+{% block title %}Iniciar sesión{% endblock %}
+{% block content %}
+<style>.errorlist{color:red;}</style>
+<main role="main">
+  <div class="container">
+    <div class="row mt-3">
+      <div class="col-md-9 mx-auto mb-5">
+      {% if 'register' in request.GET %}
+        <p style="color:green;">Usuario registrado correctamente, ya puede iniciar sesión</p>
+      {% endif %}
+        <form action="" method="post">{% csrf_token %}
+          <h3 class="mb-4">Iniciar sesión</h3>
+          {% if form.non_field_errors %}
+            <p style="color:red">Usuario o contraseña incorrectos, prueba de nuevo.</p>
+          {% endif %}
+          <p>
+            <input type="text" name="username" autofocus maxlength="254" required
+              id="id_username" class="form-control" placeholder="Nombre de usuario"/>
+          </p>
+          <p>
+            <input type="password" name="password" required
+              id="id_password" class="form-control" placeholder="Contraseña"/>
+          </p>
+          <p><input type="submit" class="btn btn-primary btn-block" value="Acceder"></p>
+          <p>
+          ¿A olvidado su contraseña?. Haga click <a href="{% url 'password_reset' %}">aqui</a> para recuperar contraseña
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %} {% endcomment %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>Iniciar sesión</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="{% static 'registration/vendor/mdi/css/materialdesignicons.min.css' %}">
+  <link rel="stylesheet" href="{% static 'registration/vendor/base/vendor.bundle.base.css' %}">
+  <!-- endinject -->
+  <!-- plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="{% static 'registration/css/style.css' %}">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="{% static 'registration/img/favicon.png' %}" />
+</head>
+
+<body>
+
+<style>.errorlist{color:red;}</style>
+  <div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth px-0">
+        <div class="row w-100 mx-0">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left py-5 px-4 px-sm-5">
+              <div class="brand-logo">
+                <img src="{% static 'registration/images/logo.svg' %}" alt="logo">
+              </div>
+              <h4>Inicie sesión para continuar</h4>
+              <form class="pt-3" method="post">{% csrf_token %}
+              {% if form.non_field_errors %}
+                <p style="color:red">Usuario o contraseña incorrectos, prueba de nuevo.</p>
+              {% endif %}
+                <div class="form-group">
+                  <input type="text" name="username" autofocus maxlength="254" required
+              id="id_username" class="form-control" placeholder="Nombre de usuario"/>
+                </div>
+                <div class="form-group">
+                  <input type="password" name="password" required
+              id="id_password" class="form-control" placeholder="Contraseña"/>
+                </div>
+                <div class="mt-3">
+                  <p><input type="submit" class="btn btn-primary btn-block" value="Acceder"></p>
+                </div>
+                <div class="my-2 d-flex justify-content-between align-items-center">
+                  <div class="form-check">
+                    <label class="form-check-label text-muted">
+                      <input type="checkbox" class="form-check-input">
+                      Mantener sesión iniciada
+                    </label>
+                  </div>
+                  <a href="{% url 'password_reset' %}" class="auth-link text-black">¿Olvido su contraseña?</a>
+                </div>
+                
+                <div class="text-center mt-4 font-weight-light">
+                  Don't have an account? <a href="register.html" class="text-primary">Create</a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- content-wrapper ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="{% static 'registration/vendor/base/vendor.bundle.base.js' %}"></script>
+  <!-- endinject -->
+  <!-- inject:js -->
+  <script src="{% static 'registration/js/off-canvas.js' %}"></script>
+  <script src="{% static 'registration/js/hoverable-collapse.js' %}"></script>
+  <script src="{% static 'registration/js/template.js' %}"></script>
+  <!-- endinject -->
+</body>
+
+</html>
