@@ -1,41 +1,3 @@
-{% comment %} 
-{% extends 'core/base_layout_club.html' %}
-{% load static %}
-{% block title %}Iniciar sesión{% endblock %}
-{% block content %}
-<style>.errorlist{color:red;}</style>
-<main role="main">
-  <div class="container">
-    <div class="row mt-3">
-      <div class="col-md-9 mx-auto mb-5">
-      {% if 'register' in request.GET %}
-        <p style="color:green;">Usuario registrado correctamente, ya puede iniciar sesión</p>
-      {% endif %}
-        <form action="" method="post">{% csrf_token %}
-          <h3 class="mb-4">Iniciar sesión</h3>
-          {% if form.non_field_errors %}
-            <p style="color:red">Usuario o contraseña incorrectos, prueba de nuevo.</p>
-          {% endif %}
-          <p>
-            <input type="text" name="username" autofocus maxlength="254" required
-              id="id_username" class="form-control" placeholder="Nombre de usuario"/>
-          </p>
-          <p>
-            <input type="password" name="password" required
-              id="id_password" class="form-control" placeholder="Contraseña"/>
-          </p>
-          <p><input type="submit" class="btn btn-primary btn-block" value="Acceder"></p>
-          <p>
-          ¿A olvidado su contraseña?. Haga click <a href="{% url 'password_reset' %}">aqui</a> para recuperar contraseña
-          </p>
-        </form>
-      </div>
-    </div>
-  </div>
-</main>
-{% endblock %} {% endcomment %}
-
-
 <!DOCTYPE html>
 <html lang="en">
 {% load static %}
@@ -86,16 +48,12 @@
                 </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
-                    <label class="form-check-label text-muted">
-                      <input type="checkbox" class="form-check-input">
-                      Mantener sesión iniciada
-                    </label>
                   </div>
                   <a href="{% url 'password_reset' %}" class="auth-link text-black">¿Olvido su contraseña?</a>
                 </div>
                 
                 <div class="text-center mt-4 font-weight-light">
-                  Don't have an account? <a href="register.html" class="text-primary">Create</a>
+                  ¿No tienes una cuenta? <a href="{% url 'signup' %}" class="text-primary">Registrarse</a>
                 </div>
               </form>
             </div>
