@@ -1,5 +1,6 @@
 from django.db import models
 from clubes.models import Club
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -14,6 +15,7 @@ class Miembro(models.Model):
     direccion = models.CharField(max_length=200, verbose_name = "Direccion")
     genero = models.CharField(max_length=1, verbose_name = "Genero")
     club_id = models.ForeignKey(Club,verbose_name="Club",on_delete=models.CASCADE,default=1)
+    user_id = models.OneToOneField(User,verbose_name = "Usuario", on_delete=models.CASCADE, default = 99)
     created = models.DateTimeField(auto_now_add=True, verbose_name = "Fecha de creacion")
     updated = models.DateTimeField(auto_now = True, verbose_name = "Fecha de ult. actualizacion")
 

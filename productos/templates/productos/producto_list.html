@@ -1,6 +1,4 @@
-
 {% extends "core/base_layout_club.html" %}
-_club
 {%block title%}Productos{%endblock%}
 {%block content%}
     <section class="page-section about-heading">
@@ -8,7 +6,10 @@ _club
       <div class="container">
       
       <tr>
-        <a class="btn btn-primary mt-3" href="{%url 'productos:create'%}" >Añadir Productos</a>
+
+            <a class="btn btn-primary mt-3" href="{%url 'productos:create'%}" >{% if request.user.profile.bio == "Probando" %}Agregar Producto{%endif%}</a>
+
+
       </tr>
       <br/>
       
