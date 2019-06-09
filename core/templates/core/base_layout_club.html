@@ -157,6 +157,14 @@
             <span class="menu-title">Noticias</span>
           </a>
         </li>
+        {%if request.user.profile.tipo_cuenta_id == 2 or request.user.profile.tipo_cuenta_id == 4%}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'noticias:noticias' %}">
+            <i class="mdi mdi-chart-pie menu-icon"></i>
+            <span class="menu-title">Estadisticas</span>
+          </a>
+        </li>
+        {%endif%}
       </ul>
     </nav>
     <ul>

@@ -8,11 +8,15 @@ def custom_upload_to(instance, filename):
     old_instance.avatar.delete()
     return "profiles/" + filename
 
+class Tipo_Cuenta(models.Model):
+    tipo = models.CharField(max_length = 20)
+
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(upload_to=custom_upload_to, null=True, blank=True)
     bio = models.TextField(null=True, blank=True)
     link = models.URLField(max_length=200, null=True, blank=True)
+    tipo_cuenta = models.ForeignKey(Tipo_Cuenta, on_delete=models.CASCADE, default = 1)
 
 @receiver(post_save, sender = User)
 def ensure_profile_exists(sender, instance, **kwargs):

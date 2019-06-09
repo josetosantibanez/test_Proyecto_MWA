@@ -83,8 +83,8 @@ WSGI_APPLICATION = 'zMedicalWeedApp.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mwapp',
-        'USER': 'adminmwapp',
+        'NAME': 'Medical_Weed_App',
+        'USER': 'admin_medical_weed_app',
         'PASSWORD': 'superadmin1289',
         'HOST': 'localhost',
         'PORT': '3306',
