@@ -1,10 +1,8 @@
 from django.db import models
-from clubes.models import Club
-from django.contrib.auth.models import User
 
 # Create your models here.
 
-class Miembro(models.Model):
+class Paciente(models.Model):
     rut = models.CharField(max_length=10, verbose_name = "Rut")
     nombres = models.CharField(max_length=40, verbose_name = "Nombres")
     apellido_p = models.CharField(max_length=20, verbose_name = "Apellido paterno")
@@ -13,18 +11,9 @@ class Miembro(models.Model):
     correo = models.CharField(max_length=100, verbose_name = "Correo electronico")
     celular = models.CharField(max_length=12, verbose_name = "Numero celular")
     direccion = models.CharField(max_length=200, verbose_name = "Direccion")
-    genero = models.CharField(max_length=15, verbose_name = "Genero")
-    club_id = models.ForeignKey(Club,verbose_name="Club",on_delete=models.CASCADE,default=1)
-    user_id = models.OneToOneField(User,verbose_name = "Usuario", on_delete=models.CASCADE, default = 99)
+    genero = models.CharField(max_length=1, verbose_name = "Genero")
     created = models.DateTimeField(auto_now_add=True, verbose_name = "Fecha de creacion")
     updated = models.DateTimeField(auto_now = True, verbose_name = "Fecha de ult. actualizacion")
 
-    class Meta:
-        verbose_name = "Miembro"
-        verbose_name_plural = "Miembros"
-        ordering = ['apellido_p']
 
-    def __str__(self):
-        ret = self.apellido_p + " " + self.nombres
-        return ret
-    
+

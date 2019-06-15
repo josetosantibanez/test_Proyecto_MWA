@@ -4,19 +4,109 @@
 {% block content %}
 <main role="main">
   <div class="container">
-    <div class="row mt-3 mb-5">
-      <div class="col-md-9 mx-auto">
+
         <form action="" method="post" class="">{% csrf_token %}
-          <table>
-          {{ form.as_table}}
-          </table>
-          <div class = "text-center">
-            <input type="submit" class="btn btn-primary btn-rounded" value="Agregar miembro" />
-            <button type="button" class="btn btn-inverse-secondary btn-rounded btn-fw" href="{% url 'miembros:miembros' %}">Volver</button>
-          </div>
+          <div class="col-12 grid-margin">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Horizontal Two column</h4>
+                  <form class="form-sample">
+                    <p class="card-description">
+                      Personal info
+                    </p>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Rut</label>
+                          <div class="col-sm-9">
+                            {{form.rut}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Nombre</label>
+                          <div class="col-sm-9">
+                            {{form.nombres}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Apellido paterno</label>
+                          <div class="col-sm-9">
+                            {{form.apellido_p}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Apellido materno</label>
+                          <div class="col-sm-9">
+                            {{form.apellido_m}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Fecha de nacimiento</label>
+                          <div class="col-sm-9">
+                            {{form.fecha_nacimiento}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Correo electronico</label>
+                          <div class="col-sm-9">
+                            {{form.correo}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Celular</label>
+                          <div class="col-sm-9">
+                            {{form.celular}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Dirección</label>
+                          <div class="col-sm-9">
+                            {{form.direccion}}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Género</label>
+                          <div class="col-sm-9">
+                            {{form.genero}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class = "text-center">
+                      <input type="submit" class="btn btn-primary btn-rounded" value="Agregar miembro" />
+                      <button type="button" class="btn btn-inverse-secondary btn-rounded btn-fw" href="{% url 'miembros:miembros' %}">Volver</button>
+                    </div>
+                    </div>
+
+                  </form>
+                </div>
+              </div>
+            </div>
         </form>
       </div>
-    </div>
-  </div>
+
 </main>
 {% endblock %}
