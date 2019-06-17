@@ -4,9 +4,8 @@
 {% block content %}
 <main role="main">
   <div class="container">
-
         <form action="" method="post" class="">{% csrf_token %}
-          <div class="col-12 grid-margin">
+          <div class="col-12 ">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Horizontal Two column</h4>
@@ -17,7 +16,7 @@
                     <div class="row">
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Rut</label>
+                          <label class="col-sm-3 col-form-label">{{form.rut.label_tag}}</label>
                           <div class="col-sm-9">
                             {{form.rut}}
                           </div>
@@ -25,7 +24,7 @@
                       </div>
                       <div class="col-md-6">
                         <div class="form-group row">
-                          <label class="col-sm-3 col-form-label">Nombre</label>
+                          <label class="col-sm-3 col-form-label">{{form.nombres.label_tag}}</label>
                           <div class="col-sm-9">
                             {{form.nombres}}
                           </div>
@@ -56,6 +55,9 @@
                           <label class="col-sm-3 col-form-label">Fecha de nacimiento</label>
                           <div class="col-sm-9">
                             {{form.fecha_nacimiento}}
+                            {% if form.fecha_nacimiento.errors %}
+                              <p class="text-danger">- Porfavor ingrese una fecha válida</p>
+                            {%endif%}
                           </div>
                         </div>
                       </div>
