@@ -1,5 +1,9 @@
 from django import forms
 from .models import Miembro
+from django.core.exceptions import ValidationError
+from itertools import cycle
+import datetime
+from datetime import date
 
 class MiembroForm(forms.ModelForm):
     class Meta:
@@ -37,6 +41,44 @@ class MiembroForm(forms.ModelForm):
             'genero':'Género',
         }
 
+    def clean_rut(self):
+        rut = self.cleaned_data['rut']
+        miembros = Miembro.objects.all()
+        
+        rut = rut.upper()
+        rut = rut.replace("-","")
+        rut = rut.replace(".","")
+        aux = rut[:-1]
+        dv = rut[-1:]
+    
+        revertido = map(int, reversed(str(aux)))
+        factors = cycle(range(2,8))
+        s = sum(d * f for d, f in zip(revertido,factors))
+        res = (-s)%11
+    
+        if str(res) == dv:
+            pass
+        elif dv=="K" and res==10:
+            pass
+        else:
+            raise ValidationError("El rut ingresado no es válido")
 
+        for miembro in miembros:
+            if miembro.rut == rut:
+                raise ValidationError("El rut ingresado ya esta registrado")
+                break
+        return rut
+
+    def clean_fecha_nacimiento(self):
+        fecha = self.cleaned_data['fecha_nacimiento']
+        fecha_actual = datetime.date.today()
+        diferencia = (fecha_actual - fecha).days
+
+        if diferencia < 6570:
+            raise ValidationError("Debe ser mayor de edad para ingresar como miembro")
+        else:
+            pass
+
+        return fecha
        
     
