@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Miembro(models.Model):
-    rut = models.CharField(max_length=10, verbose_name = "Rut")
+    rut = models.CharField(max_length=12, verbose_name = "Rut")
     nombres = models.CharField(max_length=40, verbose_name = "Nombres")
     apellido_p = models.CharField(max_length=20, verbose_name = "Apellido paterno")
     apellido_m = models.CharField(max_length=20, verbose_name = "Apellido materno")

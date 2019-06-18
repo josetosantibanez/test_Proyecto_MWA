@@ -5,8 +5,9 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
-from .forms import ProductoForm
-from .models import Producto
+from .forms import ProductoForm, ReservaForm
+from .models import Producto, Reserva
+from miembros.models import Miembro
 
 # Create your views here.
 
@@ -19,8 +20,8 @@ class StaffRequiredMixin(object):
 class ProductoListView(ListView):
     model = Producto
 
-class ProductoDetailView(DetailView):
-    model = Producto
+# class ProductoDetailView(DetailView):
+#     model = Producto
 
 @method_decorator(staff_member_required,name='dispatch')
 class ProductoCreateView(CreateView):
@@ -41,3 +42,32 @@ class ProductoUpdateView(UpdateView):
 class ProductoDeleteView(DeleteView):
     model = Producto
     success_url = reverse_lazy('productos:productos')
+
+def reservar_producto(request,pk):
+    producto = get_object_or_404(Producto,id=pk)
+    miembros = Miembro.objects.all()
+    var=""
+    if request.method == "POST":
+        form = ReservaForm(request.POST, instance=producto)
+        if form.is_valid():
+            for miembro in miembros:
+                if miembro.user_id_id == request.user.id:     
+                    var = miembro.user_id_id
+                    break
+                else:
+                    pass
+            
+            reserva = form.save(commit=False)
+            reserva.miembro = var
+            reserva.producto = producto.id
+            reserva.estado = 'P'
+            print (reserva)
+            reserva.save()
+
+            return redirect('productos:productos')
+    else:
+        form = ReservaForm(instance=producto)
+    return render (request,'productos/producto_detail.html',{'form':form,'producto':producto})
+    
+            
+            

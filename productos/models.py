@@ -1,5 +1,6 @@
 from django.db import models
 from clubes.models import Club
+from miembros.models import Miembro
 
 # Create your models here.
 
@@ -21,3 +22,20 @@ class Producto(models.Model):
     
     def __str__(self):
         return self.nombre
+
+class Reserva(models.Model):
+    producto = models.ForeignKey(Producto,on_delete=models.CASCADE,default=1)
+    miembro = models.ForeignKey(Miembro,on_delete=models.CASCADE,default=1)
+    cantidad_reservar = models.SmallIntegerField(verbose_name="Cantidad a reservar")
+    estado = models.CharField(max_length=1,verbose_name = "Estado",default='P')
+    created = models.DateTimeField(auto_now_add=True, verbose_name = "Fecha de creacion")
+    updated = models.DateTimeField(auto_now = True, verbose_name = "Fecha de ult. actualizacion")
+
+    class Meta:
+        verbose_name = "Reserva"
+        verbose_name_plural = "Reservas"
+        ordering = ['created', 'updated']
+
+    
+    def __str__(self):
+        return self.producto

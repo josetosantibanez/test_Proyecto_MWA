@@ -10,7 +10,7 @@
         <div>
             {%if 'ok' in request.GET%}
               <p style="color: green;">El producto se ha actualizado correctamente
-              <a href = "{% url 'productos:producto' producto.id producto.nombre|slugify %}">Haz Click aqui para ver el resultado</a>
+              <a href = "{% url 'productos:producto' producto.id  %}">Haz Click aqui para ver el resultado</a>
               </p>
             {%endif%}
             <form action="" method="post" enctype=multipart/form-data>{% csrf_token %}

@@ -5,26 +5,164 @@
 {% block content %}
 <main role="main">
   <div class="container">
-    <div class="row mt-3 mb-5">
-      <div class="col-md-9 mx-auto">
-        <div>
+
             {%if 'ok' in request.GET%}
               <p style="color: green;">El miembro rut, {{miembro.rut}} se ha actualizado correctamente
               <a href = "{% url 'miembros:miembro' miembro.id %}">Haz Click aqui para ver el resultado</a>
               </p>
             {%endif%}
-            <form action="" method="post" enctype=multipart/form-data>{% csrf_token %}
-              <table >
-              {{ form.as_table}}
-              </table>
+            <form action="" method="post" class="">{% csrf_token %}
+          <div class="col-12 ">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Modificar miembro</h4>
+                  <form class="form-sample">
+                    <p class="card-description">
+                      Información de {{miembro.nombres}} {{miembro.apellido_p}}
+                    </p>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">{{form.rut.label_tag}}</label>
+                          <div class="col-sm-9">
+                            <input type="text" class ="form-control mb-2" value="{{miembro.rut}}" readonly></input>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">{{form.nombres.label_tag}}</label>
+                          <div class="col-sm-9">
+                            {{form.nombres}}
+                            {% if form.nombres.errors %}
+                              <ul>
+                                {%for error in form.nombres.errors%}
+                                  <li style="list-style:none;" class="text-danger">{{form.nombres.errors}}</li>
+                                {%endfor%}
+                              </ul>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Apellido paterno</label>
+                          <div class="col-sm-9">
+                            {{form.apellido_p}}
+                            {% if form.apellido_p.errors %}
+                              <ul>
+                                {%for error in form.apellido_p.errors%}
+                                  <li style="list-style:none;" class="text-danger">{{form.apellido_p.errors}}</li>
+                                {%endfor%}
+                              </ul>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Apellido materno</label>
+                          <div class="col-sm-9">
+                            {{form.apellido_m}}
+                            {% if form.apellido_m.errors %}
+                              <ul>
+                                {%for error in form.apellido_m.errors%}
+                                  <li style="list-style:none;" class="text-danger">{{form.apellido_m.errors}}</li>
+                                {%endfor%}
+                              </ul>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Fecha de nacimiento</label>
+                          <div class="col-sm-9">
+                            {{form.fecha_nacimiento}}
+                            {% if form.fecha_nacimiento.errors %}
+                              <ul>
+                                {%for error in form.fecha_nacimiento.errors%}
+                                  <li style="list-style:none;" class="text-danger">{{form.fecha_nacimiento.errors}}</li>
+                                {%endfor%}
+                              </ul>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Correo electronico</label>
+                          <div class="col-sm-9">
+                            {{form.correo}}
+                            {% if form.correo.errors %}
+                              <ul>
+                                {%for error in form.correo.errors%}
+                                  <li style="list-style:none;" class="text-danger">{{form.correo.errors}}</li>
+                                {%endfor%}
+                              </ul>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Celular</label>
+                          <div class="col-sm-9">
+                            {{form.celular}}
+                            {% if form.celular.errors %}
+                              <ul>
+                                {%for error in form.celular.errors%}
+                                  <li style="list-style:none;" class="text-danger">{{form.celular.errors}}</li>
+                                {%endfor%}
+                              </ul>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Dirección</label>
+                          <div class="col-sm-9">
+                            {{form.direccion}}
+                            {% if form.direccion.errors %}
+                              <ul>
+                                {%for error in form.direccion.errors%}
+                                  <li style="list-style:none;" class="text-danger">{{form.direccion.errors}}</li>
+                                {%endfor%}
+                              </ul>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Género</label>
+                          <div class="col-sm-9">
+                            {{form.genero}}
+                            {% if form.genero.errors %}
+                              <ul>
+                                {%for error in form.genero.errors%}
+                                  <li style="list-style:none;" class="text-danger">{{form.genero.errors}}</li>
+                                {%endfor%}
+                              </ul>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
               <div class = "text-center">
                 <input type="submit" class="btn btn-primary btn-rounded" value="Modificar miembro" />
                 <input type="button" href="{% url 'miembros:miembros' %}" class="btn btn-primary btn-rounded" value="Volver" />
               </div>
             </form>
         </div>
-      </div>
-    </div>
-  </div>
+      
 </main>
 {% endblock %}

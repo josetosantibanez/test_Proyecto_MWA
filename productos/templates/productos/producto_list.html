@@ -19,10 +19,11 @@
               <div class="media-body">
                 <h5 class="mt-0 mb-1">{{producto.nombre}}</h5>
                 {{producto.descripcion|safe}}<br>
+                {{producto.club_id.nombre_org}}
                 <strong>{{producto.proporcion}}<br></strong>
                 <strong>Disponible: {{producto.stock}} gramos.</strong>
                 <br>
-            <a style="width:150px; height:50px;" height=50 class="btn btn-primary " href="{% url 'productos:producto' producto.id producto.nombre|slugify %}" >Leer más</a>
+            <a style="width:150px; height:50px;" height=50 class="btn btn-primary " href="{% url 'productos:producto' producto.id %}" >Leer más</a>
             {% if request.user.profile.tipo_cuenta == 1 %}
               <a style="width:150px; height:50px;" height=50 class="btn btn-primary " href="{% url 'productos:update' producto.id %}" >Reservar producto</a>
             {% endif %}
