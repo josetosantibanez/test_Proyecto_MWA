@@ -1,6 +1,7 @@
 from django.db import models
 from clubes.models import Club
-from miembros.models import Miembro
+from django.contrib.auth.models import User
+
 
 # Create your models here.
 
@@ -24,8 +25,8 @@ class Producto(models.Model):
         return self.nombre
 
 class Reserva(models.Model):
-    producto = models.ForeignKey(Producto,on_delete=models.CASCADE,default=1)
-    miembro = models.ForeignKey(Miembro,on_delete=models.CASCADE,default=1)
+    producto = models.ForeignKey(Producto,on_delete=models.CASCADE,default=1,blank=True,null=True)
+    usuario = models.ForeignKey(User,on_delete=models.CASCADE,default=1,blank=True,null=True)
     cantidad_reservar = models.SmallIntegerField(verbose_name="Cantidad a reservar")
     estado = models.CharField(max_length=1,verbose_name = "Estado",default='P')
     created = models.DateTimeField(auto_now_add=True, verbose_name = "Fecha de creacion")
@@ -38,4 +39,4 @@ class Reserva(models.Model):
 
     
     def __str__(self):
-        return self.producto
+        return self.usuario

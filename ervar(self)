@@ -1,0 +1,8 @@
+[33m74805c8[m[33m ([m[1;36mHEAD -> [m[1;32mdesarrollo[m[33m, [m[1;31morigin/tester[m[33m, [m[1;31morigin/desarrollo[m[33m)[m En desarrollo las reservas de productos
+[33m67834a2[m Validaciones mas completas en miembro y vista basada en funcion crear miembro
+[33mc58825b[m[33m ([m[1;31morigin/prueba[m[33m)[m Arreglando formulario base, fecha arreglada
+[33mc3ddfc5[m Se agrego el nuevo estilo de formulario a miembro
+[33m379e175[m[33m ([m[1;32mmaster[m[33m)[m Se crean usuarios desde miembro y diferencia por tipo de cuenta
+[33ma0ee166[m[33m ([m[1;31morigin/master[m[33m)[m Antes de crear nueva bdd para tipo_cuenta en profile
+[33m06c2b68[m Incorporacion de creacion de perfiles de usuario
+[33m8db370a[m primer commit proyecto final recien integrado el trigger

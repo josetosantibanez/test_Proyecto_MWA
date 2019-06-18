@@ -32,5 +32,15 @@ class ReservaForm(forms.ModelForm):
         fields = ['cantidad_reservar']
         widgets = {
             'cantidad_reservar':forms.NumberInput(attrs={'class':'form-control'}),
-            # 'estado':forms.RadioSelect(attrs = {'class':'form-check-input'},choices=ESTADO_OPCIONES),
+            'estado':forms.HiddenInput(),
+            'usuario':forms.HiddenInput(),
+            'producto':forms.HiddenInput(),
         }
+    
+    def clean_cantidad_reservar(self):
+        cantidad = self.cleaned_data['cantidad_reservar']
+        if cantidad <= 0:
+            raise ValidationError("No puede reservar por 0 o menos")
+        else:
+            pass
+        return cantidad

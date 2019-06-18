@@ -45,28 +45,20 @@ class ProductoDeleteView(DeleteView):
 
 def reservar_producto(request,pk):
     producto = get_object_or_404(Producto,id=pk)
-    miembros = Miembro.objects.all()
-    var=""
     if request.method == "POST":
-        form = ReservaForm(request.POST, instance=producto)
-        if form.is_valid():
-            for miembro in miembros:
-                if miembro.user_id_id == request.user.id:     
-                    var = miembro.user_id_id
-                    break
-                else:
-                    pass
-            
-            reserva = form.save(commit=False)
-            reserva.miembro = var
-            reserva.producto = producto.id
-            reserva.estado = 'P'
-            print (reserva)
-            reserva.save()
-
+        print("Entro al post")
+        form = ReservaForm(request.POST)
+        if form.is_valid():            
+            print("Formulario valido")
+            form = form.save(commit=False)
+            form.usuario = request.user
+            form.producto = producto
+            form.estado = 'P'
+            form.save()
             return redirect('productos:productos')
     else:
-        form = ReservaForm(instance=producto)
+        print("Renderizando la pagina")
+        form = ReservaForm()
     return render (request,'productos/producto_detail.html',{'form':form,'producto':producto})
     
             
