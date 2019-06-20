@@ -1,2 +1,0 @@
- prueba de pull desde repositorio remoto a repositorio local 
- !!!
