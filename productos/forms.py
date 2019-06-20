@@ -7,12 +7,14 @@ class ProductoForm(forms.ModelForm):
 
     class Meta:
         model = Producto
-        fields = ['nombre','proporcion','descripcion','stock','imagen']
+        fields = ['nombre','proporcion','descripcion','stock','imagen','precio_gramo']
         widgets = {
             'nombre':forms.TextInput(attrs={'class':'form-control'}),
             'proporcion':forms.TextInput(attrs={'class':'form-control'}),
             'descripcion':forms.Textarea(attrs={'class':'form-control'}),
-            'stock':forms.NumberInput(attrs={'class':'form-control'})
+            'stock':forms.NumberInput(attrs={'class':'form-control'}),
+            'imagen':forms.FileInput(attrs={'class':'form-control'}),
+            'precio_gramo':forms.NumberInput(attrs={'class':'form-control'}),
         }
         labels = {
             'nombre':'Producto' ,
@@ -20,7 +22,20 @@ class ProductoForm(forms.ModelForm):
             'descripcion':'Descripción del producto',
             'stock':'Stock disponible',
             'imagen':'Imagen',
+            'precio_gramo':"Precio por gramo"
         }
+    
+    def clean_stock(self):
+        stock = self.cleaned_data['stock']
+        if stock <= 0:
+            raise ValidationError("No se puede agregar un producto sin stock.")
+        return stock
+    
+    def clean_precio_gramo(self):
+        precio_gramo = self.cleaned_data['precio_gramo']
+        if precio_gramo <= 0:
+            raise ValidationError("El producto no puede tener un precio igual o menor a 0.")
+        return precio_gramo
 
 class ReservaForm(forms.ModelForm):
     class Meta:
@@ -43,7 +58,7 @@ class ReservaForm(forms.ModelForm):
         cantidad = self.cleaned_data['cantidad_reservar']
         miembros = Miembro.objects.all()
         if cantidad <= 0:
-            raise ValidationError("No puede reservar por 0 o menos")
+            raise ValidationError("No puede reservar por 0 o menos.")
         else:
             pass
         return cantidad

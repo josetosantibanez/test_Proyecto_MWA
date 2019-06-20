@@ -10,6 +10,7 @@ class Producto(models.Model):
     proporcion = models.CharField(max_length=200,verbose_name="Proporcion en % (Indica/Sativa/Rudelaris)")
     descripcion = models.TextField(verbose_name="Descripción")
     stock = models.SmallIntegerField(verbose_name="Stock disponible(Gramos)")
+    precio_gramo = models.IntegerField(verbose_name = "Precio por gramo", default=8000)
     imagen = models.ImageField(verbose_name="Imagen", upload_to="productos")
     club_id = models.ForeignKey(Club, verbose_name = "Codigo de club",on_delete=models.CASCADE,default=1)
     created = models.DateTimeField(auto_now_add= True,verbose_name="Fecha de creacion")

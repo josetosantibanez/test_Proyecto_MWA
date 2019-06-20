@@ -29,6 +29,17 @@ class ProductoCreateView(CreateView):
     form_class = ProductoForm
     success_url = reverse_lazy('productos:productos')
 
+def agregar_producto(request):
+    if request.method == "POST":
+        form = ProductoForm(request.POST,request.FILES)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect("productos:productos")
+    else:
+        form = ProductoForm()
+    return render(request,'productos/producto_form.html',{'form':form})    
+
 @method_decorator(staff_member_required,name='dispatch')
 class ProductoUpdateView(UpdateView):
     model = Producto
