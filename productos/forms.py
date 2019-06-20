@@ -1,5 +1,6 @@
 from django import forms
 from .models import Producto, Reserva
+from miembros.models import Miembro
 from django.core.exceptions import ValidationError
 
 class ProductoForm(forms.ModelForm):
@@ -30,7 +31,7 @@ class ReservaForm(forms.ModelForm):
             ('E','Entregado'),
         ]
 
-        fields = ['cantidad_reservar']
+        fields = ['cantidad_reservar','estado','usuario','producto']
         widgets = {
             'cantidad_reservar':forms.NumberInput(attrs={'class':'form-control'}),
             'estado':forms.HiddenInput(),
@@ -40,8 +41,15 @@ class ReservaForm(forms.ModelForm):
     
     def clean_cantidad_reservar(self):
         cantidad = self.cleaned_data['cantidad_reservar']
+        miembros = Miembro.objects.all()
         if cantidad <= 0:
             raise ValidationError("No puede reservar por 0 o menos")
         else:
             pass
         return cantidad
+
+    # def clean(self):
+    #     form_data = self.cleaned_data
+    #     miembros = Miembro.objects.all()
+    #     for miembro in miembros:
+    #         if form_data['']

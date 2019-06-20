@@ -4,12 +4,11 @@
 {% block content %}
 <main role="main">
   <div class="container">
-        <form action="" method="post" class="">{% csrf_token %}
+        <form action="" method="post" class="form-sample" enctype=multipart/form-data>{% csrf_token %}
           <div class="col-12 ">
               <div class="card">
                 <div class="card-body">
                   <h4 class="card-title">Argegar nuevo miembro</h4>
-                  <form class="form-sample">
                     <p class="card-description">
                       Información del miembro
                     </p>
@@ -242,7 +241,6 @@
                       <input type="submit" class="btn btn-primary btn-rounded" value="Agregar miembro" />
                       <button type="button" class="btn btn-inverse-secondary btn-rounded btn-fw" href="{% url 'miembros:miembros' %}">Volver</button>
                     </div>
-                  </form>
                 </div>
               </div>
             </div>
