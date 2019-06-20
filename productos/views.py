@@ -55,7 +55,6 @@ def reservar_producto(request,pk):
             form.producto = producto
             form.estado = 'P'
             form.save()
-            return redirect('productos:productos')
     else:
         print("Renderizando la pagina")
         form = ReservaForm()

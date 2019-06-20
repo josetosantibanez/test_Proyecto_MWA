@@ -16,7 +16,7 @@ class MiembroForm(forms.ModelForm):
         ]
 
         fields = ['rut','nombres','apellido_p','apellido_m','fecha_nacimiento',
-        'correo','celular','direccion','genero']
+        'correo','celular','direccion','genero','dosis_diaria','fecha_expiracion_receta','receta','fotocopia_carnet_a','fotocopia_carnet_b']
         
         widgets = {
             'rut':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: 11111111-1'}),
@@ -28,6 +28,11 @@ class MiembroForm(forms.ModelForm):
             'celular':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: +56967878678'}),
             'direccion':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: Avda. Vicuña Mackena 1010'}),
             'genero':forms.RadioSelect(attrs = {'class':'form-check-input'},choices=GENERO_OPCIONES),
+            'dosis_diaria':forms.NumberInput(attrs={'class':'form-control mb-2'}),
+            'fecha_expiracion_receta':forms.DateInput(attrs={'class':'form-control mb-2','placeholder':'Ej: DD/MM/AAAA'}),
+            'receta':forms.FileInput(attrs={'class':'form-control mb-2'}),
+            'fotocopia_carnet_a':forms.FileInput(attrs={'class':'form-control mb-2'}),
+            'fotocopia_carnet_b':forms.FileInput(attrs={'class':'form-control mb-2'}),
         }
         labels = {
             'rut':'Rut' ,
@@ -79,6 +84,16 @@ class MiembroForm(forms.ModelForm):
         else:
             pass
 
+        return fecha
+
+    def clean_fecha_expiracion_receta(self):
+        fecha = self.cleaned_data['fecha_expiracion_receta']
+        fecha_actual = datetime.date.today()
+        diferencia = (fecha_actual - fecha).days
+        if diferencia >= 0:
+            raise ValidationError("Receta ya expirada")
+        else:
+            pass
         return fecha
        
     

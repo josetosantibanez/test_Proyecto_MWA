@@ -25,7 +25,7 @@ class MiembroListView(ListView):
 def agregar_miembro(request):
     args = {}
     if request.method == 'POST':
-        form = MiembroForm(request.POST)
+        form = MiembroForm(request.POST,request.FILES)
         if form.is_valid():     
             form.save()
             return redirect('miembros:miembros')
