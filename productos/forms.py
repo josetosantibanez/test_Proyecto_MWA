@@ -72,8 +72,8 @@ class ReservaForm(forms.ModelForm):
         print("Entro a la validacion general")
         for miembro in miembros:
             print(user)
-            print(miembro.rut)
-            if form_data['usuario'] == miembro.rut:
+            print(miembro.user_id_id)
+            if user.id == miembro.user_id_id:
                 cant = miembro.dosis_diaria * 14
                 print("Cantidad a reservar: {}".format(c))
                 print("Cantidad maxima: {}".format(cant) )

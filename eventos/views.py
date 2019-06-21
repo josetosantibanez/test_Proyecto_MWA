@@ -16,11 +16,11 @@ class StaffRequiredMixin(object):
     def dispatch(self,request,*args,**kwargs):
         return super(StaffRequiredMixin,self).dispatch(request,*args,**kwargs)
 
-@method_decorator(staff_member_required,name='dispatch')
+
 class EventoListView(ListView):
     model = Evento
 
-@method_decorator(staff_member_required,name='dispatch')
+
 class EventoDetailView(DetailView):
     model = Evento
 

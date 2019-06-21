@@ -62,6 +62,7 @@ def reservar_producto(request,pk):
         request.POST['usuario'] = request.user.id
         request.POST['producto'] = producto.id
         request.POST['estado'] = 'P'
+        print(request.POST['usuario'])
         form = ReservaForm(request.POST)
         if form.is_valid():            
             print("Formulario valido")
@@ -71,6 +72,9 @@ def reservar_producto(request,pk):
         print("Renderizando la pagina")
         form = ReservaForm()
     return render (request,'productos/producto_detail.html',{'form':form,'producto':producto})
+
+def ver_reservas(request):
+    return render(request,'productos/listado_reservas.html')
     
             
             
