@@ -59,11 +59,16 @@ def reservar_producto(request,pk):
     if request.method == "POST":
         print("Entro al post, {}".format(request.user))
         request.POST._mutable = True
+        res = request.POST['cantidad_reservar']
+        cant =  int(res) * producto.precio_gramo
+        request.POST['precio_total'] = cant
         request.POST['usuario'] = request.user.id
         request.POST['producto'] = producto.id
         request.POST['estado'] = 'P'
-        print(request.POST['usuario'])
         form = ReservaForm(request.POST)
+        print(producto.precio_gramo)
+        print(res)
+        print(cant)
         if form.is_valid():            
             print("Formulario valido")
             form.save()
@@ -73,8 +78,8 @@ def reservar_producto(request,pk):
         form = ReservaForm()
     return render (request,'productos/producto_detail.html',{'form':form,'producto':producto})
 
-def ver_reservas(request):
-    return render(request,'productos/listado_reservas.html')
+class ReservaListView(ListView):
+    model = Reserva
     
             
             

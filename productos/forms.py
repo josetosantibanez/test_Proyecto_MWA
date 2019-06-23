@@ -46,12 +46,14 @@ class ReservaForm(forms.ModelForm):
             ('E','Entregado'),
         ]
 
-        fields = ['cantidad_reservar','estado','usuario','producto']
+        fields = ['cantidad_reservar','estado','usuario','producto','precio_total']
         widgets = {
             'cantidad_reservar':forms.NumberInput(attrs={'class':'form-control'}),
             'estado':forms.HiddenInput(),
             'usuario':forms.HiddenInput(),
             'producto':forms.HiddenInput(),
+            'precio_total':forms.HiddenInput(),
+            
         }
     
     def clean_cantidad_reservar(self):
@@ -69,14 +71,9 @@ class ReservaForm(forms.ModelForm):
         productos = Producto.objects.all()
         c = form_data['cantidad_reservar']
         user = form_data['usuario']
-        print("Entro a la validacion general")
         for miembro in miembros:
-            print(user)
-            print(miembro.user_id_id)
             if user.id == miembro.user_id_id:
                 cant = miembro.dosis_diaria * 14
-                print("Cantidad a reservar: {}".format(c))
-                print("Cantidad maxima: {}".format(cant) )
                 if c > cant:
                     self._errors['cantidad_reservar']=["La cantidad que desea reservar supera el maximo permitido de dos semanas de dosis."]
                     del form_data['cantidad_reservar']
@@ -89,4 +86,20 @@ class ReservaForm(forms.ModelForm):
                             break
         return form_data
 
+class ListadoReservaForm(forms.ModelForm):
+    class Meta:
+        model = Reserva
 
+        ESTADO_OPCIONES=[
+            ('P','Entrega pendiente'),
+            ('E','Entregado'),
+        ]
+
+        fields = ['cantidad_reservar','estado','usuario','producto']
+        widgets = {
+            'cantidad_reservar':forms.NumberInput(attrs={'class':'form-control'}),
+            'estado':forms.HiddenInput(),
+            'usuario':forms.HiddenInput(),
+            'producto':forms.HiddenInput(),
+            
+        }

@@ -9,6 +9,6 @@ def get_producto_list():
     return productos
 
 @register.simple_tag
-def get_reservas_list():
+def get_reserva_list():
     reservas = Reserva.objects.all()
     return reservas

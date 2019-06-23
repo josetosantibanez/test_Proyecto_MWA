@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'miembros.apps.MiembrosConfig',
     'productos.apps.ProductosConfig',
     'eventos.apps.EventosConfig',
-
+    'widget_tweaks'
     ]
 
 MIDDLEWARE = [

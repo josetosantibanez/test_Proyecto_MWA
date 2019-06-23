@@ -16,7 +16,7 @@ class MiembroForm(forms.ModelForm):
         ]
 
         fields = ['rut','nombres','apellido_p','apellido_m','fecha_nacimiento',
-        'correo','celular','direccion','genero','dosis_diaria','fecha_expiracion_receta','receta','fotocopia_carnet_a','fotocopia_carnet_b']
+        'correo','celular','direccion','dosis_diaria','fecha_expiracion_receta','receta','fotocopia_carnet_a','fotocopia_carnet_b','genero']
         
         widgets = {
             'rut':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: 11111111-1'}),
@@ -27,12 +27,12 @@ class MiembroForm(forms.ModelForm):
             'correo':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: correo_ejemplo@ejemplo.com'}),
             'celular':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: +56967878678'}),
             'direccion':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: Avda. Vicuña Mackena 1010'}),
-            'genero':forms.RadioSelect(attrs = {'class':'form-check-input'},choices=GENERO_OPCIONES),
             'dosis_diaria':forms.NumberInput(attrs={'class':'form-control mb-2'}),
             'fecha_expiracion_receta':forms.DateInput(attrs={'class':'form-control mb-2','placeholder':'Ej: DD/MM/AAAA'}),
-            'receta':forms.FileInput(attrs={'class':'form-control mb-2'}),
-            'fotocopia_carnet_a':forms.FileInput(attrs={'class':'form-control mb-2'}),
-            'fotocopia_carnet_b':forms.FileInput(attrs={'class':'form-control mb-2'}),
+            'receta':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es','id':'customFileLang'}),
+            'fotocopia_carnet_a':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es','id':'customFileLang'}),
+            'fotocopia_carnet_b':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es','id':'customFileLang'}),
+            'genero':forms.RadioSelect(attrs = {'class':'form-check-input'},choices=GENERO_OPCIONES),
         }
         labels = {
             'rut':'Rut' ,
@@ -66,6 +66,7 @@ class MiembroForm(forms.ModelForm):
         elif dv=="K" and res==10:
             pass
         else:
+            
             raise ValidationError("El rut ingresado no es válido")
 
         for miembro in miembros:

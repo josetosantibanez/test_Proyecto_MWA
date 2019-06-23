@@ -28,6 +28,7 @@ def agregar_miembro(request):
         form = MiembroForm(request.POST,request.FILES)
         if form.is_valid():     
             form.save()
+            
             return redirect('miembros:miembros')
     else:
         form = MiembroForm()

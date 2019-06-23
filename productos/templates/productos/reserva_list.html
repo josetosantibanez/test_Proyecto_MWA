@@ -1,0 +1,47 @@
+{%extends 'core/base_layout_club.html'%}
+{%block title%}Lista de reservas{%endblock%}
+{%block content%}
+
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Reservas del club</h4>
+                  <p class="card-description">
+                    Listado de reservas
+                  </p>
+                  <div class="table-responsive">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">Codigo reserva</th>
+                          <th scope="col">Miembro</th>
+                          <th scope="col">Producto reservado</th>
+                          <th scope="col">Cantidad reservada (gramos)</th>
+                          <th scope="col">Precio Total</th>
+                          <th scope="col">Estado de la reserva</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for reserva in reserva_list %}
+                            <tr>
+                            <th scope="row">{{reserva.id}}</th>
+                            <td>{{reserva.usuario}}</td>
+                            <td>{{reserva.producto.nombre}}</td>
+                            <td>{{reserva.cantidad_reservar}}</td>
+                            <td>{{reserva.precio_total}}</td>
+                            {% if reserva.estado == 'P' %}
+                            <td>Pendiente</td>
+                            {% elif reserva.estado == 'E' %}
+                            <td>Entregado</td>
+                            {% elif reserva.estado == 'C' %}
+                            <td>Cancelado</td>
+                            {% endif %}                
+                            
+                            </tr>
+                        {%endfor%}
+                        </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+{%endblock%}

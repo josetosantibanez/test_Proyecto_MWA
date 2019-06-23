@@ -12,18 +12,19 @@
                 <strong>{{producto.proporcion}}<br></strong>
                 <strong>Disponible: {{producto.stock}} gramos.</strong>
                 <br>
+                {% if request.user.profile.tipo_cuenta == 1 %}
                 <form method="POST">{% csrf_token %}
                   <div class="row">
                   <div class="col-md-6">
                     <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Cantidad a reservar</label>
                     <div class="col-sm-9">
-                    {% if request.user.profile.tipo_cuenta != 2 or request.user.profile.tipo_cuenta != 3 %}
+                    
                         {{form.cantidad_reservar}}
                         {{form.producto}}
                         {{form.usuario}}
                         {{form.estado}}
-                    {% endif %}
+                    
                         {% if form.cantidad_reservar.errors %}
                         <ul>
                             {%for error in form.cantidad_reservar.errors%}
@@ -55,7 +56,7 @@
                     </div>
                     </div>
                     </div>
-                  {% if request.user.profile.tipo_cuenta != 2 or request.user.profile.tipo_cuenta != 3 %}
+                  
                   <div class = "text-center">
                       <input type="submit" class="btn btn-primary btn-rounded" value="Reservar" />
                   </div>

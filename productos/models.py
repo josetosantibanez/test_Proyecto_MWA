@@ -30,6 +30,7 @@ class Reserva(models.Model):
     usuario = models.ForeignKey(User,on_delete=models.CASCADE,default=1,blank=True,null=True)
     cantidad_reservar = models.SmallIntegerField(verbose_name="Cantidad a reservar")
     estado = models.CharField(max_length=1,verbose_name = "Estado",default='P')
+    precio_total = models.IntegerField(verbose_name="Monto total de la reserva",default = 0)
     created = models.DateTimeField(auto_now_add=True, verbose_name = "Fecha de creacion")
     updated = models.DateTimeField(auto_now = True, verbose_name = "Fecha de ult. actualizacion")
 
