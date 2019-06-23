@@ -159,11 +159,18 @@
             <span class="menu-title">Noticias</span>
           </a>
         </li>
-        {% if request.user.is_staff %}
+        {% if request.user.profile.tipo_cuenta_id == 2 or request.user.profile.tipo_cuenta_id == 3 %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'productos:reservas' %}">
             <i class="mdi mdi-chart-pie menu-icon"></i>
             <span class="menu-title">Reservas</span>
+          </a>
+        </li>
+        {% elif request.user.profile.tipo_cuenta_id == 1 %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'productos:mis_reservas' %}">
+            <i class="mdi mdi-chart-pie menu-icon"></i>
+            <span class="menu-title">Mis Reservas</span>
           </a>
         </li>
         {%endif%}

@@ -75,13 +75,13 @@ class ReservaForm(forms.ModelForm):
             if user.id == miembro.user_id_id:
                 cant = miembro.dosis_diaria * 14
                 if c > cant:
-                    self._errors['cantidad_reservar']=["La cantidad que desea reservar supera el maximo permitido de dos semanas de dosis."]
+                    self._errors['cantidad_reservar']="La cantidad que desea reservar supera el maximo permitido de dos semanas de dosis."
                     del form_data['cantidad_reservar']
                     break
                 else:
                     for producto in productos:
                         if c > producto.stock:
-                            self._errors['cantidad_reservar']=["La cantidad que desea reservar supera el stock disponible."]
+                            self._errors['cantidad_reservar']="La cantidad que desea reservar supera el stock disponible."
                             del form_data['cantidad_reservar']
                             break
         return form_data
@@ -90,16 +90,13 @@ class ListadoReservaForm(forms.ModelForm):
     class Meta:
         model = Reserva
 
-        ESTADO_OPCIONES=[
-            ('P','Entrega pendiente'),
-            ('E','Entregado'),
-        ]
-
-        fields = ['cantidad_reservar','estado','usuario','producto']
+        fields = ['cantidad_reservar','estado','usuario','producto','precio_total']
+        
         widgets = {
-            'cantidad_reservar':forms.NumberInput(attrs={'class':'form-control'}),
-            'estado':forms.HiddenInput(),
-            'usuario':forms.HiddenInput(),
-            'producto':forms.HiddenInput(),
-            
+            'cantidad_reservar':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
+            'estado':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
+            'usuario':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
+            'producto':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
+            'precio_total':forms.HiddenInput(attrs={'class':'form-control','readonly':True}),
         }
+         

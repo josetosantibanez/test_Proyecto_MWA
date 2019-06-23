@@ -10,7 +10,7 @@ class MiembroForm(forms.ModelForm):
         
         model = Miembro
 
-        GENERO_OPCIONES=[
+        GENERO=[
             ('M','Masculino'),
             ('F','Femenino'),
         ]
@@ -32,7 +32,7 @@ class MiembroForm(forms.ModelForm):
             'receta':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es','id':'customFileLang'}),
             'fotocopia_carnet_a':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es','id':'customFileLang'}),
             'fotocopia_carnet_b':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es','id':'customFileLang'}),
-            'genero':forms.RadioSelect(attrs = {'class':'form-check-input'},choices=GENERO_OPCIONES),
+            'genero':forms.RadioSelect(attrs = {'class':'form-check-input'},choices=GENERO),
         }
         labels = {
             'rut':'Rut' ,

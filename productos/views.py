@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
-from .forms import ProductoForm, ReservaForm
+from .forms import ProductoForm, ReservaForm, ListadoReservaForm
 from .models import Producto, Reserva
 from miembros.models import Miembro
 
@@ -80,6 +80,35 @@ def reservar_producto(request,pk):
 
 class ReservaListView(ListView):
     model = Reserva
+
+def mis_reservas(request):
+    return render(request,'productos/mis_reservas.html')
+    
+def estado_reservas(request, pk):
+    reserva = get_object_or_404(Reserva,pk=pk)
+    if request.method == "POST":
+        request.POST._mutable = True
+        request.POST['usuario'] = reserva.usuario_id
+        request.POST['producto'] = reserva.producto_id
+        request.POST['cantidad_reservar'] = reserva.cantidad_reservar
+        request.POST['precio_total'] = reserva.precio_total
+        
+        if '_entregado' in request.POST:
+            print("E")
+            request.POST['estado'] = 'E'
+        elif '_cancelar' in request.POST:
+            print("C")
+            request.POST['estado'] = 'C'
+            print(request.POST['estado'])
+        form = ListadoReservaForm(request.POST,instance=reserva)
+        if form.is_valid():
+            form.save()
+            print(request.POST['estado'])
+        return redirect('productos:reservas')
+    else:
+        form = ListadoReservaForm()
+    return render(request, 'productos/reserva_detalle.html',{'form':form,'reserva':reserva})
+
     
             
             
