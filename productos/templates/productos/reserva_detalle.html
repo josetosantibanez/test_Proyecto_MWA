@@ -7,15 +7,10 @@
 <form action="" method="post" enctype=multipart/form-data>{% csrf_token %}
     <div class="card">
     <div class="card-body">
-        {% for miembro in miembro_list %}
-        {% if reserva.usuario == miembro.rut %}
-        <h4 class="card-title">Reserva de {{miembro.nombres}} {{miembro.apellido_p}}</h4>
-        {% endif %}
-        {% endfor %}
-
+        <h4 class="card-title">Reserva de {{ request.user.first_name }} {{request.user.last_name}}</h4>
         <div class="form-group">
         <label>Miembro</label>
-        <input type="text" class="form-control form-control-lg" value="{{reserva.usuario}}" aria-label="Username">
+        <input type="text" class="form-control" value="{{reserva.usuario}}" >
         </div>
         <div class="form-group">
         <label>Producto reservado</label>
@@ -48,48 +43,48 @@
 
 
     {{form.cantidad_reservar}}
-    {{form.producto}}
-    {{form.usuario}}
-    {{form.estado}}
-    {{form.precio_total}}
         {% if form.cantidad_reservar.errors %}
-                        <ul>
-                            <li class="text-danger">{{form.cantidad_reservar.errors}}</li>
-                        </ul>
-                        {%endif%}
-                        {% if form.producto.errors %}
-                        <ul>
-                            {%for error in form.producto.errors%}
-                            <li style="list-style:none;" class="text-danger">{{form.producto.errors}}</li>
-                            {%endfor%}
-                        </ul>
-                        {%endif%}
-                        {% if form.usuario.errors %}
-                        <ul>
-                            {%for error in form.usuario.errors%}
-                            <li style="list-style:none;" class="text-danger">{{form.usuario.errors}}</li>
-                            {%endfor%}
-                        </ul>
-                        {%endif%}
-                        {% if form.estado.errors %}
-                        <ul>
-                            {%for error in form.estado.errors%}
-                            <li style="list-style:none;" class="text-danger">{{form.estado.errors}}</li>
-                            {%endfor%}
-                        </ul>
-                        {%endif%}
-                        {% if form.precio_total.errors %}
-                        <ul>
-                            {%for error in form.precio_total.errors%}
-                            <li style="list-style:none;" class="text-danger">{{form.precio_total.errors}}</li>
-                            {%endfor%}
-                        </ul>
-                        {%endif%}
-    </div>
-    </div>
+        <ul>
+            <li class="text-danger">{{form.cantidad_reservar.errors}}</li>
+        </ul>
+        {%endif%}
+    {{form.producto}}
+        {% if form.producto.errors %}
+        <ul>
+            {%for error in form.producto.errors%}
+            <li style="list-style:none;" class="text-danger">{{form.producto.errors}}</li>
+            {%endfor%}
+        </ul>
+        {%endif%}
+    {{form.usuario}}
+        {% if form.usuario.errors %}
+        <ul>
+            {%for error in form.usuario.errors%}
+            <li style="list-style:none;" class="text-danger">{{form.usuario.errors}}</li>
+            {%endfor%}
+        </ul>
+        {%endif%}
+    {{form.estado}}
+        {% if form.estado.errors %}
+        <ul>
+            {%for error in form.estado.errors%}
+            <li style="list-style:none;" class="text-danger">{{form.estado.errors}}</li>
+            {%endfor%}
+        </ul>
+        {%endif%}
+    {{form.precio_total}}
+        {% if form.precio_total.errors %}
+        <ul>
+            {%for error in form.precio_total.errors%}
+            <li style="list-style:none;" class="text-danger">{{form.precio_total.errors}}</li>
+            {%endfor%}
+        </ul>
+        {%endif%}
     
     <button type="submit" class="btn btn-success" name="_entregado">Reserva Entregada</button>
     <button type="submit" class="btn btn-danger" name="_cancelar">Reserva Cancelada</button>
+    </div>
+    </div>
 </form>
 </div>
 

@@ -22,6 +22,7 @@
                         </tr>
                       </thead>
                       <tbody>
+                      {% if request.user.profile.tipo_cuenta_id == 2 or request.user.profile.tipo_cuenta_id == 3 %}
                         {% for reserva in reserva_list %}
                             <tr>
                             <th scope="row">{{reserva.id}}</th>
@@ -41,6 +42,29 @@
                             </td>
                             </tr>
                         {%endfor%}
+                      {% elif request.user.profile.tipo_cuenta_id == 1 %}
+                        {% for reserva in reserva_list %}
+                          {% if request.user == reserva.usuario %}
+                            <tr>
+                            <th scope="row">{{reserva.id}}</th>
+                            <td>{{reserva.usuario}}</td>
+                            <td>{{reserva.producto.nombre}}</td>
+                            <td>{{reserva.cantidad_reservar}}</td>
+                            <td>{{reserva.precio_total}}</td>
+                            {% if reserva.estado == 'P' %}
+                            <td><label class="badge badge-warning">Pendiente</label></td>
+                            {% elif reserva.estado == 'E' %}
+                            <td><label class="badge badge-success">Entregado</label></td>
+                            {% elif reserva.estado == 'C' %}
+                            <td><label class="badge badge-danger">Cancelado</label></td>
+                            {% endif %}
+                            <td>                
+                            <a class="" href="{% url 'productos:estado_reservas' reserva.id %}" >🔎</a>
+                            </td>
+                            </tr>
+                          {% endif %}
+                        {% endfor %}
+                      {% endif %}
                         </tbody>
                     </table>
                   </div>
