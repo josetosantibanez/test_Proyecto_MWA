@@ -5,7 +5,10 @@
 {% block content %}
 <main role="main">
   <div class="container">
-
+    <div class="col-12 ">
+              <div class="card mt-2">
+                <div class="card-body">
+                  <h4 class="card-title">Modificar miembro</h4>
             {%if 'ok' in request.GET%}
               <p style="color: green;">El miembro rut, {{miembro.rut}} se ha actualizado correctamente
               <a href = "{% url 'miembros:miembro' miembro.id %}">Haz Click aqui para ver el resultado</a>
@@ -159,10 +162,12 @@
                       </div>
               <div class = "text-center">
                 <input type="submit" class="btn btn-primary btn-rounded" value="Modificar miembro" />
-                <input type="button" href="{% url 'miembros:miembros' %}" class="btn btn-primary btn-rounded" value="Volver" />
+                <a class="btn btn-inverse-secondary btn-rounded btn-fw ml-2" href="{% url 'miembros:miembros' %}">Volver</a>
               </div>
             </form>
         </div>
-      
+      </div>
+      </div>
+      </div>
 </main>
 {% endblock %}

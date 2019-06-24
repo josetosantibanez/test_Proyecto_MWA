@@ -2,10 +2,9 @@
 {%block title%}Noticias{%endblock%}
 {%load static%}
 {%block content%}
-
     <li style="list-style:none;">
       <div class="container ml-4 " >
-        <div style="display:center" >
+        <div style="display:center;" >
           <tr>
             {% if request.user.is_authenticated %}
               {% include 'noticias/includes/noticias_menu.html' %}
@@ -27,9 +26,9 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item"><a>{{noticia.cuerpo|safe}}</a></li>
 
-            {%if noticia.url_noticia %}
-              <li class="list-group-item"><a class="link" href = {{noticia.url_noticia}}>Ver fuente original de la noticia</a></li>
-            {%endif%}
+          {%if noticia.url_noticia %}
+            <li class="list-group-item"><a class="link" href = {{noticia.url_noticia}}>Ver fuente original de la noticia</a></li>
+          {%endif%}
 
           {% if request.user.is_staff %}
           <li class="list-group-item">
@@ -40,8 +39,6 @@
           </ul>
           </div>
         </div>
-        
-
         {% endfor %}
         </div> 
       </li>

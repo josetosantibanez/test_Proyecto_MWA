@@ -3,8 +3,12 @@
 {% block title %}Miembro{% endblock %}
 {% block content %}
 <main role="main">
-  <div class="container mt-4">
-    <h3>Detalle de {{miembro.nombres}} {{miembro.apellido_p}} {{miembro.apellido_m}}</h3>
+  <div class="container">
+  <div class="col-12 ">
+  <div class="card mt-2">
+    <div class="card-body">
+      <h4 class="card-title">Detalle de {{miembro.nombres}} {{miembro.apellido_p}} {{miembro.apellido_m}}</h4>
+
     <div class="row">
       <div class="col-md-6">
         <div class="form-group row">
@@ -95,8 +99,12 @@
         {% if request.user.is_staff %}
           <a class="btn btn-primary btn-rounded ml-auto" href="{% url 'miembros:update' miembro.id %}">Modificar Miembro</a>
         {% endif %}
+        <a class="btn btn-inverse-secondary btn-rounded btn-fw" href="{% url 'miembros:miembros' %}">Volver</a>
         </div>
       </div>
+    </div>
+  </div>
+  </div>
     </div>
   </div>
 </main>

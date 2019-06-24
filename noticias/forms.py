@@ -7,10 +7,10 @@ class NoticiaForm(forms.ModelForm):
         model = Noticia
         fields = ['titulo','subtitulo','cuerpo','imagen','url_noticia']
         widgets = {
-            'titulo':forms.TextInput(attrs={'class':'form-control'}),
-            'subtitulo':forms.TextInput(attrs={'class':'form-control'}),
-            'cuerpo':forms.Textarea(attrs={'class':'form-control'}),
-            'url_noticia':forms.URLInput(attrs={'class':'form-control'})
+            'titulo':forms.TextInput(attrs={'class':'form-control mb-3'}),
+            'subtitulo':forms.TextInput(attrs={'class':'form-control mb-3'}),
+            'cuerpo':forms.Textarea(attrs={'class':'form-control mb-3'}),
+            'url_noticia':forms.URLInput(attrs={'class':'form-control mb-3'})
         }
         labels = {
             'titulo':'Título' ,

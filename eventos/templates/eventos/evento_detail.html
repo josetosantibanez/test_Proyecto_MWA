@@ -2,27 +2,15 @@
 {% load static %}
 {% block title %}Evento {{evento.nombre}}{% endblock %}
 {% block content %}
-<main role="main">
-  <div class="container mt-4">
-    <h3>Detalle de {{evento.nombre}}</h3>
-    <br/>
-        <div class="product-item">
-          <div class="product-item-title d-flex">
-            <div class="bg-faded p-5 d-flex mr-auto rounded">
-              <h2 class="section-heading mb-0">
-                <span class="section-heading-upper">{{evento.fecha}}</span>
-                <span class="section-heading-lower">{{evento.nombre}}</span>
-              </h2>
-            </div>
-          </div>
-          <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{evento.imagen.url}}" width = 600 heigth = 1200 alt="">
-          <div class="product-item-description d-flex ml-auto">
-            <div class="bg-faded p-5 rounded">
-              <p class="mb-0">Cupos: {{evento.cupos}}<br>{{evento.descripcion|safe}}<br>Ubicacion: {{evento.ubicacion}}<br>Te esperamos</p>
-            </div>
-          </div>
-          
-            {% if request.user.is_staff %}
+
+<div class="card mb-3 ml-4 mt-4">
+  <img class="card-img-top" src="{{evento.imagen.url}}" alt="Card image cap">
+  <div class="card-body">
+      <h5 class="card-title">{{evento.nombre}}</h5>
+      <h6 class="card-text">{{evento.fecha}}</h6>
+      <p class="card-text">{{evento.descripcion|safe}}</p>
+      <p class="mb-0"><strong>Cupos: {{evento.cupos}}<br>Ubicacion: {{evento.ubicacion}}<br>Te esperamos</strong></p><br><br>
+      {% if request.user.is_staff %}
             <a class="btn btn-primary " href="{% url 'eventos:update' evento.id %}" >Modificar Evento</a>
             <a class="btn btn-primary " href="{% url 'eventos:delete' evento.id %}" >Eliminar Evento</a>
             {% elif request.user.profile.tipo_cuenta_id == 1 %}
@@ -32,8 +20,7 @@
             <button class="btn btn-primary " type=submit href="" >Confirmar asistencia</button>
             </form>
             {% endif %}
-          <hr size="10" style="color: #0056b2;" width="75%"/>
-        </div>
   </div>
-</main>
+</div>
+
 {% endblock %}

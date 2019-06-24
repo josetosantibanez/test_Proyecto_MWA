@@ -37,7 +37,7 @@ class Reserva(models.Model):
     class Meta:
         verbose_name = "Reserva"
         verbose_name_plural = "Reservas"
-        ordering = ['created', 'updated']
+        ordering = ['-created']
 
     
     def __str__(self):

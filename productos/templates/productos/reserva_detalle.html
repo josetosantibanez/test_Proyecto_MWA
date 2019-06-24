@@ -43,46 +43,16 @@
 
 
     {{form.cantidad_reservar}}
-        {% if form.cantidad_reservar.errors %}
-        <ul>
-            <li class="text-danger">{{form.cantidad_reservar.errors}}</li>
-        </ul>
-        {%endif%}
     {{form.producto}}
-        {% if form.producto.errors %}
-        <ul>
-            {%for error in form.producto.errors%}
-            <li style="list-style:none;" class="text-danger">{{form.producto.errors}}</li>
-            {%endfor%}
-        </ul>
-        {%endif%}
     {{form.usuario}}
-        {% if form.usuario.errors %}
-        <ul>
-            {%for error in form.usuario.errors%}
-            <li style="list-style:none;" class="text-danger">{{form.usuario.errors}}</li>
-            {%endfor%}
-        </ul>
-        {%endif%}
     {{form.estado}}
-        {% if form.estado.errors %}
-        <ul>
-            {%for error in form.estado.errors%}
-            <li style="list-style:none;" class="text-danger">{{form.estado.errors}}</li>
-            {%endfor%}
-        </ul>
-        {%endif%}
     {{form.precio_total}}
-        {% if form.precio_total.errors %}
-        <ul>
-            {%for error in form.precio_total.errors%}
-            <li style="list-style:none;" class="text-danger">{{form.precio_total.errors}}</li>
-            {%endfor%}
-        </ul>
-        {%endif%}
-    
-    <button type="submit" class="btn btn-success" name="_entregado">Reserva Entregada</button>
-    <button type="submit" class="btn btn-danger" name="_cancelar">Reserva Cancelada</button>
+        <div style="text-align:center;">
+    {% if request.user.is_staff %}
+    <button style="text-align:center;" type="submit" class="btn btn-success" name="_entregado">Reserva Entregada</button>
+    {% endif %}
+    <button style="text-align:center;" type="submit" class="btn btn-danger" name="_cancelar">Reserva Cancelada</button>
+    </div>
     </div>
     </div>
 </form>

@@ -9,6 +9,7 @@ from .forms import ProductoForm, ReservaForm, ListadoReservaForm
 from .models import Producto, Reserva
 from miembros.models import Miembro
 
+
 # Create your views here.
 
 class StaffRequiredMixin(object):
@@ -56,6 +57,7 @@ class ProductoDeleteView(DeleteView):
 
 def reservar_producto(request,pk):
     producto = get_object_or_404(Producto,id=pk)
+    miembros = Miembro.objects.all()
     if request.method == "POST":
         print("Entro al post, {}".format(request.user))
         request.POST._mutable = True
@@ -75,8 +77,20 @@ def reservar_producto(request,pk):
             return redirect('productos:productos')
     else:
         print("Renderizando la pagina")
+        
         form = ReservaForm()
-    return render (request,'productos/producto_detail.html',{'form':form,'producto':producto})
+    if request.user.profile.tipo_cuenta_id == 1:
+        for miembro in miembros:
+            if miembro.user_id_id == request.user.id:
+                m = get_object_or_404(Miembro,pk=miembro.id)
+                cmax = m.dosis_diaria * 14
+    else:
+        m={}
+        cmax = 0                
+    contexto = {
+        'form':form,'producto':producto,'m':m,'cmax':cmax
+    }
+    return render (request,'productos/producto_detail.html',contexto)
 
 class ReservaListView(ListView):
     model = Reserva

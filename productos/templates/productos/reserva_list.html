@@ -2,73 +2,76 @@
 {%block title%}Lista de reservas{%endblock%}
 {%block content%}
 
-              <div class="card">
-                <div class="card-body">
-                  <h4 class="card-title">Reservas del club</h4>
-                  <p class="card-description">
-                    Listado de reservas
-                  </p>
-                  <div class="table-responsive">
-                    <table class="table table-hover table-striped table-bordered">
-                      <thead class ="thead-dark">
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Miembro</th>
-                          <th scope="col">Producto reservado</th>
-                          <th scope="col">Cantidad reservada (gramos)</th>
-                          <th scope="col">Precio Total</th>
-                          <th scope="col">Estado de la reserva</th>
-                          <th scope="col">Acción</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                      {% if request.user.profile.tipo_cuenta_id == 2 or request.user.profile.tipo_cuenta_id == 3 %}
-                        {% for reserva in reserva_list %}
-                            <tr>
-                            <th scope="row">{{reserva.id}}</th>
-                            <td>{{reserva.usuario}}</td>
-                            <td>{{reserva.producto.nombre}}</td>
-                            <td>{{reserva.cantidad_reservar}}</td>
-                            <td>{{reserva.precio_total}}</td>
-                            {% if reserva.estado == 'P' %}
-                            <td><label class="badge badge-warning">Pendiente</label></td>
-                            {% elif reserva.estado == 'E' %}
-                            <td><label class="badge badge-success">Entregado</label></td>
-                            {% elif reserva.estado == 'C' %}
-                            <td><label class="badge badge-danger">Cancelado</label></td>
-                            {% endif %}
-                            <td>                
-                            <a class="" href="{% url 'productos:estado_reservas' reserva.id %}" >🔎</a>
-                            </td>
-                            </tr>
-                        {%endfor%}
-                      {% elif request.user.profile.tipo_cuenta_id == 1 %}
-                        {% for reserva in reserva_list %}
-                          {% if request.user == reserva.usuario %}
-                            <tr>
-                            <th scope="row">{{reserva.id}}</th>
-                            <td>{{reserva.usuario}}</td>
-                            <td>{{reserva.producto.nombre}}</td>
-                            <td>{{reserva.cantidad_reservar}}</td>
-                            <td>{{reserva.precio_total}}</td>
-                            {% if reserva.estado == 'P' %}
-                            <td><label class="badge badge-warning">Pendiente</label></td>
-                            {% elif reserva.estado == 'E' %}
-                            <td><label class="badge badge-success">Entregado</label></td>
-                            {% elif reserva.estado == 'C' %}
-                            <td><label class="badge badge-danger">Cancelado</label></td>
-                            {% endif %}
-                            <td>                
-                            <a class="" href="{% url 'productos:estado_reservas' reserva.id %}" >🔎</a>
-                            </td>
-                            </tr>
-                          {% endif %}
-                        {% endfor %}
-                      {% endif %}
-                        </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
+<div class="card ml-4 mr-4 mb-4 mt-4">
+  <div class="card-body">
+    <h4 class="card-title">Reservas del club</h4>
+    <p class="card-description">
+      Listado de reservas
+    </p>
+    <div class="table-responsive">
+      <table class="table table-hover table-striped table-bordered">
+        <thead class ="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Miembro</th>
+            <th scope="col">Producto reservado</th>
+            <th scope="col">Cantidad (gramos)</th>
+            <th scope="col">Fecha de reserva</th>
+            <th scope="col">Precio Total</th>
+            <th scope="col">Estado de la reserva</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% if request.user.profile.tipo_cuenta_id == 2 or request.user.profile.tipo_cuenta_id == 3 %}
+          {% for reserva in reserva_list %}
+              <tr>
+              <th scope="row">{{reserva.id}}</th>
+              <td>{{reserva.usuario}}</td>
+              <td>{{reserva.producto.nombre}}</td>
+              <td>{{reserva.cantidad_reservar}}</td>
+              <td>{{reserva.created|date:"SHORT_DATE_FORMAT"}}</td>
+              <td>{{reserva.precio_total}}</td>
+              {% if reserva.estado == 'P' %}
+              <td><label class="badge badge-warning">Pendiente</label></td>
+              {% elif reserva.estado == 'E' %}
+              <td><label class="badge badge-success">Entregado</label></td>
+              {% elif reserva.estado == 'C' %}
+              <td><label class="badge badge-danger">Cancelado</label></td>
+              {% endif %}
+              <td>                
+              <a class="" href="{% url 'productos:estado_reservas' reserva.id %}" >🔎</a>
+              </td>
+              </tr>
+          {%endfor%}
+        {% elif request.user.profile.tipo_cuenta_id == 1 %}
+          {% for reserva in reserva_list %}
+            {% if request.user == reserva.usuario %}
+              <tr>
+              <th scope="row">{{reserva.id}}</th>
+              <td>{{reserva.usuario}}</td>
+              <td>{{reserva.producto.nombre}}</td>
+              <td>{{reserva.cantidad_reservar}}</td>
+              <td>{{reserva.created|date:"SHORT_DATETIME_FORMAT"}}</td>
+              <td>{{reserva.precio_total}}</td>
+              {% if reserva.estado == 'P' %}
+              <td><label class="badge badge-warning">Pendiente</label></td>
+              {% elif reserva.estado == 'E' %}
+              <td><label class="badge badge-success">Entregado</label></td>
+              {% elif reserva.estado == 'C' %}
+              <td><label class="badge badge-danger">Cancelado</label></td>
+              {% endif %}
+              <td>                
+              <a class="" href="{% url 'productos:estado_reservas' reserva.id %}" >🔎</a>
+              </td>
+              </tr>
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 {%endblock%}

@@ -7,11 +7,11 @@ class EventoForm(forms.ModelForm):
         model = Evento
         fields = ['nombre','cupos','fecha','ubicacion','descripcion','imagen']
         widgets = {
-            'nombre':forms.TextInput(attrs={'class':'form-control-lg mb-2'}),
-            'cupos':forms.TextInput(attrs={'class':'form-control-lg mb-2'}),
-            'fecha':forms.DateTimeInput(attrs={'class':'form-control-lg mb-2'}),
-            'ubicacion':forms.TextInput(attrs={'class':'form-control-lg mb-2'}),
-            'descripcion':forms.DateInput(attrs={'class':'form-control-lg mb-2'}),
+            'nombre':forms.TextInput(attrs={'class':'form-control mb-2'}),
+            'cupos':forms.TextInput(attrs={'class':'form-control mb-2'}),
+            'fecha':forms.DateTimeInput(attrs={'class':'form-control mb-2'}),
+            'ubicacion':forms.TextInput(attrs={'class':'form-control mb-2'}),
+            'descripcion':forms.DateInput(attrs={'class':'form-control mb-2'}),
             }
         labels = {
             'nombre':'Evento' ,

@@ -11,7 +11,7 @@
           Información del producto.
         </p>
         <form action="" method="post" class="form-sample" enctype=multipart/form-data>{% csrf_token %}
-          <div class="form-group row">
+          {% comment %} <div class="form-group row">
             <label class="col-sm-3 col-form-label">{{form.nombre.label}}</label>
             <div class="col-sm-9">
               {{form.nombre}}
@@ -88,7 +88,9 @@
                     </ul>
               {%endif%}
             </div>
-          </div>
+          </div> {% endcomment %}
+
+          {{form.as_p}}
           <button type="submit" class="btn btn-primary mr-2">Agregar producto</button>
         </form>
       </div>

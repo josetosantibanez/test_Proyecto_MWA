@@ -143,9 +143,9 @@ LOGOUT_REDIRECT_URL = 'inicio'
 
 
 #Emails
-if DEBUG:
-    EMAIL_BACKEND="django.core.mail.backends.filebased.EmailBackend"
-    EMAIL_FILE_PATH= os.path.join(BASE_DIR, "sent_emails")
-else:
-    #Aqui hay que configurar un email real para producción
-    pass
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 25
+EMAIL_HOST_USER = 'medicalweedapp@gmail.com'
+EMAIL_HOST_PASSWORD = 'MedicalWeed9911.'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

@@ -69,6 +69,7 @@ class ReservaForm(forms.ModelForm):
         form_data = self.cleaned_data
         miembros = Miembro.objects.all()
         productos = Producto.objects.all()
+        reservas = Reserva.objects.all()
         c = form_data['cantidad_reservar']
         user = form_data['usuario']
         for miembro in miembros:
@@ -84,6 +85,14 @@ class ReservaForm(forms.ModelForm):
                             self._errors['cantidad_reservar']="La cantidad que desea reservar supera el stock disponible."
                             del form_data['cantidad_reservar']
                             break
+                        else:
+                            for reserva in reservas:
+                                if user == reserva.usuario:
+                                    if reserva.estado == 'P':
+                                        self._errors['cantidad_reservar']="No puede realizar la reserva, ya que aun tiene una reserva pendiente."
+                                        del form_data['cantidad_reservar']
+                                        break
+            
         return form_data
 
 class ListadoReservaForm(forms.ModelForm):

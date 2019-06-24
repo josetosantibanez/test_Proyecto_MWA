@@ -2,75 +2,41 @@
 {% load static %}
 {% block title %}{{producto.nombre}}{% endblock %}
 {% block content %}
-<main role="main">
-  <div class="container">
- <div class="col-12 ">
-        <img class="mr-3" src="{{producto.imagen.url}}" alt="Generic placeholder image" style="height:250px; width:200px;">
-              <div class="card-body">
-                <h5 class="mt-0 mb-1">{{producto.nombre}}</h5>
-                {{producto.descripcion|safe}}<br>
-                <strong>{{producto.proporcion}}<br></strong>
-                <strong>Disponible: {{producto.stock}} gramos.</strong>
-                <br>
-                {% if request.user.profile.tipo_cuenta_id == 1 %}
-                <form method="POST">{% csrf_token %}
-                  <div class="row">
-                  <div class="col-md-6">
-                    <div class="form-group row">
-                    <label class="col-sm-3 col-form-label">Cantidad a reservar</label>
-                    <div class="col-sm-9">
-                    
-                        {{form.cantidad_reservar}}
-                        {{form.producto}}
-                        {{form.usuario}}
-                        {{form.estado}}
-                        {{form.precio_total}}
-                    
-                        {% if form.cantidad_reservar.errors %}
-                        <ul>
-                            <li class="text-danger">{{form.cantidad_reservar.errors}}</li>
-                        </ul>
-                        {%endif%}
-                        {% if form.producto.errors %}
-                        <ul>
-                            {%for error in form.producto.errors%}
-                            <li style="list-style:none;" class="text-danger">{{form.producto.errors}}</li>
-                            {%endfor%}
-                        </ul>
-                        {%endif%}
-                        {% if form.usuario.errors %}
-                        <ul>
-                            {%for error in form.usuario.errors%}
-                            <li style="list-style:none;" class="text-danger">{{form.usuario.errors}}</li>
-                            {%endfor%}
-                        </ul>
-                        {%endif%}
-                        {% if form.estado.errors %}
-                        <ul>
-                            {%for error in form.estado.errors%}
-                            <li style="list-style:none;" class="text-danger">{{form.estado.errors}}</li>
-                            {%endfor%}
-                        </ul>
-                        {%endif%}
-                        {% if form.precio_total.errors %}
-                        <ul>
-                            {%for error in form.precio_total.errors%}
-                            <li style="list-style:none;" class="text-danger">{{form.precio_total.errors}}</li>
-                            {%endfor%}
-                        </ul>
-                        {%endif%}
-                    </div>
-                    </div>
-                    </div>
-                  
-                  <div class = "text-center">
-                      <input type="submit" class="btn btn-primary btn-rounded" value="Reservar" />
-                  </div>
-                {% endif %}
-                  </div>
-              </form>
-            </div>
-        </div>
-       </div>
-</main>
+
+<div class="card mb-4 ml-3 mt-3" >
+  <div class="row no-gutters">
+    <div class="col-md-4">
+      <img src="{{producto.imagen.url}}" class="card-img" alt="..." style="height:400px; width:300px;" >
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title">{{producto.nombre}}</h5>
+        <p class="card-text">{{producto.descripcion|safe}}</p>
+        <p class="card-text"><strong>{{producto.proporcion}}</strong></p>
+        <p class="card-text"><strong>Stock disponible: {{producto.stock}} gramos.</strong></p>
+        {% if request.user.profile.tipo_cuenta_id == 1 %}
+          <form method="POST" class="form-inline">{% csrf_token %}
+            {{form.producto}}
+            {{form.usuario}}
+            {{form.estado}}
+            {{form.precio_total}}
+          <div class = "row">
+            {{form.cantidad_reservar}}
+            
+            <input type="submit" class="btn btn-primary btn-rounded ml-2" value="Reservar" />
+          </div>
+        {%endif%}
+        <p class="card-text"><small class="text-muted">Nota:Usted, {{m.nombres}} puede reservar un máximo de {{cmax}} gramos.</small></p>
+        </form>
+        {% if form.cantidad_reservar.errors %}
+          <ul>
+            {%for error in form.cantidad_reservar.errors%}
+              <li style="list-style:none;" class="text-danger">{{form.cantidad_reservar.errors}}</li>
+            {%endfor%}
+          </ul>
+        {%endif%}
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
