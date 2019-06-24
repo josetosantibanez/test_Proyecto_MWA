@@ -12,7 +12,7 @@
 
 	<!-- Google Font -->
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 	<!-- Stylesheets -->
 	<link rel="stylesheet" href="{% static 'core/css2/bootstrap.min.css' %}"/>
@@ -41,17 +41,11 @@
 	<!-- Header section -->
 	<header class="header-section" >
 		<div class="header-warp">
-			<div class="header-social d-flex justify-content-end">
-				<p>Siguenos:</p>
-				<a href="#"><i class="fa fa-instagram"></i></a>
-				<a href="#"><i class="fa fa-facebook"></i></a>
-				<a href="#"><i class="fa fa-twitter"></i></a>
-				
-			</div>
+			
 			<div class="header-bar-warp d-flex">
 				<!-- site logo -->
 				<a href="home.html" class="site-logo">
-					<img class="logo-test" src="{% static 'core/img2/logo-test.jpg' %}" alt="" >
+					<img class="logo-test" src="{% static 'core/img2/logoMwa.jpg' %}" alt="" >
 				</a>
 				<nav class="top-nav-area w-100">
 					<div class="user-panel">
@@ -59,12 +53,13 @@
 					</div>
 					<!-- Menu -->
 					<ul class="main-menu primary-menu">
-						<li><a href="iniciohtml" class="fa fa-home"></a></li>
-						<li><a href="blog.html">Buscar Club</a></li>
-						<li><a href="blog.html">Buscar Medico</a></li>
-						<li><a href="productos.html">Productos</a></li>
-						<li><a href="review.html">Actividades</a></li>
+						<li><a href="iniciohtml"><i class="fa fa-home" style="font-size:24px"></i></a></li>
+						<li><a href="review.html">Novedades</a></li>
+						<li><a href="#Mision">Valores</a></li>
 						<li><a href="blog.html">Colaboradores</a></li>
+						<li><a href="productos.html">Contacto</a></li>
+						
+
                        
 						
 
@@ -78,21 +73,15 @@
 
 	<!-- Hero section -->
 	<section class="hero-section overflow-hidden">
-		<div class="hero-slider owl-carousel">
-			<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center"  data-setbg="{% static 'core/img2/slider-test-2.jpg' %}">
+		<div id="inicio"class="hero-slider owl-carousel">
+			<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center"  data-setbg="{% static 'core/img2/fondo.jpg' %}">
 				<div class="container">
-					<h2>Nombre club / Ofertas!</h2>
-					<p>texto relacionado club/oferta.</p>
-					<a href="#" class="site-btn">Ver más  <img src="{% static 'core/img2/icons/double-arrow.png' %}" alt="#"/></a>
+					<h1>Forma parte de la medicina Cannábica!</h1>
+					<p>Medical Weed App.</p>
+					<a href="#" class="site-btn">Unete...<img src="{% static 'core/img2/icons/double-arrow.png' %}" alt="#"/></a>
 				</div>
 			</div>
-			<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center" data-setbg="{% static 'core/img2/slider-test.jpg' %}">
-				<div class="container">
-					<h2>Noticia, algo!</h2>
-					<p>Texto relacionado</p>
-					<a href="#" class="site-btn">Ver más  <img src="{% static 'core/img2/icons/double-arrow.png' %}" alt="#"/></a>
-				</div>
-			</div>
+			 
 		</div>
 	</section>
 	<!-- Hero section end-->
@@ -100,14 +89,18 @@
 
 	<!-- Intro section -->
 	<section class="intro-section">
-		<div class="container">
+		<div class="container" id='Mision'>
 			<div class="row">
 				<div class="col-md-4">
 					<div class="intro-text-box text-box text-white">
-						<div class="top-meta">11.11.18  /  in <a href="">Games</a></div>
-						<h3>Aca pueden ir los talleres, actividades!</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida....</p>
-						<a href="#" class="read-more">Inscribirse  <img src="{% static 'core/img2/icons/double-arrow.png' %}" alt="#"/></a>
+						
+						<h3>Misión</h3>
+						<p>Como misión nos imponemos que a través de la innovación podamos aumentar
+						 la seguridad y el acceso al cannabis de calidad en todo chile, ofreciendo 
+						 una calidad constante en un valor competitivo a través de una diversa red
+						  y variados canales de distribución priorizando siempre la seguridad del 
+						  consumidor y entendiendo el impacto social de este.</p>
+						
 					</div>
 				</div>
 			
@@ -155,28 +148,14 @@
 
 
 
-	<!-- Newsletter section -->
-	<section class="newsletter-section">
-		<div class="container">
-			<h2>Suscribete a nuestras informaciones</h2>
-			<form class="newsletter-form">
-				<input type="text" placeholder="INGRESA TU EMAIL">
-				<button class="site-btn">Suscribete  <img src="{% static 'core/img2/icons/double-arrow.png' %}" alt="#"/></button>
-			</form>
-		</div>
-	</section>
-	<!-- Newsletter section end -->
-
-
 	<!-- Footer section -->
 	<footer class="footer-section">
 		<div class="container">
 		
 			<a href="#" class="footer-logo">
-				<img src="{% static 'core/img2/logo-test.jpg' %}" alt="">
+				<img src="{% static 'core/img2/logo-MWA.jpg' %}" alt="">
 			</a>
 			<ul class="main-menu footer-menu">
-				<li><a href="">Contacto</a></li>
 				<li><a href="">Sobre Nosotros</a></li>
 				<li><a href="">Donaciones</a></li>
 				

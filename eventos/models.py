@@ -1,5 +1,6 @@
 from django.db import models
 from clubes.models import Club
+from miembros.models import Miembro
 
 # Create your models here.
 
@@ -22,3 +23,18 @@ class Evento(models.Model):
     
     def __str__(self):
         return self.nombre
+
+
+class Asistentes(models.Model):
+    miembro = models.ForeignKey(Miembro,verbose_name="Miembro asitente", on_delete=models.CASCADE)
+    evento = models.ForeignKey(Evento,verbose_name="Evento", on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add= True, verbose_name="Fecha de creacion")
+
+    class Meta:
+        verbose_name="Asistencia"
+        verbose_name_plural = "Asistencias"
+        ordering = ['miembro']
+
+    
+    def __str__(self):
+        return self.miembro

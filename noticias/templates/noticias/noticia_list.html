@@ -31,12 +31,12 @@
               <li class="list-group-item"><a class="link" href = {{noticia.url_noticia}}>Ver fuente original de la noticia</a></li>
             {%endif%}
 
-          <li class="list-group-item">
           {% if request.user.is_staff %}
+          <li class="list-group-item">
             <a class="btn btn-primary " href="{% url 'noticias:update' noticia.id %}" >Modificar Noticia</a>
             <a class="btn btn-primary " href="{% url 'noticias:delete' noticia.id %}" >Eliminar Noticia</a>
-          {% endif %}
           </li>
+          {% endif %}
           </ul>
           </div>
         </div>

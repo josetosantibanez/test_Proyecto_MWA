@@ -25,6 +25,12 @@
             {% if request.user.is_staff %}
             <a class="btn btn-primary " href="{% url 'eventos:update' evento.id %}" >Modificar Evento</a>
             <a class="btn btn-primary " href="{% url 'eventos:delete' evento.id %}" >Eliminar Evento</a>
+            {% elif request.user.profile.tipo_cuenta_id == 1 %}
+            <form method = "POST"> {% csrf_token %}
+            {{form.usuario}}
+            {{form.evento}}
+            <button class="btn btn-primary " type=submit href="" >Confirmar asistencia</button>
+            </form>
             {% endif %}
           <hr size="10" style="color: #0056b2;" width="75%"/>
         </div>

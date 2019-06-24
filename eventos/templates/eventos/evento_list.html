@@ -3,40 +3,22 @@
 {%load static%}
 
 {%block content%}
-    <section class="page-section">
-       <div class="container">
-       <tr>
-        <a class="btn btn-primary " href="{% url 'eventos:create' %}" >Añadir Evento</a>
-        <br/>
-      </tr>
-      {%for evento in evento_list %}    
-        <br/>
-        <div class="product-item">
-          <div class="product-item-title d-flex">
-            <div class="bg-faded p-5 d-flex mr-auto rounded">
-              <h2 class="section-heading mb-0">
-                <span class="section-heading-upper">{{evento.fecha}}</span>
-                <span class="section-heading-lower">{{evento.nombre}}</span>
-              </h2>
-            </div>
-          </div>
-          <img class="product-item-img mx-auto d-flex rounded img-fluid mb-3 mb-lg-0" src="{{evento.imagen.url}}" width = 600 heigth = 1200 alt="">
-          <div class="product-item-description d-flex ml-auto">
-            <div class="bg-faded p-5 rounded">
-              <p class="mb-0">Cupos: {{evento.cupos}}<br>{{evento.descripcion|safe}}<br>Ubicacion: {{evento.ubicacion}}<br>Te esperamos</p>
-            </div>
-          </div>
-          <a class="btn btn-primary " href="{% url 'eventos:evento' evento.id %}" >Leer más</a>
-            {% if request.user.is_staff %}
-            <a class="btn btn-primary " href="{% url 'eventos:update' evento.id %}" >Modificar Evento</a>
-            <a class="btn btn-primary " href="{% url 'eventos:delete' evento.id %}" >Eliminar Evento</a>
-            {% endif %}
-          <hr size="10" style="color: #0056b2;" width="75%"/>
-        </div>
-        {%endfor%}  
-        
-      </div>
-     
-    </section>
-
+{%for evento in evento_list %} 
+    <div class="card-deck ml-2 mt-2">
+  <div class="card">
+    <img src="{{evento.imagen.url}}" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{evento.nombre}}</h5>
+      <h6 class="card-text">{{evento.fecha}}</h6>
+      <p class="card-text">{{evento.descripcion|safe}}</p>
+      <p class="mb-0"><strong>Cupos: {{evento.cupos}}<br>Ubicacion: {{evento.ubicacion}}<br>Te esperamos</strong></p>
+    </div>
+    <div class="card-footer" style="text-align:center;">
+      <button class="btn btn-primary " type=submit href="{% url 'eventos:evento' evento.id %}" >Ver detalle</button>
+    </div>
+  </div>
+</div>
+{% endfor %}
+    
+   
 {%endblock%}

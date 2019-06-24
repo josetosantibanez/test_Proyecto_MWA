@@ -5,7 +5,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.admin.views.decorators import staff_member_required
 from django.utils.decorators import method_decorator
 from django.urls import reverse_lazy
-from .forms import EventoForm
+from .forms import EventoForm, AsistenciaForm
 from .models import Evento
 
 # Create your views here.
@@ -21,8 +21,8 @@ class EventoListView(ListView):
     model = Evento
 
 
-class EventoDetailView(DetailView):
-    model = Evento
+# class EventoDetailView(DetailView):
+#     model = Evento
 
 @method_decorator(staff_member_required,name='dispatch')
 class EventoCreateView(CreateView):
@@ -43,3 +43,17 @@ class EventoUpdateView(UpdateView):
 class EventoDeleteView(DeleteView):
     model = Evento
     success_url = reverse_lazy('eventos:eventos')
+
+def asistir_evento(request,pk):
+    evento = get_object_or_404(Evento,pk=pk)
+    if request.method == "POST":
+        request.POST._mutable = True
+        request.POST['miembro'] = request.user.id
+        request.POST['evento'] = evento.id
+        form = AsistenciaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('eventos:eventos')
+    else:
+        form = AsistenciaForm()
+    return render(request,'eventos/evento_detail.html',{'form':form,'evento':evento})

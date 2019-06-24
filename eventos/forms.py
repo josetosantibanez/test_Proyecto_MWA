@@ -1,5 +1,5 @@
 from django import forms
-from .models import Evento
+from .models import Evento, Asistentes
 
 class EventoForm(forms.ModelForm):
 
@@ -21,5 +21,14 @@ class EventoForm(forms.ModelForm):
             'descripcion':'Descripción',
             'imagen':'Imagen',
         }
+
+class AsistenciaForm(forms.ModelForm):
+    class Meta:
+        model = Asistentes
+        fields = ['miembro','evento']
+        widgets = {
+            'miembro':forms.HiddenInput(),
+            'evento':forms.HiddenInput(),
+            }
        
     
