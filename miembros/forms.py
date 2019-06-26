@@ -29,9 +29,9 @@ class MiembroForm(forms.ModelForm):
             'direccion':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: Avda. Vicuña Mackena 1010'}),
             'dosis_diaria':forms.NumberInput(attrs={'class':'form-control mb-2'}),
             'fecha_expiracion_receta':forms.DateInput(attrs={'class':'form-control mb-2','placeholder':'Ej: DD/MM/AAAA'}),
-            'receta':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es','id':'customFileLang'}),
-            'fotocopia_carnet_a':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es','id':'customFileLang'}),
-            'fotocopia_carnet_b':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es','id':'customFileLang'}),
+            'receta':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es'}),
+            'fotocopia_carnet_a':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es'}),
+            'fotocopia_carnet_b':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es'}),
             'genero':forms.RadioSelect(attrs = {'class':'form-check-input'},choices=GENERO),
         }
         labels = {

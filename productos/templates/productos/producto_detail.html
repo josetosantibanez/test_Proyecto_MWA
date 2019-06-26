@@ -30,9 +30,8 @@
         </form>
         {% if form.cantidad_reservar.errors %}
           <ul>
-            {%for error in form.cantidad_reservar.errors%}
               <li style="list-style:none;" class="text-danger">{{form.cantidad_reservar.errors}}</li>
-            {%endfor%}
+            
           </ul>
         {%endif%}
       </div>

@@ -6,7 +6,7 @@
       <div class="container ml-4 " >
         <div style="display:center;" >
           <tr>
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_staff %}
               {% include 'noticias/includes/noticias_menu.html' %}
             {% endif %}
             <br/>

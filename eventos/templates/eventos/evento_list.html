@@ -3,8 +3,19 @@
 {%load static%}
 
 {%block content%}
+<li style="list-style:none;">
+      <div class="container ml-4 " >
+        <div style="display:center;" >
+          <tr>
+            {% if request.user.is_staff %}
+              {% include 'eventos/includes/eventos_menu.html' %}
+            {% endif %}
+            <br/>
+          </tr>
+        </div>
+        <div class="card-deck ml-2 mt-2">
 {%for evento in evento_list %} 
-    <div class="card-deck ml-2 mt-2">
+    
   <div class="card">
     <img src="{{evento.imagen.url}}" class="card-img-top" alt="...">
     <div class="card-body">
@@ -17,8 +28,8 @@
       <a class="btn btn-primary " type=submit href="{% url 'eventos:evento' evento.id %}" >Ver detalle</a>
     </div>
   </div>
-</div>
+
 {% endfor %}
-    
+   </div> 
    
 {%endblock%}

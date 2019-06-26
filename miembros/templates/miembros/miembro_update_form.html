@@ -160,6 +160,87 @@
                           </div>
                         </div>
                       </div>
+                      
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Dosis diaria recetada</label>
+                          <div class="col-sm-9">
+                            {{form.dosis_diaria}}
+                            {% if form.dosis_diaria.errors %}
+                              <ul>
+                                {%for error in form.dosis_diaria.errors%}
+                                  <li style="list-style:none;" class="text-danger">{{form.dosis_diaria.errors}}</li>
+                                {%endfor%}
+                              </ul>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Fecha de expiración de receta médica</label>
+                          <div class="col-sm-9">
+                            {{form.fecha_expiracion_receta}}
+                            {% if form.fecha_expiracion_receta.errors %}
+                              <ul>
+                                {%for error in form.fecha_expiracion_receta.errors%}
+                                  <li style="list-style:none;" class="text-danger">{{form.fecha_expiracion_receta.errors}}</li>
+                                {%endfor%}
+                              </ul>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Fotocopia de receta</label>
+                          <div class="col-sm-9">
+                            {{form.receta}}
+                            {% if form.receta.errors %}
+                              <ul>
+                                {%for error in form.receta.errors%}
+                                  <li style="list-style:none;" class="text-danger">{{form.receta.errors}}</li>
+                                {%endfor%}
+                              </ul>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Fotocopia de carnet lado A</label>
+                          <div class="col-sm-9">
+                            {{form.fotocopia_carnet_a}}
+                            {% if form.fotocopia_carnet_a.errors %}
+                              <ul>
+                                {%for error in form.fotocopia_carnet_a.errors%}
+                                  <li style="list-style:none;" class="text-danger">{{form.fotocopia_carnet_a.errors}}</li>
+                                {%endfor%}
+                              </ul>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group row">
+                          <label class="col-sm-3 col-form-label">Fotocopia de carnet lado B</label>
+                          <div class="col-sm-9">
+                            {{form.fotocopia_carnet_b}}
+                            {% if form.fotocopia_carnet_b.errors %}
+                              <ul>
+                                {%for error in form.fotocopia_carnet_b.errors%}
+                                  <li style="list-style:none;" class="text-danger">{{form.fotocopia_carnet_b.errors}}</li>
+                                {%endfor%}
+                              </ul>
+                            {%endif%}
+                          </div>
+                        </div>
+                      </div>
+                      
               <div class = "text-center">
                 <input type="submit" class="btn btn-primary btn-rounded" value="Modificar miembro" />
                 <a class="btn btn-inverse-secondary btn-rounded btn-fw ml-2" href="{% url 'miembros:miembros' %}">Volver</a>
