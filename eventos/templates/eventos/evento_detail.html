@@ -1,26 +1,44 @@
 {% extends 'core/base_layout_club.html' %}
-{% load static %}
+
 {% block title %}Evento {{evento.nombre}}{% endblock %}
 {% block content %}
-
-<div class="card mb-3 ml-4 mt-4">
-  <img class="card-img-top" src="{{evento.imagen.url}}" alt="Card image cap">
-  <div class="card-body">
-      <h5 class="card-title">{{evento.nombre}}</h5>
-      <h6 class="card-text">{{evento.fecha}}</h6>
-      <p class="card-text">{{evento.descripcion|safe}}</p>
-      <p class="mb-0"><strong>Cupos: {{evento.cupos}}<br>Ubicacion: {{evento.ubicacion}}<br>Te esperamos</strong></p><br><br>
-      {% if request.user.is_staff %}
-            <a class="btn btn-primary " href="{% url 'eventos:update' evento.id %}" >Modificar Evento</a>
-            <a class="btn btn-primary " href="{% url 'eventos:delete' evento.id %}" >Eliminar Evento</a>
-            {% elif request.user.profile.tipo_cuenta_id == 1 %}
-            <form method = "POST"> {% csrf_token %}
-            {{form.usuario}}
-            {{form.evento}}
-            <button class="btn btn-primary " type=submit href="" >Confirmar asistencia</button>
-            </form>
-            {% endif %}
+{% load static %}
+{% load eventos_extras %}  
+  <div class="card-deck">
+    <div class="card mb-3 ml-4 mt-4">
+    <img class="card-img-top" src="{{evento.imagen.url}}" alt="Card image cap" style="height:200px;">
+      <div class="card-body">
+        <h5 class="card-title">{{evento.nombre}}</h5>
+        <h6 class="card-text">{{evento.fecha}}</h6>
+        <p class="card-text">{{evento.descripcion|safe}}</p>
+        <p class="mb-0"><strong>Cupos: {{evento.cupos}}<br>Ubicacion: {{evento.ubicacion}}<br>Te esperamos</strong></p><br><br>
+        {% if request.user.is_staff %}
+          <a class="btn btn-primary " href="{% url 'eventos:update' evento.id %}" >Modificar Evento</a>
+          <a class="btn btn-primary " href="{% url 'eventos:delete' evento.id %}" >Eliminar Evento</a>
+        {% elif request.user.profile.tipo_cuenta_id == 1 %}
+          <form method = "POST"> {% csrf_token %}
+          {{form.usuario}}
+          {{form.evento}}
+          <button class="btn btn-primary " type=submit href="" >Confirmar asistencia</button>
+          </form>
+        {% endif %}
+      </div>
+    </div>
+    {% if request.user.profile.tipo_cuenta_id == 2 %}
+      <div class="card mb-3 ml-4 mt-4">
+        <img src="{% static 'eventos/img/checklist.jpg' %}" alt="Card image cap" style="height:200px;">
+        <div class="card-body">
+          <h5 class="card-title">Asistencia al evento {{evento.nombre}}</h5>
+          <ol>
+            {% for a in asistentes %}
+              {% if a.evento_id == evento.id %}
+                <li><p class="card-text">{{a.miembro.nombres}} {{a.miembro.apellido_p}}</p></li>
+              {% endif %}
+            {% endfor %}
+          </ol>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      {% endif %}
+    </div>
   </div>
-</div>
-
 {% endblock %}
