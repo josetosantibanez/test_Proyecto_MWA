@@ -1,86 +1,8 @@
-<!DOCTYPE html>
-<html lang="zxx">
-<head>
-{%load static%}
-	<title>MWA - Medical Weed App</title>
-	<meta charset="UTF-8">
-	<meta name="description" content="EndGam Gaming Magazine Template">
-	<meta name="keywords" content="endGam,gGaming, magazine, html">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Favicon -->
-	<link href="{% static 'core/img2/favicon.ico' %}" rel="shortcut icon"/>
+{% extends 'core/base_layout_inicio.html' %}
 
-	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	{% block title %}Inicio MWA {% endblock %}
 
-	<!-- Stylesheets -->
-	<link rel="stylesheet" href="{% static 'core/css2/bootstrap.min.css' %}"/>
-	<link rel="stylesheet" href="{% static 'core/css2/font-awesome.min.css' %}"/>
-	<link rel="stylesheet" href="{% static 'core/css2/slicknav.min.css' %}"/>
-	<link rel="stylesheet" href="{% static 'core/css2/owl.carousel.min.css' %}"/>
-	<link rel="stylesheet" href="{% static 'core/css2/magnific-popup.css' %}"/>
-	<link rel="stylesheet" href="{% static 'core/css2/animate.css' %}"/>
-
-	<!-- Main Stylesheets -->
-	<link rel="stylesheet" href="{% static 'core/css2/style.css' %}"/>
-
-
-	<!--[if lt IE 9]>
-		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-	<![endif]-->
-
-</head>
-<body>
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
-
-	<!-- Header section -->
-	<header class="header-section" >
-		<div class="header-warp">
-			
-			<div class="header-bar-warp d-flex">
-				<!-- site logo -->
-				<a href="home.html" class="site-logo">
-					<img class="logo-test" src="{% static 'core/img2/logoMwa.jpg' %}" alt="" >
-				</a>
-				<nav class="top-nav-area w-100">
-					<div class="user-panel">
-						<a href="{%url 'login'%}">Ingresar</a> / <a href="{% url 'signup' %}">Registrarse</a>
-					</div>
-					<!-- Menu -->
-					<ul class="main-menu primary-menu">
-						<li><a href="iniciohtml"><i class="fa fa-home" style="font-size:24px"></i></a></li>
-						<li><a href="review.html">Novedades</a></li>
-						<li><a href="#Mision">Valores</a></li>
-						<li><a href="blog.html">Colaboradores</a></li>
-						<li><a href="productos.html">Contacto</a></li>						
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</header>
-	<!-- Header section end -->
-
-	<!-- Hero section -->
-	<section class="hero-section overflow-hidden">
-		<div id="inicio"class="hero-slider owl-carousel">
-			<div class="hero-item set-bg d-flex align-items-center justify-content-center text-center"  data-setbg="{% static 'core/img2/fondo.jpg' %}">
-				<div class="container">
-					<h1>Forma parte de la medicina Cannábica!</h1>
-					<p>Medical Weed App.</p>
-					<a href="#" class="site-btn">Unete...<img src="{% static 'core/img2/icons/double-arrow.png' %}" alt="#"/></a>
-				</div>
-			</div>
-			 
-		</div>
-	</section>
-	<!-- Hero section end-->
-
-
+	{% block content %}
 	<!-- Intro section -->
 	<section class="intro-section">
 		<div class="container" id='Mision'>
@@ -138,43 +60,7 @@
 	</section>
 	<!-- Intro section end -->
 
-
+	{% endblock %}
 	
 
 
-
-	<!-- Footer section -->
-	<footer class="footer-section">
-		<div class="container">
-		
-			<a href="#" class="footer-logo">
-				<img src="{% static 'core/img2/logo-MWA.jpg' %}" alt="">
-			</a>
-			<ul class="main-menu footer-menu">
-				<li><a href="">Sobre Nosotros</a></li>
-				<li><a href="">Donaciones</a></li>
-				
-			</ul>
-			<div class="footer-social d-flex justify-content-center">
-				<a href="#"><i class="fa fa-instagram"></i></a>
-				<a href="#"><i class="fa fa-facebook"></i></a>
-				<a href="#"><i class="fa fa-twitter"></i></a>
-
-			</div>
-			<div class="copyright"><a href="">MWA</a> 2019 @ Todos los derechos reservados</div>
-		</div>
-	</footer>
-	<!-- Footer section end -->
-
-
-	<!--====== Javascripts & Jquery ======-->
-	<script src="{% static 'core/js2/jquery-3.2.1.min.js' %}"></script>
-	<script src="{% static 'core/js2/bootstrap.min.js' %}"></script>
-	<script src="{% static 'core/js2/jquery.slicknav.min.js' %}"></script>
-	<script src="{% static 'core/js2/owl.carousel.min.js' %}"></script>
-	<script src="{% static 'core/js2/jquery.sticky-sidebar.min.js' %}"></script>
-	<script src="{% static 'core/js2/jquery.magnific-popup.min.js' %}"></script>
-	<script src="{% static 'core/js2/main.js' %}"></script>
-
-	</body>
-</html>

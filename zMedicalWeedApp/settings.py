@@ -138,7 +138,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 
 #Redirecciones del login y logout
-LOGIN_REDIRECT_URL = 'profile'
+LOGIN_REDIRECT_URL = 'inicio' #Este debera redirigir a inicio una vez que tenga forma de entrar a la interfaz club desde alli dps de estar loggeado
 LOGOUT_REDIRECT_URL = 'inicio'
 
 
