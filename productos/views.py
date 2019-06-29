@@ -57,7 +57,7 @@ class ProductoDeleteView(DeleteView):
 
 def reservar_producto(request,pk):
     producto = get_object_or_404(Producto,id=pk)
-    miembros = Miembro.objects.all()
+    miembros = Miembro.objects.all() #Se puede mejorar
     if request.method == "POST":
         print("Entro al post, {}".format(request.user))
         request.POST._mutable = True
