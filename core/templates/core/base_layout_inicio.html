@@ -72,6 +72,8 @@
 								{% if request.user.miembro.id %}
 									<li><a href="review.html">Mi club</a></li>
 								{% endif %}
+							{% elif request.user.profile.tipo_cuenta_id == 2 %}
+								<li><a href="review.html">Mi club</a></li>
 							{% endif %}
 						{% else %}
 							<li><a href="review.html">Buscar clubes</a></li>
