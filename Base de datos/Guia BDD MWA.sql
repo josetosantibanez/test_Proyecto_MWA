@@ -72,9 +72,21 @@ delete from registration_profile where id = 9;
 		set new.nombres = CONCAT(UCASE(LEFT(new.nombres, 1)),LCASE(SUBSTRING(new.nombres, 2)));
 	    set new.apellido_p = CONCAT(UCASE(LEFT(new.apellido_p, 1)),LCASE(SUBSTRING(new.apellido_p, 2)));
 	    set new.apellido_m = CONCAT(UCASE(LEFT(new.apellido_m, 1)),LCASE(SUBSTRING(new.apellido_m, 2)));
-	END;
+		update clubes_club set cantidad_miembros = cantidad_miembros + 1 where id = new.club_id_id;
+    END;
 	DELIMITER;
     
+    DELIMITER //
+		create trigger cant_miembros_delete after delete on miembros_miembro
+		for each row
+        BEGIN
+			declare m int;
+            set m = old.id;
+			update clubes_club set cantidad_miembros = cantidad_miembros - 1 where id = old.club_id_id;
+            update productos_reserva set estado = 'C' where usuario_id = old.user_id_id;
+            delete from eventos_asistentes where old.user_id_id = m;
+		END;
+    DELIMITER;
     
     drop trigger stock_productos;
     
@@ -110,6 +122,14 @@ delete from registration_profile where id = 9;
         for each row
         begin
             update eventos_evento set cupos = cupos - 1 where id = new.evento_id;
+		end;
+    DELIMITER;
+    
+    DELIMITER //
+		create trigger cupos_eventos_del after delete on eventos_asistentes
+        for each row
+        begin
+			update eventos_evento set cupos = cupos + 1 where id = old.evento_id;
 		end;
     DELIMITER;
     

@@ -70,13 +70,13 @@
 						{% if request.user.is_authenticated %}
 							{% if request.user.profile.tipo_cuenta_id == 1 %}
 								{% if request.user.miembro.id %}
-									<li><a href="review.html">Mi club</a></li>
+									<li><a href="{% url 'home' %}">Mi club</a></li>
 								{% endif %}
 							{% elif request.user.profile.tipo_cuenta_id == 2 %}
-								<li><a href="review.html">Mi club</a></li>
+								<li><a href="{% url 'home' %}">Mi club</a></li>
 							{% endif %}
 						{% else %}
-							<li><a href="review.html">Buscar clubes</a></li>
+							<li><a href="{% url 'clubes:clubes' %}">Buscar clubes</a></li>
 						{% endif %}
 						<li><a href="review.html">Novedades</a></li>
 						<li><a href="#Mision">Valores</a></li>
