@@ -45,6 +45,7 @@ class EventoDeleteView(DeleteView):
     success_url = reverse_lazy('eventos:eventos')
 
 def asistir_evento(request,pk):
+    b=0
     evento = get_object_or_404(Evento,pk=pk)
     asistentes = Asistentes.objects.all()
     if request.method == "POST":
@@ -55,7 +56,17 @@ def asistir_evento(request,pk):
         print(request.POST['miembro'])
         if form.is_valid():
             form.save()
+            evento.cupos = evento.cupos - 1
+            evento.save()
             return redirect('eventos:eventos')
     else:
         form = AsistenciaForm()
-    return render(request,'eventos/evento_detail.html',{'form':form,'evento':evento,'asistentes':asistentes })
+        for a in asistentes:
+            if request.user.miembro.id == a.miembro_id and evento.id == a.evento_id:
+                b = 2
+                break
+            else:
+                b = 1
+         
+        ctx = {'form':form,'evento':evento,'asistentes':asistentes,'b':b }
+    return render(request,'eventos/evento_detail.html',ctx)

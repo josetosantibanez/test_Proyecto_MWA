@@ -33,11 +33,13 @@
               <td>{{reserva.created|date:"SHORT_DATE_FORMAT"}}</td>
               <td>{{reserva.precio_total}}</td>
               {% if reserva.estado == 'P' %}
-              <td><label class="badge badge-warning">Pendiente</label></td>
+              <td><label class="badge badge-warning">Retiro pendiente</label></td>
               {% elif reserva.estado == 'E' %}
               <td><label class="badge badge-success">Entregado</label></td>
               {% elif reserva.estado == 'C' %}
               <td><label class="badge badge-danger">Cancelado</label></td>
+              {% elif reserva.estado == 'D' %}
+              <td><label class="badge badge-warning">Despachando al local</label></td>
               {% endif %}
               <td>                
               <a class="" href="{% url 'productos:estado_reservas' reserva.id %}" >🔎</a>
@@ -55,11 +57,13 @@
               <td>{{reserva.created|date:"SHORT_DATETIME_FORMAT"}}</td>
               <td>{{reserva.precio_total}}</td>
               {% if reserva.estado == 'P' %}
-              <td><label class="badge badge-warning">Pendiente</label></td>
+              <td><label class="badge badge-warning">Entrega Pendiente</label></td>
               {% elif reserva.estado == 'E' %}
               <td><label class="badge badge-success">Entregado</label></td>
               {% elif reserva.estado == 'C' %}
               <td><label class="badge badge-danger">Cancelado</label></td>
+              {% elif reserva.estado == 'D' %}
+              <td><label class="badge badge-warning">Despachando al local</label></td>
               {% endif %}
               <td>                
               <a class="" href="{% url 'productos:estado_reservas' reserva.id %}" >🔎</a>

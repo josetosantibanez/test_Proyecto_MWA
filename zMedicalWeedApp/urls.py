@@ -4,6 +4,7 @@ from noticias.urls import noticias_patterns
 from miembros.urls import miembros_patterns
 from productos.urls import productos_patterns
 from eventos.urls import eventos_patterns
+from clubes.urls import clubes_patterns
 from django.conf import settings
 
 urlpatterns = [
@@ -11,6 +12,9 @@ urlpatterns = [
 
     #Path Home
     path('', include("core.urls")),
+
+    #Path de clubes
+    path('clubes', include(clubes_patterns)),
 
     #Path de noticias
     path('club/noticias/',include(noticias_patterns)),

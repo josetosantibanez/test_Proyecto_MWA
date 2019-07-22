@@ -1,5 +1,4 @@
 {% extends 'core/base_layout_club.html' %}
-{% load widget_tweaks %}
 {% block title %}Detalle reserva{% endblock %}
 
 {% block content %}
@@ -7,7 +6,7 @@
 <form action="" method="post" enctype=multipart/form-data>{% csrf_token %}
     <div class="card">
     <div class="card-body">
-        <h4 class="card-title">Reserva de {{ request.user.first_name }} {{request.user.last_name}}</h4>
+        <h4 class="card-title">Reserva de {{ reserva.usuario }}</h4>
         <div class="form-group">
         <label>Miembro</label>
         <input type="text" class="form-control" value="{{reserva.usuario}}" >
@@ -39,6 +38,11 @@
         <label>Estado</label>
         <input type="text" class="form-control form-control-sm" value="Cancelado" aria-label="Username">
         </div>
+        {% elif reserva.estado == 'D' %}
+        <div class="form-group">
+        <label>Estado</label>
+        <input type="text" class="form-control form-control-sm" value="Despachando" aria-label="Username">
+        </div>
         {% endif %}
 
 
@@ -48,10 +52,19 @@
     {{form.estado}}
     {{form.precio_total}}
         <div style="text-align:center;">
-    {% if request.user.is_staff %}
-    <button style="text-align:center;" type="submit" class="btn btn-success" name="_entregado">Reserva Entregada</button>
+    {% if request.user.profile.tipo_cuenta_id == 2 %}
+        {% if reserva.estado == 'D' %}
+            <button style="text-align:center;" type="submit" class="btn btn-success" name="_despachado">Reserva Ha llegado</button>
+        {% elif reserva.estado != 'E' and reserva.estado != 'C' %}
+            <button style="text-align:center;" type="submit" class="btn btn-success" name="_entregado">Reserva Entregada</button>
+            <button style="text-align:center;" type="submit" class="btn btn-danger" name="_cancelar">Cancelar Reserva</button>
+        {% endif %}
     {% endif %}
-    <button style="text-align:center;" type="submit" class="btn btn-danger" name="_cancelar">Reserva Cancelada</button>
+    {% if request.user.profile.tipo_cuenta_id == 1 %}
+        {% if reserva.estado != 'C' and reserva.estado != 'E' %}
+            <button style="text-align:center;" type="submit" class="btn btn-danger" name="_cancelar">Cancelar Reserva</button>
+        {% endif %}
+    {% endif %}
     </div>
     </div>
     </div>

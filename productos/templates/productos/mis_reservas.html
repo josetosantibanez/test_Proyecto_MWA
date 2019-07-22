@@ -4,7 +4,7 @@
 
               <div class="card">
                 <div class="card-body">
-                  <h4 class="card-title">Reservas del club</h4>
+                  <h4 class="card-title">Mis reservas</h4>
                   <p class="card-description">
                     Listado de reservas
                   </p>
@@ -31,13 +31,17 @@
                                 <td>{{reserva.producto.nombre}}</td>
                                 <td>{{reserva.cantidad_reservar}}</td>
                                 <td>{{reserva.precio_total}}</td>
+                                <td>
                                 {% if reserva.estado == 'P' %}
-                                <td><label class="badge badge-warning">Pendiente</label></td>
+                                  <label class="badge badge-warning">Entrega Pendiente</label>
                                 {% elif reserva.estado == 'E' %}
-                                <td><label class="badge badge-success">Entregado</label></td>
+                                  <label class="badge badge-success">Entregado</label>
                                 {% elif reserva.estado == 'C' %}
-                                <td><label class="badge badge-danger">Cancelado</label></td>
+                                  <label class="badge badge-danger">Cancelado</label>
+                                {% else %}
+                                  <label class="badge badge-danger">Despachando reserva</label>
                                 {% endif %}
+                                </td>
                                 <td>                
                                 <a class="" href="{% url 'productos:estado_reservas' reserva.id %}" >🔎</a>
                                 </td>

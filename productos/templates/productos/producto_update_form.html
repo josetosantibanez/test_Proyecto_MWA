@@ -7,7 +7,7 @@
 
             
  <main role="main">
-  <div class="col-md-12 stretch-card">
+  <div class="col-md-12 stretch-card mb-2 mt-2 ">
     <div class="card">
     {%if 'ok' in request.GET%}
               <p style="color: green;">El producto se ha actualizado correctamente
@@ -20,7 +20,7 @@
           Información del producto {{producto.nombre}}.
         </p>
         <form action="" method="post" class="form-sample" enctype=multipart/form-data>{% csrf_token %}
-          {% comment %} <div class="form-group row">
+          <div class="form-group row">
             <label class="col-sm-3 col-form-label">{{form.nombre.label}}</label>
             <div class="col-sm-9">
               {{form.nombre}}
@@ -97,10 +97,10 @@
                     </ul>
               {%endif%}
             </div>
-          </div> {% endcomment %}
+          </div> 
 
-          {{form.as_p}}
-          <button type="submit" class="btn btn-primary mr-2">Agregar producto</button>
+          {% comment %} {{form.as_p}} {% endcomment %}
+          <button type="submit" class="btn btn-primary mr-2">Modificar producto</button>
         </form>
       </div>
     </div>

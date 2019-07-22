@@ -3,10 +3,10 @@
 {% block title %}{{producto.nombre}}{% endblock %}
 {% block content %}
 
-<div class="card mb-4 ml-3 mt-3" >
+<div class="card mb-4 ml-3 mt-3" style="height:80%; width:50%;" >
   <div class="row no-gutters">
-    <div class="col-md-4">
-      <img src="{{producto.imagen.url}}" class="card-img" alt="..." style="height:400px; width:300px;" >
+    <div class="col-md-4" >
+      <img src="{{producto.imagen.url}}" class="card-img" alt="..." style="height:300px; width:250px;">
     </div>
     <div class="col-md-8">
       <div class="card-body">
@@ -14,6 +14,7 @@
         <p class="card-text">{{producto.descripcion|safe}}</p>
         <p class="card-text"><strong>{{producto.proporcion}}</strong></p>
         <p class="card-text"><strong>Stock disponible: {{producto.stock}} gramos.</strong></p>
+        <p class="card-text"><strong>Precio por gramo: ${{producto.precio_gramo}} </strong></p>
         {% if request.user.profile.tipo_cuenta_id == 1 %}
           <form method="POST" class="form-inline">{% csrf_token %}
             {{form.producto}}
@@ -25,8 +26,9 @@
             
             <input type="submit" class="btn btn-primary btn-rounded ml-2" value="Reservar" />
           </div>
+          <p class="card-text"><small class="text-muted">Nota:Usted, {{m.nombres}} puede reservar un máximo de {{cmax}} gramos.</small></p>
         {%endif%}
-        <p class="card-text"><small class="text-muted">Nota:Usted, {{m.nombres}} puede reservar un máximo de {{cmax}} gramos.</small></p>
+        
         </form>
         {% if form.cantidad_reservar.errors %}
           <ul>

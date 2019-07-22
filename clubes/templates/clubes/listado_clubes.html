@@ -1,0 +1,36 @@
+{% extends "core/base_layout_inicio.html" %}
+
+{%block title%}Detalle club{%endblock%}
+{%block content%}     
+  
+  <section class="page-section about-heading">
+    <div class="container">
+      <h2>Listado de clubes</h2>
+      <br/>
+      <table class="table table-striped" style="text-align:center;">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Nombre Club</th>
+            <th scope="col">Dirección</th>
+            <th scope="col">Telefono de contacto</th>
+            <th scope="col">Correo de contacto</th>
+            <th scope="col">Cupos disponibles</th>
+            <th scope="col">Detalle</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for c in clubes %}
+            <tr>
+              <th scope="row">{{c.nombre_org}}</th>
+              <td>{{c.direccion}}</td>
+              <td>{{c.telefono_contacto}}</td>
+              <td>{{c.correo_contacto}}</td>
+              <td>{{c.cantidad_miembros}}</td>           
+              <td><a href="{% url 'clubes:club' c.id %}" title="Ver Detalle">🔎</a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>  
+    </div>
+  </section>
+{%endblock%}

@@ -1,0 +1,14 @@
+{% extends "core/base_layout_inicio.html" %}
+{%block title%}Inicio{%endblock%}
+{%block content%}     
+  <div class="card">
+    <h5 class="card-header">{{club.nombre_org}}</h5>
+      <div class="card-body">
+        <p class="card-title">Rut: {{club.rut_org}}</p>
+        <p class="card-text">Dirección: {{club.direccion}}</p>
+        <p class="card-text">Cupos maximos: {{club.cant_max_miembros}}, Cupos disponibles: {{club.cantidad_miembros}}</p>
+        <p class="card-text">Numero de contacto: {{club.telefono_contacto}}, Correo de contacto: {{club.correo_contacto}}</p>
+        <a href="#" class="btn btn-primary">Enviar solicitud de ingreso</a>
+      </div>
+  </div>
+{%endblock%}
