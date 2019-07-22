@@ -16,7 +16,7 @@ class MiembroForm(forms.ModelForm):
         ]
 
         fields = ['rut','nombres','apellido_p','apellido_m','fecha_nacimiento',
-        'correo','celular','direccion','dosis_diaria','fecha_expiracion_receta','receta','fotocopia_carnet_a','fotocopia_carnet_b','genero']
+        'correo','celular','direccion','dosis_diaria','fecha_expiracion_receta','genero']
         
         widgets = {
             'rut':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: 11111111-1'}),
@@ -29,9 +29,6 @@ class MiembroForm(forms.ModelForm):
             'direccion':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: Avda. Vicuña Mackena 1010'}),
             'dosis_diaria':forms.NumberInput(attrs={'class':'form-control mb-2'}),
             'fecha_expiracion_receta':forms.DateInput(attrs={'class':'form-control mb-2','placeholder':'Ej: DD/MM/AAAA'}),
-            'receta':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es'}),
-            'fotocopia_carnet_a':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es'}),
-            'fotocopia_carnet_b':forms.FileInput(attrs={'class':'custom-file-input mb-2','lang':'es'}),
             'genero':forms.RadioSelect(attrs = {'class':'form-check-input'},choices=GENERO),
         }
         labels = {

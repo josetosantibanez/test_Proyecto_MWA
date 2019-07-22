@@ -66,7 +66,8 @@ def reservar_producto(request,pk):
         request.POST['precio_total'] = cant
         request.POST['usuario'] = request.user.id
         request.POST['producto'] = producto.id
-        request.POST['estado'] = 'P'
+        request.POST['estado'] = 'D'
+        producto.stock = producto.stock - int(res)
         form = ReservaForm(request.POST)
         print(producto.precio_gramo)
         print(res)
@@ -74,6 +75,7 @@ def reservar_producto(request,pk):
         if form.is_valid():            
             print("Formulario valido")
             form.save()
+            producto.save()
             return redirect('productos:productos')
     else:
         print("Renderizando la pagina")
@@ -100,23 +102,29 @@ def mis_reservas(request):
     
 def estado_reservas(request, pk):
     reserva = get_object_or_404(Reserva,pk=pk)
+    p = get_object_or_404(Producto,pk=reserva.producto_id)
     if request.method == "POST":
         request.POST._mutable = True
         request.POST['usuario'] = reserva.usuario_id
         request.POST['producto'] = reserva.producto_id
         request.POST['cantidad_reservar'] = reserva.cantidad_reservar
         request.POST['precio_total'] = reserva.precio_total
-        
+        res=request.POST['cantidad_reservar']
         if '_entregado' in request.POST:
             print("E")
             request.POST['estado'] = 'E'
         elif '_cancelar' in request.POST:
             print("C")
             request.POST['estado'] = 'C'
+            p.stock = p.stock + int(res)
             print(request.POST['estado'])
+        elif '_despachado' in request.POST:
+            print("D")
+            request.POST['estado'] = 'D'
         form = ListadoReservaForm(request.POST,instance=reserva)
         if form.is_valid():
             form.save()
+            p.save()
             print(request.POST['estado'])
         return redirect('productos:reservas')
     else:

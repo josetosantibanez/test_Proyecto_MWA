@@ -18,9 +18,6 @@ class Miembro(models.Model):
     genero = models.CharField(max_length=15, verbose_name = "Genero")
     dosis_diaria = models.SmallIntegerField(verbose_name="Dosis diaria recetada",default = 0)
     fecha_expiracion_receta = models.DateField(verbose_name="Fecha de expiración de receta", blank=True, null=True)
-    receta = models.FileField(verbose_name="Receta",upload_to="miembros", blank=True, null=True)
-    fotocopia_carnet_a = models.FileField(verbose_name="Fotocopia de carnet A",upload_to="miembros", blank=True, null=True)
-    fotocopia_carnet_b = models.FileField(verbose_name="Fotocopia de carnet B",upload_to="miembros", blank=True, null=True)
     club_id = models.ForeignKey(Club,verbose_name="Club",on_delete=models.CASCADE,default=1)
     user_id = models.OneToOneField(User,verbose_name = "Usuario", on_delete=models.CASCADE, default = 99)
 
