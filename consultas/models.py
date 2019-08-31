@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -15,5 +16,11 @@ class Paciente(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name = "Fecha de creacion")
     updated = models.DateTimeField(auto_now = True, verbose_name = "Fecha de ult. actualizacion")
 
-
-
+class Consulta(models.Model):
+    paciente = models.ForeignKey(Paciente,verbose_name ="Paciente atendido",on_delete=models.CASCADE)
+    medico = models.ForeignKey(User,verbose_name="Medico",on_delete=models.CASCADE)
+    anotaciones = models.TextField(verbose_name="Datos de la consulta")
+    diagnostico = models.TextField(verbose_name="Diagnostico")
+    prescripcion = models.TextField(verbose_name="Prescripcion")
+    created = models.DateTimeField(auto_now_add=True, verbose_name = "Fecha de creacion")
+    updated = models.DateTimeField(auto_now = True, verbose_name = "Fecha de ult. actualizacion")

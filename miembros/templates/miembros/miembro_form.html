@@ -6,7 +6,7 @@
   <div class="container">
         <form action="" method="post" class="form-sample" enctype=multipart/form-data>{% csrf_token %}
           <div class="col-12 ">
-              <div class="card mt-2">
+              <div class="card mt-2" style="width:130%">
                 <div class="card-body">
                   <h4 class="card-title">Argegar nuevo miembro</h4>
                     <p class="card-description">
@@ -189,6 +189,7 @@
                           </div>
                         </div>
                       </div>
+                      {{form.user_id}}
                       <div class="col-md-6">
                         <div class = "text-center">
                       <input type="submit" class="btn btn-primary btn-rounded" value="Agregar miembro" />

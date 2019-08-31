@@ -40,3 +40,27 @@ class EmailForm(forms.ModelForm):
             if User.objects.filter(email=email).exists():
                 raise forms.ValidationError("El email ya esta ocupado prueba con otro.")
         return email
+
+
+
+class UserCreationHidden(UserCreationForm):
+    email= forms.EmailField(required = True, help_text = "Requerido, 254 caracteres como maximo y debe ser valido")
+    username = forms.CharField(required = True, help_text = "Ingrese su rut")
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1','password2')
+        widgets={
+            'username':forms.HiddenInput(),
+            'email':forms.HiddenInput(),
+            'password1':forms.HiddenInput(),
+            'password2':forms.HiddenInput(),
+            
+            
+        }
+
+    def clean_email(self):
+        email = self.cleaned_data.get("email")
+        if User.objects.filter(email=email).exists():
+            raise forms.ValidationError("El email ya esta ocupado prueba con otro.")
+        return email

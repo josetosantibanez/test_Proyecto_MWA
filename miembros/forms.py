@@ -16,7 +16,7 @@ class MiembroForm(forms.ModelForm):
         ]
 
         fields = ['rut','nombres','apellido_p','apellido_m','fecha_nacimiento',
-        'correo','celular','direccion','dosis_diaria','fecha_expiracion_receta','genero']
+        'correo','celular','direccion','dosis_diaria','fecha_expiracion_receta','genero','user_id']
         
         widgets = {
             'rut':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: 11111111-1'}),
@@ -30,6 +30,7 @@ class MiembroForm(forms.ModelForm):
             'dosis_diaria':forms.NumberInput(attrs={'class':'form-control mb-2'}),
             'fecha_expiracion_receta':forms.DateInput(attrs={'class':'form-control mb-2','placeholder':'Ej: DD/MM/AAAA'}),
             'genero':forms.RadioSelect(attrs = {'class':'form-check-input'},choices=GENERO),
+            'user_id':forms.HiddenInput(attrs = {'value':14})
         }
         labels = {
             'rut':'Rut' ,
