@@ -13,6 +13,7 @@ class Paciente(models.Model):
     celular = models.CharField(max_length=12, verbose_name = "Numero celular")
     direccion = models.CharField(max_length=200, verbose_name = "Direccion")
     genero = models.CharField(max_length=1, verbose_name = "Genero")
+    user = models.ForeignKey(User,verbose_name = "Cuenta de usuario", on_delete=models.CASCADE, default=200)
     created = models.DateTimeField(auto_now_add=True, verbose_name = "Fecha de creacion")
     updated = models.DateTimeField(auto_now = True, verbose_name = "Fecha de ult. actualizacion")
 

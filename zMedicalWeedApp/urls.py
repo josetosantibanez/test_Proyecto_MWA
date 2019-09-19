@@ -5,6 +5,7 @@ from miembros.urls import miembros_patterns
 from productos.urls import productos_patterns
 from eventos.urls import eventos_patterns
 from clubes.urls import clubes_patterns
+from consultas.urls import consultas_patterns
 from django.conf import settings
 
 urlpatterns = [
@@ -14,7 +15,7 @@ urlpatterns = [
     path('', include("core.urls")),
 
     #Path de clubes
-    path('clubes', include(clubes_patterns)),
+    path('clubes/', include(clubes_patterns)),
 
     #Path de noticias
     path('club/noticias/',include(noticias_patterns)),
@@ -28,6 +29,9 @@ urlpatterns = [
 
     #Path de eventos
     path('club/eventos/', include(eventos_patterns)),
+
+    #Path de consultas
+    path('medico/buscar_paciente/', include(consultas_patterns)),
 
     #Path del auth
     path('accounts/', include('django.contrib.auth.urls')),

@@ -21,7 +21,7 @@ class InfoPaciente(forms.ModelForm):
         ]
 
         fields = ['rut','nombres','apellido_p','apellido_m','fecha_nacimiento',
-        'correo','celular','direccion','genero','user_id']
+        'correo','celular','direccion','genero','user']
         
         widgets = {
             'rut':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: 11111111-1'}),
@@ -33,7 +33,7 @@ class InfoPaciente(forms.ModelForm):
             'celular':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: +56967878678'}),
             'direccion':forms.TextInput(attrs={'class':'form-control mb-2','placeholder':'Ej: Avda. Vicuña Mackena 1010'}),
             'genero':forms.RadioSelect(attrs = {'class':'form-check-input'},choices=GENERO),
-            'user_id':forms.HiddenInput(attrs = {'value':14})
+            'user':forms.HiddenInput(attrs = {'value':14})
         }
         labels = {
             'rut':'Rut' ,

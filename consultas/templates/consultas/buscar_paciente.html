@@ -3,12 +3,16 @@
 {% block title %}Registrar consulta{% endblock %}
 {% block content %}
 
-    <form class="form-inline">
+    {% comment %} <form class="form-inline">
     <div class="form-group mb-2">
-    <label for="staticEmail2" class="sr-only">Email</label>
-    <input type="text" readonly class="form-control-plaintext" id="staticEmail2" value="email@example.com">
+    <label for="rut_buscar_p" class="sr-only">Rut Paciente</label>
+    <input type="text" class="form-control-plaintext" id="rut_buscar_p" value="">
     </div>
-    <button type="submit" class="btn btn-primary mb-2">Confirm identity</button>
+    <button type="submit" class="btn btn-primary mb-2">Buscar</button>
+    </form> {% endcomment %}
+    <form class="form-inline" method='post' action="" enctype=multipart/form-data>{% csrf_token %}
+        {{form}}
+        <button type="submit" class="btn btn-primary mb-2">Buscar</button>
     </form>
 
 {% endblock %}
