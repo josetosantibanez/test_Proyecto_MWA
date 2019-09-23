@@ -19,8 +19,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">{{form.rut.label_tag}}</label>
                           <div class="col-sm-9">
-                            {% comment %} {{form.rut}} {% endcomment %}
-                            <input readonly id='id_rut' name='rut' class='form-control mb-2' placeholder ='Ej: 11111111-1' value={{form.rut.value}}>
+                            {{form.rut}}
                             {% if form.rut.errors %}
                               <ul>
                                 {%for error in form.rut.errors%}
@@ -36,7 +35,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">{{form.nombres.label_tag}}</label>
                           <div class="col-sm-9">
-                            <input readonly id='id_nombres' name='nombres' class='form-control mb-2' placeholder ='Ej: 11111111-1' value={{form.nombres.value}}>
+                            {{form.nombres}}
                             {% if form.nombres.errors %}
                               <ul>
                                 {%for error in form.nombres.errors%}
@@ -53,7 +52,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Apellido paterno</label>
                           <div class="col-sm-9">
-                            <input readonly id='id_apellido_p' name='apellido_p' class='form-control mb-2' placeholder ='Ej: 11111111-1' value={{form.apellido_p.value}}>
+                            {{form.apellido_p}}
                             {% if form.apellido_p.errors %}
                               <ul>
                                 {%for error in form.apellido_p.errors%}
@@ -68,7 +67,7 @@
                         <div class="form-group row">
                           <label class="col-sm-3 col-form-label">Apellido materno</label>
                           <div class="col-sm-9">
-                            <input readonly id='id_apellido_m' name='apellido_m' class='form-control mb-2' placeholder ='Ej: 11111111-1' value={{form.apellido_m.value}}>
+                            {{form.apellido_m}}
                             {% if form.apellido_m.errors %}
                               <ul>
                                 {%for error in form.apellido_m.errors%}

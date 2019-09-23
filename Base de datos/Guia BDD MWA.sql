@@ -13,6 +13,7 @@
 	insert into registration_tipo_cuenta values (1,'Paciente');
 	insert into registration_tipo_cuenta values (2,'Club');
 	insert into registration_tipo_cuenta values (3,'SuperAdministrador');
+	insert into registration_tipo_cuenta values (4,'Medico');
 
 #-Selects basicos
 
@@ -36,12 +37,18 @@
     # Selects de eventos
     select * from eventos_evento;
     select * from eventos_asistentes;
+    
+    # Selects de consultas
+    select * from consultas_paciente;
 	
 	desc auth_user;
     desc miembros_miembro;
 	desc registration_profile;
     desc clubes_club;
-
+    desc consultas_paciente;
+    desc consultas_consulta;
+    
+alter table registration_profile drop column direccion;
 
 #Trabajar
 update auth_user set first_name = "Club de prueba" where id = 8;
@@ -51,6 +58,8 @@ delete from auth_user where id = 3;
 delete from productos_reserva where id = 35;
 delete from registration_profile where id = 9;
 
+
+update registration_profile set tipo_cuenta_id = 4 where user_id = 16; 
 
 #-Triggers:
 	drop trigger user_de_miembro;
@@ -67,7 +76,7 @@ delete from registration_profile where id = 9;
 				insert into auth_user (username,password,first_name,last_name,email,is_superuser,is_staff,is_active,date_joined) values (new.rut, 'pbkdf2_sha256$120000$Kpyp2shQuEe9$5oV3qOMpFvruBdGeQp6+/O3RJdfo6KnUT2vNCknGdW8=',new.nombres,new.apellido_p,new.correo,0,0,1,now());
 				set var_user_id = (select id from auth_user where username = new.rut order by date_joined DESC LIMIT 1);
 	            set new.user_id_id = var_user_id;
-                insert into registration_profile (tipo_cuenta_id,user_id) values (2,new.user_id_id);
+                insert into registration_profile (tipo_cuenta_id,user_id) values (1,new.user_id_id);
 	        end if;
 		set new.nombres = CONCAT(UCASE(LEFT(new.nombres, 1)),LCASE(SUBSTRING(new.nombres, 2)));
 	    set new.apellido_p = CONCAT(UCASE(LEFT(new.apellido_p, 1)),LCASE(SUBSTRING(new.apellido_p, 2)));
@@ -117,6 +126,7 @@ delete from registration_profile where id = 9;
 		end;
     DELIMITER;
     
+    drop trigger cupos_eventos;
     DELIMITER //
 		create trigger cupos_eventos after insert on eventos_asistentes
         for each row
@@ -125,6 +135,8 @@ delete from registration_profile where id = 9;
 		end;
     DELIMITER;
     
+    
+    drop trigger cupos_eventos_del;
     DELIMITER //
 		create trigger cupos_eventos_del after delete on eventos_asistentes
         for each row
@@ -134,12 +146,55 @@ delete from registration_profile where id = 9;
     DELIMITER;
     
     
+    drop trigger user_de_paciente;
+    #User de paciente
+    DELIMITER //
+	create trigger user_de_paciente before insert on consultas_paciente
+	for each row
+	BEGIN
+	    declare var_user_id int;
+			if exists (select * from auth_user where username = new.rut) then
+				set var_user_id = (select id from auth_user where username = new.rut order by date_joined DESC LIMIT 1);
+	            set new.user_id = var_user_id;
+			else 
+				insert into auth_user (username,password,first_name,last_name,email,is_superuser,is_staff,is_active,date_joined) values (new.rut, 'pbkdf2_sha256$120000$Kpyp2shQuEe9$5oV3qOMpFvruBdGeQp6+/O3RJdfo6KnUT2vNCknGdW8=',new.nombres,new.apellido_p,new.correo,0,0,1,now());
+				set var_user_id = (select id from auth_user where username = new.rut order by date_joined DESC LIMIT 1);
+	            set new.user_id = var_user_id;
+                insert into registration_profile (tipo_cuenta_id,user_id,apellido_m,apellido_p,direccion,fecha_nacimiento,genero,celular,nombres,correo,rut) values (4,new.user_id,new.apellido_m,new.apellido_p,new.direccion,new.fecha_nacimiento,new.genero,new.celular,new.nombres,new.correo,new.rut);
+	        end if;
+		set new.nombres = CONCAT(UCASE(LEFT(new.nombres, 1)),LCASE(SUBSTRING(new.nombres, 2)));
+	    set new.apellido_p = CONCAT(UCASE(LEFT(new.apellido_p, 1)),LCASE(SUBSTRING(new.apellido_p, 2)));
+	    set new.apellido_m = CONCAT(UCASE(LEFT(new.apellido_m, 1)),LCASE(SUBSTRING(new.apellido_m, 2)));
+		
+    END;
+	DELIMITER;
     
+    insert into consultas_paciente (id,rut,nombres,apellido_p,apellido_m,fecha_nacimiento,correo,celular,direccion,genero,created,updated) values (6,'186404092','Pruebasasda','consultsdasdas','pacientedasds','2000/10/10','coreo@prueba.lol','+245635643','sucasa','M','2019-06-24 12:14:16.671344','2019-06-24 12:14:16.671344');
     
+    select * from consultas_paciente;
+    select * from registration_profile;
+    select * from miembros_miembro;
+    select * from auth_user;
+    alter table registration_profile drop column genero;
     
+DELIMITER//
+
+create trigger update_profile after update on registration_profile
+for each row begin
+if exists (select * from consultas_paciente where user_id = new.user_id) then
+update consultas_paciente set rut = new.rut where user_id = new.user_id;
+update consultas_paciente set nombres = new.nombres where user_id = new.user_id;
+update consultas_paciente set apellido_p = new.apellido_p where user_id = new.user_id;
+update consultas_paciente set apellido_m = new.apellido_m where user_id = new.user_id;
+update consultas_paciente set fecha_nacimiento = new.fecha_nacimiento where user_id = new.user_id;
+update consultas_paciente set correo = new.correo where user_id = new.user_id;
+update consultas_paciente set celular = new.celular where user_id = new.user_id;
+update consultas_paciente set genero = new.genero where user_id = new.user_id;
+update consultas_paciente set direccion = new.direccion where user_id = new.user_id;
+end;    
+DELIMITER;
     
-    
-    
+
     
     
     
