@@ -62,11 +62,12 @@ def asistir_evento(request,pk):
     else:
         form = AsistenciaForm()
         for a in asistentes:
-            if request.user.miembro.id == a.miembro_id and evento.id == a.evento_id:
-                b = 2
-                break
-            else:
-                b = 1
-         
+            if request.user.profile.tipo_cuenta_id == 1:
+                if request.user.miembro.id == a.miembro_id and evento.id == a.evento_id:
+                    b = 2
+                    break
+                else:
+                    b = 1
+            
         ctx = {'form':form,'evento':evento,'asistentes':asistentes,'b':b }
     return render(request,'eventos/evento_detail.html',ctx)

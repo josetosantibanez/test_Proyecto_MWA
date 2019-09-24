@@ -24,62 +24,75 @@ class StaffRequiredMixin(object):
 class MiembroListView(ListView):
     model = Miembro
 
-def agregar_miembro(request):
-    users = User.objects.all()
-    am = get_object_or_404(User,pk=14)
-    if request.method == 'POST':
-        print(am.id)
-        request.POST._mutable = True
-        request.POST['user_id'] = am.id
-        form = MiembroForm(request.POST)
-        print("Quie")
-        print(form)
-        if form.is_valid():
-            print("Formulario es valido")
-            f=form.save(commit=False)#Guardamos sin guardar 
-            ### Trigger user de miembro
-            f.user_id = 0
-            for u in users:
+# def agregar_miembro(request):
+#     users = User.objects.all()
+#     am = get_object_or_404(User,pk=14)
+#     if request.method == 'POST':
+#         print(am.id)
+#         request.POST._mutable = True
+#         request.POST['user_id'] = am.id
+#         form = MiembroForm(request.POST)
+#         print("Quie")
+#         print(form)
+#         if form.is_valid():
+#             print("Formulario es valido")
+#             f=form.save(commit=False)#Guardamos sin guardar 
+#             ### Trigger user de miembro
+#             f.user_id = 0
+#             for u in users:
                 
-                if u.username == f.rut:
-                    # Existe un cuenta de usuario con este rut, 
-                    # debo enlazar este nuevo miembro cn la cuenta y hacer break
-                    print("Si!!!!!!!!!!!!!!!!!!!1")
-                    f.user_id=u.id
-                    break
-                else:
-                    print("No")
-                    pass
-            if f.user_id == 0:
-                #Si aun sigue siendo 0 es porque no existe una cuenta con ese rut
-                #Entonces debemos crear la cuenta
-                print("Entramos a donde creariamos la cuenta")
-                userform = UserCreationFormHidden()
+#                 if u.username == f.rut:
+#                     # Existe un cuenta de usuario con este rut, 
+#                     # debo enlazar este nuevo miembro cn la cuenta y hacer break
+#                     print("Si!!!!!!!!!!!!!!!!!!!1")
+#                     f.user_id=u.id
+#                     break
+#                 else:
+#                     print("No")
+#                     pass
+#             if f.user_id == 0:
+#                 #Si aun sigue siendo 0 es porque no existe una cuenta con ese rut
+#                 #Entonces debemos crear la cuenta
+#                 print("Entramos a donde creariamos la cuenta")
+#                 userform = UserCreationFormHidden()
 
 
-                vari = f.rut[0:5]
-                userform.username = f.rut
-                userform.email = f.correo
-                userform.password_1 = vari
-                userform.username = vari
-                userform.save()
-            f.save()
+#                 vari = f.rut[0:5]
+#                 userform.username = f.rut
+#                 userform.email = f.correo
+#                 userform.password_1 = vari
+#                 userform.username = vari
+#                 userform.save()
+#             f.save()
+#             return redirect('miembros:miembros')
+#     else:
+#         form = MiembroForm()
+#     args={'form':form}
+#     return render(request,'miembros/miembro_form.html',args)
+
+
+def agregar_miembro(request):
+    if request.method == 'POST':
+        form = MiembroForm(request.POST)
+        request.POST._mutable=True
+        request.POST['user_id']=14
+        if form.is_valid():
+            form.save()
             return redirect('miembros:miembros')
     else:
         form = MiembroForm()
-    args={'form':form}
-    return render(request,'miembros/miembro_form.html',args)
-
+    ctx={'form':form}
+    return render(request, 'miembros/miembro_form.html', ctx)
 
 @method_decorator(staff_member_required,name='dispatch')
 class MiembroDetailView(DetailView):
     model = Miembro
 
-# @method_decorator(staff_member_required,name='dispatch')
-# class MiembroCreateView(CreateView):
-#     model = Miembro
-#     form_class = MiembroForm
-#     success_url = reverse_lazy('miembros:miembros')
+@method_decorator(staff_member_required,name='dispatch')
+class MiembroCreateView(CreateView):
+    model = Miembro
+    form_class = MiembroForm
+    success_url = reverse_lazy('miembros:miembros')
 
 @method_decorator(staff_member_required,name='dispatch')
 class MiembroUpdateView(UpdateView):

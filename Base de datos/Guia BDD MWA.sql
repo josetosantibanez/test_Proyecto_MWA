@@ -76,7 +76,7 @@ update registration_profile set tipo_cuenta_id = 4 where user_id = 16;
 				insert into auth_user (username,password,first_name,last_name,email,is_superuser,is_staff,is_active,date_joined) values (new.rut, 'pbkdf2_sha256$120000$Kpyp2shQuEe9$5oV3qOMpFvruBdGeQp6+/O3RJdfo6KnUT2vNCknGdW8=',new.nombres,new.apellido_p,new.correo,0,0,1,now());
 				set var_user_id = (select id from auth_user where username = new.rut order by date_joined DESC LIMIT 1);
 	            set new.user_id_id = var_user_id;
-                insert into registration_profile (tipo_cuenta_id,user_id) values (1,new.user_id_id);
+                insert into registration_profile (tipo_cuenta_id,user_id,apellido_m,apellido_p,direccion,fecha_nacimiento,genero,celular,nombres,correo,rut) values (1,new.user_id,new.apellido_m,new.apellido_p,new.direccion,new.fecha_nacimiento,new.genero,new.celular,new.nombres,new.correo,new.rut);
 	        end if;
 		set new.nombres = CONCAT(UCASE(LEFT(new.nombres, 1)),LCASE(SUBSTRING(new.nombres, 2)));
 	    set new.apellido_p = CONCAT(UCASE(LEFT(new.apellido_p, 1)),LCASE(SUBSTRING(new.apellido_p, 2)));
@@ -160,7 +160,7 @@ update registration_profile set tipo_cuenta_id = 4 where user_id = 16;
 				insert into auth_user (username,password,first_name,last_name,email,is_superuser,is_staff,is_active,date_joined) values (new.rut, 'pbkdf2_sha256$120000$Kpyp2shQuEe9$5oV3qOMpFvruBdGeQp6+/O3RJdfo6KnUT2vNCknGdW8=',new.nombres,new.apellido_p,new.correo,0,0,1,now());
 				set var_user_id = (select id from auth_user where username = new.rut order by date_joined DESC LIMIT 1);
 	            set new.user_id = var_user_id;
-                insert into registration_profile (tipo_cuenta_id,user_id,apellido_m,apellido_p,direccion,fecha_nacimiento,genero,celular,nombres,correo,rut) values (4,new.user_id,new.apellido_m,new.apellido_p,new.direccion,new.fecha_nacimiento,new.genero,new.celular,new.nombres,new.correo,new.rut);
+                insert into registration_profile (tipo_cuenta_id,user_id,apellido_m,apellido_p,direccion,fecha_nacimiento,genero,celular,nombres,correo,rut) values (1,new.user_id,new.apellido_m,new.apellido_p,new.direccion,new.fecha_nacimiento,new.genero,new.celular,new.nombres,new.correo,new.rut);
 	        end if;
 		set new.nombres = CONCAT(UCASE(LEFT(new.nombres, 1)),LCASE(SUBSTRING(new.nombres, 2)));
 	    set new.apellido_p = CONCAT(UCASE(LEFT(new.apellido_p, 1)),LCASE(SUBSTRING(new.apellido_p, 2)));
@@ -171,6 +171,7 @@ update registration_profile set tipo_cuenta_id = 4 where user_id = 16;
     
     insert into consultas_paciente (id,rut,nombres,apellido_p,apellido_m,fecha_nacimiento,correo,celular,direccion,genero,created,updated) values (6,'186404092','Pruebasasda','consultsdasdas','pacientedasds','2000/10/10','coreo@prueba.lol','+245635643','sucasa','M','2019-06-24 12:14:16.671344','2019-06-24 12:14:16.671344');
     
+    select * from consultas_consulta;
     select * from consultas_paciente;
     select * from registration_profile;
     select * from miembros_miembro;
@@ -191,6 +192,7 @@ update consultas_paciente set correo = new.correo where user_id = new.user_id;
 update consultas_paciente set celular = new.celular where user_id = new.user_id;
 update consultas_paciente set genero = new.genero where user_id = new.user_id;
 update consultas_paciente set direccion = new.direccion where user_id = new.user_id;
+end if;
 end;    
 DELIMITER;
     

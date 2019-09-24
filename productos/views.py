@@ -123,13 +123,13 @@ def estado_reservas(request, pk):
             print(request.POST['estado'])
         elif '_despachado' in request.POST:
             print("D")
-            request.POST['estado'] = 'D'
+            request.POST['estado'] = 'P'
         form = ListadoReservaForm(request.POST,instance=reserva)
         if form.is_valid():
             form.save()
             p.save()
             print(request.POST['estado'])
-        return redirect('productos:reservas')
+            return redirect('productos:reservas')
     else:
         form = ListadoReservaForm()
     return render(request, 'productos/reserva_detalle.html',{'form':form,'reserva':reserva})

@@ -1,4 +1,24 @@
+{% extends 'core/base_layout_medico.html' %}
+{% block title %}registrar consultas{% endblock %}
+
 {% block content %}
-Beinvenido
+<form method='POST' class="form-sample" action="">{% csrf_token %}
+
+    <div class="form-group">
+      <label for="disabledTextInput">Anotaciones</label>
+      {{form.anotaciones}}
+    </div>
+    <div class="form-group">
+      <label for="disabledTextInput">Diagnostico</label>
+      {{form.diagnostico}}
+    </div>
+    <div class="form-group">
+      <label for="disabledTextInput">Prescripcion</label>
+      {{form.prescripcion}}
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Registrar</button>
+
+</form>
 
 {% endblock %}

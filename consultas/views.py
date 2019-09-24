@@ -1,6 +1,6 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth.models import User
-from .forms import BuscarPaciente,InfoPaciente,NuevoPaciente
+from .forms import BuscarPaciente,InfoPaciente,NuevoPaciente,AgregarConsulta
 from .models import Paciente
 from registration.models import Profile
 
@@ -92,6 +92,22 @@ def nuevo_paciente(request):
 
 
 def agregar_consulta(request,pk):
-    paciente = Paciente.objects.filter(user_id=pk)
-    
-    return render(request,'consultas/registrar_consulta.html')
+    user_paciente = get_object_or_404(User, pk=pk)
+    id_paciente = Paciente.objects.get(user=pk)
+    print(id_paciente)
+    if request.method == 'POST':
+        form = AgregarConsulta(request.POST)
+        request.POST._mutable= True
+        request.POST['paciente']=id_paciente.id
+        request.POST['medico']=request.user.id
+        if form.is_valid():
+            
+            form.save()
+            return redirect('consultas:buscar_paciente')
+            #Falta imprimir receta
+        else:
+            print(form.errors)
+    else:
+        form = AgregarConsulta()
+    ctx={'form':form,'pk':pk}
+    return render(request,'consultas/registrar_consulta.html',ctx)

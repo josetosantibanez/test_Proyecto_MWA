@@ -133,14 +133,14 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="consutaMedico.html">
+            <a class="nav-link" href="{% url 'consultas:buscar_paciente' %}">
               <i class="mdi mdi-view-headline menu-icon"></i>
-              <span class="menu-title">Consulta</span>
+              <span class="menu-title">Nueva Consulta</span>
             </a>
           </li>
            
           </li>
-          <li class="nav-item">
+          {% comment %} <li class="nav-item">
             <a class="nav-link" href="historialMedico.html">
               <i class="mdi mdi-view-headline menu-icon"></i>
               <span class="menu-title">Historial</span>
@@ -151,7 +151,7 @@
               <i class="mdi mdi-chart-pie menu-icon"></i>
               <span class="menu-title">Definir Consultas</span>
             </a>
-          </li>
+          </li> {% endcomment %}
          
          
         </ul>

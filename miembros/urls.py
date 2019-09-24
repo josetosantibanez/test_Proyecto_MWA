@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from .views import MiembroListView,MiembroDetailView,MiembroUpdateView,MiembroDeleteView, agregar_miembro
+from .views import MiembroListView,MiembroDetailView,MiembroUpdateView,MiembroDeleteView,agregar_miembro
 
 miembros_patterns = ([
     path('', MiembroListView.as_view(), name='miembros'),
