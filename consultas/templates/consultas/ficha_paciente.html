@@ -1,0 +1,45 @@
+{% extends 'core/base_layout_medico.html' %}
+{% block title %}Paciente{% endblock %}
+{% load static %}
+{% block content %}
+<form method='POST' class="form-sample" action="">{% csrf_token %}
+<div class="card mb-3 ml-2" style="width:400px;">
+  <img src="{% static '/consultas/img/ficha_paciente.jpg' %}" class="card-img-top" alt="..." width="450" height="250" > 
+  {% comment %} Arreglar ancho de la foto, esta srea solo decorativa asique buscar foto {% endcomment %}
+  <div class="card-body">
+    <h5 class="card-title">{{paciente.apellido_p}} {{paciente.apellido_m}}, {{paciente.nombres}}</h5>
+    <p class="card-text">Rut: {{paciente.rut}}</p>
+    <p class="card-text">Fecha de nacimiento: {{paciente.fecha_nacimiento}}</p>
+    <p class="card-text">Genero: {% if paciente.genero == 'M' %}Masculino{% else %}Femenino{% endif %}</p>
+    <p class="card-text">Email: {{paciente.correo}}</p>
+    <p class="card-text">N° Celular: {{paciente.celular}}</p>
+    <p class="card-text">Dirección: {{paciente.direccion}}</p>
+    <button type="submit" class="btn btn-primary" name="_volver">Volver al menu principal</button>
+    <button type="submit" class="btn btn-primary" name="_imprimir">Imprimir recta</button>
+  </div>
+<table class="table table-sm">
+  <thead>
+    <tr>
+      <th scope="col">Apellidos</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Fecha consulta</th>
+      <th scope="col">Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for c in consultas %}
+        {% if c.paciente_id == paciente.id %}
+        <tr>
+        <th>{{ paciente.apellido_p }} {{paciente.apellido_m}}</th>
+        <td>{{paciente.nombres}}</td>
+        <td>{{c.created}}</td>
+        <td>🖨</td>
+        </tr>
+        {% endif %}
+    {% endfor %}
+  </tbody>
+</table>
+
+</div>
+</form>
+{% endblock %}

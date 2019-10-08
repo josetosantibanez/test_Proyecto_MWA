@@ -1,10 +1,14 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.contrib.auth.models import User
 from .forms import BuscarPaciente,InfoPaciente,NuevoPaciente,AgregarConsulta
-from .models import Paciente
+from .models import Paciente, Consulta
 from registration.models import Profile
+#Imprimir PDF
+import io
+from django.http import FileResponse, HttpResponse
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
 
-# Create your views here.
 
 
 def buscar_paciente_si_existe(request):
@@ -48,9 +52,9 @@ def info_paciente(request,pk):
             apellido_m = profile.apellido_m
             fecha_nacimiento = profile.fecha_nacimiento
             user = profile.user_id
+            break
         else:
             form = InfoPaciente()
-            print("Entro al else")
 
     if request.method=='POST':
 
@@ -93,21 +97,70 @@ def nuevo_paciente(request):
 
 def agregar_consulta(request,pk):
     user_paciente = get_object_or_404(User, pk=pk)
-    id_paciente = Paciente.objects.get(user=pk)
-    print(id_paciente)
+    id_paciente  = get_object_or_404(Paciente,user=pk)
+    # id_paciente = Paciente.objects.get(user=pk)
     if request.method == 'POST':
         form = AgregarConsulta(request.POST)
         request.POST._mutable= True
         request.POST['paciente']=id_paciente.id
         request.POST['medico']=request.user.id
         if form.is_valid():
-            
             form.save()
-            return redirect('consultas:buscar_paciente')
-            #Falta imprimir receta
+            return redirect('consultas:ficha',pk=id_paciente.id)
         else:
             print(form.errors)
     else:
         form = AgregarConsulta()
     ctx={'form':form,'pk':pk}
     return render(request,'consultas/registrar_consulta.html',ctx)
+
+def ver_ficha_paciente(request,pk):
+    paciente = get_object_or_404(Paciente,pk=pk)
+    consultas = Consulta.objects.all()
+    if request.method == 'POST':
+        if '_imprimir' in request.POST:
+            c = Consulta.objects.raw('''select * from consultas_consulta where medico_id = 16
+                                            order by created DESC limit 1''')[0]
+            pk=c.id
+            return redirect('consultas:imprimir',pk=pk)
+            
+        elif '_volver' in request.POST:
+            return redirect('consultas:buscar_paciente')
+    ctx={
+        'pk':pk,
+        'paciente':paciente,
+        'consultas':consultas,
+    }
+    return render(request,'consultas/ficha_paciente.html',ctx)
+
+
+def imprimir_pdf_receta(request,pk):
+    consulta = get_object_or_404(Consulta,pk=pk)
+    medico = get_object_or_404(User,pk=consulta.medico_id)
+
+    response=HttpResponse(content_type='application/pdf')
+    response['Content-Disposition']='attachement; filename=receta_med.pdf'
+     # Create a file-like buffer to receive PDF data.
+    buffer = io.BytesIO()
+    # Create the PDF object, using the buffer as its "file."
+    p = canvas.Canvas(buffer,pagesize=A4)
+
+    p.setLineWidth(.3)
+    p.setFont('Helvetica',22)
+    p.drawString(30,750,'Receta Medica')
+    p.setFont('Helvetica',12)
+    p.drawString(30,735,medico.username)
+
+
+    fecha = consulta.created
+    fecha_f = fecha.strftime('%d/ %m/ %Y')
+    p.setFont('Helvetica-Bold',12)
+    p.drawString(480,750,fecha_f)
+    p.line(460,747,560,747)
+    
+    
+    p.save()
+    pdf=buffer.getvalue()
+    buffer.close()
+    response.write(pdf)
+    return response
