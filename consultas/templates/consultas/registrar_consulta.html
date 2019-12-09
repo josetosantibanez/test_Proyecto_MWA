@@ -2,22 +2,27 @@
 {% block title %}registrar consultas{% endblock %}
 
 {% block content %}
-<form method='POST' class="form-sample" action="">{% csrf_token %}
 
-    <div class="form-group">
-      <label for="disabledTextInput">Anotaciones</label>
-      {{form.anotaciones}}
-    </div>
-    <div class="form-group">
-      <label for="disabledTextInput">Diagnostico</label>
-      {{form.diagnostico}}
-    </div>
-    <div class="form-group">
-      <label for="disabledTextInput">Prescripcion</label>
-      {{form.prescripcion}}
-    </div>
-    
-    <button type="submit" class="btn btn-primary">Guardar</button>
+<div class="container" style="width:900px;">
+<form method='POST' class="form-sample" action="">{% csrf_token %}
+  <div class="form-group">
+    <label for="id_anotaciones">Anotaciones de la consutlta</label>
+    <textarea class="form-control" name="anotaciones" id="id_anotaciones" rows="8"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="id_diagnostico">Diagnostico</label>
+    <textarea class="form-control" name="diagnostico" id="id_diagnostico" rows="3"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="id_prescripcion">Prescripción</label>
+    <textarea class="form-control" name="prescripcion" id="id_prescripcion" rows="5"></textarea>
+  </div>
+<div style="margin-left:300px;">
+  <input type="submit" class="btn btn-primary " value="Guardar" style="width:120px;"/>
+  <a class="btn btn-inverse-secondary  btn-fw" style="width:120px;" href="{% url 'consultas:buscar_paciente' %}">Volver</a>
+</div>
 </form>
+</div>
+
 
 {% endblock %}

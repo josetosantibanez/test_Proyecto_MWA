@@ -3,7 +3,7 @@
 {% load static %}
 {% block content %}
 <form method='POST' class="form-sample" action="">{% csrf_token %}
-<div class="card mb-3 ml-2" style="width:400px;">
+<div class="card mb-3 ml-2" style="width:600px;">
   <img src="{% static '/consultas/img/ficha_paciente.jpg' %}" class="card-img-top" alt="..." width="450" height="250" > 
   {% comment %} Arreglar ancho de la foto, esta srea solo decorativa asique buscar foto {% endcomment %}
   <div class="card-body">
@@ -14,10 +14,16 @@
     <p class="card-text">Email: {{paciente.correo}}</p>
     <p class="card-text">N° Celular: {{paciente.celular}}</p>
     <p class="card-text">Dirección: {{paciente.direccion}}</p>
+    <hr>
+    <div style="margin-left:50px;">
     <button type="submit" class="btn btn-primary" name="_volver">Volver al menu principal</button>
     <button type="submit" class="btn btn-primary" name="_imprimir">Imprimir recta</button>
+    </div>
   </div>
-<table class="table table-sm">
+  <br>
+  <h4 style="margin-left:20px;"><strong>Historial de consultas del paciente</strong></h4>
+  <hr>
+<table class="table table-sm" style="margin-left:10px; margin-right:20px;">
   <thead>
     <tr>
       <th scope="col">Apellidos</th>
@@ -33,7 +39,7 @@
         <th>{{ paciente.apellido_p }} {{paciente.apellido_m}}</th>
         <td>{{paciente.nombres}}</td>
         <td>{{c.created}}</td>
-        <td>🖨</td>
+        <td><a href="{% url 'consultas:imprimir' c.id %}"><img src="https://img.icons8.com/bubbles/50/000000/print.png"></a></td>
         </tr>
         {% endif %}
     {% endfor %}

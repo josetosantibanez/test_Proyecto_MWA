@@ -164,3 +164,12 @@ def imprimir_pdf_receta(request,pk):
     buffer.close()
     response.write(pdf)
     return response
+
+def historial_pacientes(request):
+ 
+    pacientes = Consulta.objects.raw('''select MAX(c.created) as fecha,c.id,p.id, p.nombres, p.apellido_p, 
+                                        p.apellido_m, p.rut from consultas_paciente p 
+                                        inner join consultas_consulta c 
+                                        where c.paciente_id = p.id group by p.rut;''')
+    ctx={'pacientes':pacientes,}
+    return render(request,'consultas/historial_pacientes.html',ctx)

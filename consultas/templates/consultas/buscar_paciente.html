@@ -3,16 +3,14 @@
 {% block title %}Registrar consulta{% endblock %}
 {% block content %}
 
-    {% comment %} <form class="form-inline">
-    <div class="form-group mb-2">
-    <label for="rut_buscar_p" class="sr-only">Rut Paciente</label>
-    <input type="text" class="form-control-plaintext" id="rut_buscar_p" value="">
-    </div>
-    <button type="submit" class="btn btn-primary mb-2">Buscar</button>
-    </form> {% endcomment %}
-    <form class="form-inline" method='post' action="" enctype=multipart/form-data>{% csrf_token %}
-        {{form}}
-        <button type="submit" class="btn btn-primary mb-2">Buscar</button>
+
+    <form class="form-inline" method='post' action="" style='heigth:50px;'>{% csrf_token %}
+        <div class="input-group mb-3 ml-4">
+            <input style='width:350px;'type="text" id="id_rut" value="" name='rut' class="form-control" placeholder="Ingrese el rut del paciente, sin puntos ni guión." >
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="submit" >Buscar</button>
+            </div>
+        </div>
     </form>
 
 {% endblock %}

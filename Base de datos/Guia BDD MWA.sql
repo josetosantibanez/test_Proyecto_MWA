@@ -40,6 +40,7 @@
     
     # Selects de consultas
     select * from consultas_paciente;
+    select * from consultas_consulta;
 	
 	desc auth_user;
     desc miembros_miembro;
@@ -76,7 +77,8 @@ update registration_profile set tipo_cuenta_id = 4 where user_id = 16;
 				insert into auth_user (username,password,first_name,last_name,email,is_superuser,is_staff,is_active,date_joined) values (new.rut, 'pbkdf2_sha256$120000$Kpyp2shQuEe9$5oV3qOMpFvruBdGeQp6+/O3RJdfo6KnUT2vNCknGdW8=',new.nombres,new.apellido_p,new.correo,0,0,1,now());
 				set var_user_id = (select id from auth_user where username = new.rut order by date_joined DESC LIMIT 1);
 	            set new.user_id_id = var_user_id;
-                insert into registration_profile (tipo_cuenta_id,user_id,apellido_m,apellido_p,direccion,fecha_nacimiento,genero,celular,nombres,correo,rut) values (1,new.user_id,new.apellido_m,new.apellido_p,new.direccion,new.fecha_nacimiento,new.genero,new.celular,new.nombres,new.correo,new.rut);
+                insert into registration_profile (tipo_cuenta_id,user_id,apellido_m,apellido_p,direccion,fecha_nacimiento,genero,celular,nombres,correo,rut) values (1,new.user_id_id,new.apellido_m,new.apellido_p,new.direccion,new.fecha_nacimiento,new.genero,new.celular,new.nombres,new.correo,new.rut);
+                insert into consultas_paciente (user_id,apellido_m,apellido_p,direccion,fecha_nacimiento,genero,celular,nombres,correo,rut,created,updated) values (new.user_id_id,new.apellido_m,new.apellido_p,new.direccion,new.fecha_nacimiento,new.genero,new.celular,new.nombres,new.correo,new.rut,now(),now());
 	        end if;
 		set new.nombres = CONCAT(UCASE(LEFT(new.nombres, 1)),LCASE(SUBSTRING(new.nombres, 2)));
 	    set new.apellido_p = CONCAT(UCASE(LEFT(new.apellido_p, 1)),LCASE(SUBSTRING(new.apellido_p, 2)));
@@ -84,6 +86,8 @@ update registration_profile set tipo_cuenta_id = 4 where user_id = 16;
 		update clubes_club set cantidad_miembros = cantidad_miembros + 1 where id = new.club_id_id;
     END;
 	DELIMITER;
+    
+    desc consultas_paciente;
     
     DELIMITER //
 		create trigger cant_miembros_delete after delete on miembros_miembro
@@ -178,26 +182,34 @@ update registration_profile set tipo_cuenta_id = 4 where user_id = 16;
     select * from auth_user;
     alter table registration_profile drop column genero;
     
+    drop trigger update_profile;
 DELIMITER//
 
 create trigger update_profile after update on registration_profile
 for each row begin
 if exists (select * from consultas_paciente where user_id = new.user_id) then
-update consultas_paciente set rut = new.rut where user_id = new.user_id;
-update consultas_paciente set nombres = new.nombres where user_id = new.user_id;
-update consultas_paciente set apellido_p = new.apellido_p where user_id = new.user_id;
-update consultas_paciente set apellido_m = new.apellido_m where user_id = new.user_id;
-update consultas_paciente set fecha_nacimiento = new.fecha_nacimiento where user_id = new.user_id;
-update consultas_paciente set correo = new.correo where user_id = new.user_id;
-update consultas_paciente set celular = new.celular where user_id = new.user_id;
-update consultas_paciente set genero = new.genero where user_id = new.user_id;
-update consultas_paciente set direccion = new.direccion where user_id = new.user_id;
+	update consultas_paciente set rut = new.rut where user_id = new.user_id;
+	update consultas_paciente set nombres = new.nombres where user_id = new.user_id;
+	update consultas_paciente set apellido_p = new.apellido_p where user_id = new.user_id;
+	update consultas_paciente set apellido_m = new.apellido_m where user_id = new.user_id;
+	update consultas_paciente set fecha_nacimiento = new.fecha_nacimiento where user_id = new.user_id;
+	update consultas_paciente set correo = new.correo where user_id = new.user_id;
+	update consultas_paciente set celular = new.celular where user_id = new.user_id;
+	update consultas_paciente set genero = new.genero where user_id = new.user_id;
+	update consultas_paciente set direccion = new.direccion where user_id = new.user_id;
+else
+	insert into consultas_paciente(rut,nombres,apellido_p,apellido_m,fecha_nacimiento,correo,celular,genero,direccion,created,updated,user_id) values (new.rut,new.nombres,new.apellido_p,new.apellido_m,new.fecha_nacimiento,new.correo,new.celular,new.genero,new.direccion,'2019-09-23 07:36:21.000000','2019-09-23 07:36:21.000000',new.user_id);
 end if;
 end;    
 DELIMITER;
-    
 
-    
+select * from registration_profile;
+select * from auth_user;
+select * from consultas_paciente;
+select * from consultas_consulta;
+select id from consultas_consulta where medico_id = 16 order by created DESC limit 1;
+
+select MAX(c.created) as fecha, p.nombres, p.apellido_p, p.apellido_m, p.rut,c.medico_id from consultas_paciente p inner join consultas_consulta c where c.paciente_id = p.id group by p.rut;
     
     
     

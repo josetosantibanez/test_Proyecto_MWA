@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'productos.apps.ProductosConfig',
     'eventos.apps.EventosConfig',
     'consultas',
+    'horarios',
 
     ]
 

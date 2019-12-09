@@ -1,0 +1,32 @@
+{% extends 'core/base_layout_medico.html' %}
+{% block title %}Paciente{% endblock %}
+{% load static %}
+{% block content %}
+
+<h3>Pacientes atendidos</h3><br>
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col"><strong>Rut</strong></th>
+            <th scope="col"><strong>Apellidos</strong></th>
+            <th scope="col"><strong>Nombre</strong></th>
+            <th scope="col"><strong>Fecha ult. atencion</strong></th>
+            <th scope="col"><strong>Acción</strong></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for p in pacientes %}
+        {% if request.user.id == p.medico_id %}
+            <tr>
+                <td>{{p.rut}}</td>
+                <th>{{p.apellido_p }} {{p.apellido_m}}</th>
+                <td>{{p.nombres}}</td>
+                <td>{{p.created}}</td>
+                <td><img src="https://img.icons8.com/bubbles/50/000000/print.png"></td>
+            </tr>
+        {% endif %}
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

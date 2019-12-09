@@ -6,6 +6,7 @@ from productos.urls import productos_patterns
 from eventos.urls import eventos_patterns
 from clubes.urls import clubes_patterns
 from consultas.urls import consultas_patterns
+from horarios.urls import horarios_patterns
 from django.conf import settings
 
 urlpatterns = [
@@ -32,6 +33,9 @@ urlpatterns = [
 
     #Path de consultas
     path('medico/buscar_paciente/', include(consultas_patterns)),
+
+    #Path de horarios medicos
+    path('medico/horarios/', include(horarios_patterns)),
 
     #Path del auth
     path('accounts/', include('django.contrib.auth.urls')),
