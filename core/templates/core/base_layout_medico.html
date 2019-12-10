@@ -11,7 +11,8 @@
   <link rel="stylesheet" href="{% static 'core/vendor/datatables.net-bs4/dataTables.bootstrap4.css' %}">
   <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
   <link rel="stylesheet" href="{% static 'core/css/styleIndexMedico.css' %}">
-
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+  
   <link rel="shortcut icon" href="{% static 'core/img/favicon.png' %}" />
 
 
@@ -139,39 +140,39 @@
           {% if request.user.profile.tipo_cuenta_id == 4 %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'consultas:buscar_paciente' %}">
-              <i class="mdi mdi-view-headline menu-icon"></i>
-              <span class="menu-title">Nueva Consulta</span>
+              <i class="fa fa-plus"></i>
+              <span style="margin-left:20px;" class="menu-title">Nueva Consulta</span>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'consultas:historial_p' %}">
-              <i class="mdi mdi-view-headline menu-icon"></i>
-              <span class="menu-title">Pacientes atendidos</span>
+              <i class="fa fa-users"></i>
+              <span style="margin-left:15px;" class="menu-title">Pacientes atendidos</span>
             </a>
           </li>
            <li class="nav-item">
             <a class="nav-link" href="{% url 'consultas:historial_p' %}">
-              <i class="mdi mdi-view-headline menu-icon"></i>
-              <span class="menu-title">Gestionar horario</span>
+              <i class="fa fa-calendar"></i>
+              <span style="margin-left:20px;" class="menu-title">Gestionar horario</span>
             </a>
           </li>
           {% elif request.user.profile.tipo_cuenta_id == 1 %}
           <li class="nav-item">
-            <a class="nav-link" href="{%url 'productos:productos'%}">
-              <i class="mdi mdi-view-headline menu-icon"></i>
-              <span class="menu-title">Productos</span>
-            </a>
-          </li>
+          <a class="nav-link" href="{%url 'productos:productos'%}">
+            <i class="fa fa-cart-plus"></i>
+            <span style="margin-left:15px;" class="menu-title">Productos</span>
+          </a>
+        </li>
           <li class="nav-item">
           <a class="nav-link" href="{% url 'eventos:eventos' %}">
-            <i class="mdi mdi-chart-pie menu-icon"></i>
-            <span class="menu-title">Eventos</span>
+            <i class="fa fa-calendar"></i>
+            <span style="margin-left:18px;" class="menu-title">Eventos</span>
           </a>
         </li>
           <li class="nav-item">
           <a class="nav-link" href="{% url 'noticias:noticias' %}">
-            <i class="mdi mdi-chart-pie menu-icon"></i>
-            <span class="menu-title">Noticias</span>
+            <i class="fa fa-university"></i>
+            <span style="margin-left:15px;" class="menu-title">Noticias</span>
           </a>
         </li>
         <li class="nav-item">
@@ -184,6 +185,18 @@
           <a class="nav-link" href="{% url 'consultas:ficha' 11 %}">
             <i class="mdi mdi-chart-pie menu-icon"></i>
             <span class="menu-title">Ficha médica</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'productos:mis_reservas' %}">
+            <i class="fa fa-folder-open"></i>
+            <span style="margin-left:15px;" class="menu-title">Mis Reservas</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'consultas:ficha' 11 %}">
+            <i class="fa fa-heartbeat"></i>
+            <span style="margin-left:15px;" class="menu-title">Ficha médica</span>
           </a>
         </li>
           {% endif %}
