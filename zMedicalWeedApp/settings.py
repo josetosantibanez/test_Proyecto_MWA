@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -58,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
 
 ROOT_URLCONF = 'zMedicalWeedApp.urls'
 
