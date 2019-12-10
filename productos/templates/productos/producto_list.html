@@ -24,13 +24,11 @@
                 <strong>{{producto.proporcion}}<br></strong>
                 <strong>Disponible: {{producto.stock}} gramos.</strong>
                 <br>
-            <a style="width:150px; height:50px;" height=50 class="btn btn-primary " href="{% url 'productos:producto' producto.id %}" >Leer más</a>
-            {% if request.user.profile.tipo_cuenta == 1 %}
-              <a style="width:150px; height:50px;" height=50 class="btn btn-primary " href="{% url 'productos:update' producto.id %}" >Reservar producto</a>
-            {% endif %}
+            <a style="width:150px; height:40px;" class="btn btn-primary mt-1" href="{% url 'productos:producto' producto.id %}" >Leer más</a>
+            
             {% if request.user.is_staff %}
-            <a style="width:150px; height:50px;" height=50 class="btn btn-primary " href="{% url 'productos:update' producto.id %}" >Modificar Producto</a>
-            <a style="width:150px; height:50px;" height=50 class="btn btn-primary " href="{% url 'productos:delete' producto.id %}" >Eliminar Producto</a>
+            <a style="width:150px; height:40px;" class="btn btn-primary mt-1" href="{% url 'productos:update' producto.id %}" >Modificar</a>
+            <a style="width:150px; height:40px;" class="btn btn-primary mt-1" href="{% url 'productos:delete' producto.id %}" >Eliminar</a>
             {% endif %}
               </div>
             

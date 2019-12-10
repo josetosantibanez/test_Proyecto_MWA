@@ -13,32 +13,30 @@
           </tr>
         </div>
         {%for noticia in noticia_list%}
-        <div class="card mb-2" style="width: 40rem;">
-          <img src="{{noticia.imagen.url}}" class="card-img-top" alt="...">
-
-          <div class="card-body">
-            <h5 class="card-title">{{noticia.titulo}}</h5>
-            <hr>
-            <h6 class="card-subtitle">{{noticia.subtitulo}}</h6>
-          </div>
-          <hr>
-          <div class="">
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item"><a>{{noticia.cuerpo|safe}}</a></li>
-
-          {%if noticia.url_noticia %}
-            <li class="list-group-item"><a class="link" href = {{noticia.url_noticia}}>Ver fuente original de la noticia</a></li>
-          {%endif%}
-
+       <div class="blog-card">
+    <div class="meta">
+           <div class="photo" style="background-image: url({{noticia.imagen.url}})"></div>
+      <ul class="details">
+        <li class="author"><a href="#">Joseto MWA </a></li>
+        <li class="date">25 Noviembre, 2019</li>
+       
+      </ul>
+    </div>
+    <div class="description">
+      <h1>{{noticia.titulo}}</h1>
+      <h2>{{noticia.subtitulo}}</h2>
+      <p>{{noticia.cuerpo|safe}}</p>
+      <p class="read-more">
+         {%if noticia.url_noticia %}
+        <a href="{{noticia.url_noticia}}">Fuente</a>
+          {%endif%}        
           {% if request.user.is_staff %}
-          <li class="list-group-item">
-            <a class="btn btn-primary " href="{% url 'noticias:update' noticia.id %}" >Modificar Noticia</a>
-            <a class="btn btn-primary " href="{% url 'noticias:delete' noticia.id %}" >Eliminar Noticia</a>
-          </li>
+         				<a href="{% url 'noticias:update' noticia.id %}">Modificar</a>
+                <a href="{% url 'noticias:delete' noticia.id %}">Eliminar</a>
           {% endif %}
-          </ul>
-          </div>
-        </div>
+      </p>
+    </div>
+  </div>
         {% endfor %}
         </div> 
       </li>

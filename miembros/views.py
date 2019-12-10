@@ -107,3 +107,7 @@ class MiembroUpdateView(UpdateView):
 class MiembroDeleteView(DeleteView):
     model = Miembro
     success_url = reverse_lazy('miembros:miembros')
+
+def solicitudes(request):
+    ctx={}
+    return render(request, 'miembros/solicitudes_pendientes.html', ctx)

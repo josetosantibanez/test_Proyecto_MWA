@@ -1,0 +1,168 @@
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0;
+}
+.clearfix {
+  display: inline-table;
+}
+
+* html .clearfix {
+  height: 1%;
+}
+.clearfix {
+  display: block;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  position: relative;
+}
+/* for demo */
+.wrapper {
+  display: block;
+  width: 800px;
+  height: 350px;
+  margin: 10px auto;
+  background: #fcfcfc;
+  color: #c5c2c2;
+}
+div#calendar {
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: 50%;
+  float: left;
+  height: 300px;
+  background: #f3f3f3;
+}
+table {
+  width: 100%;
+  font-family: sans-serif;
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid #dadada;
+  background: #ececec;
+  height: 300px;
+}
+thead {
+}
+tr.head_cal {
+  background: #3ef695;
+  color: #10b424;
+  font-size: 20px;
+  line-height: 60px;
+  text-transform: uppercase;
+}
+tr.subhead_cal {
+  background: #35d27f;
+  color: #fff;
+  font-size: 18px;
+  line-height: 28px;
+}
+tr.week_cal {
+  background: #fff;
+  color: #28965c;
+  font-size: 15px;
+  line-height: 27px;
+}
+td.white_cal {
+  background: #ececec !important;
+}
+tbody.days_cal tr td a {
+  padding: 5px 7px;
+  text-decoration: none;
+  color: #b9b9b9;
+  line-height: 30px;
+}
+tbody.days_cal tr td {
+  padding: 0;
+  margin: 0;
+  background: #fafafa;
+  border: 1px solid #ebeaea;
+  text-align: center;
+}
+.event {
+  border-radius: 100%;
+  border-bottom: 1px solid #3498db;
+  transition: all 0.3s ease;
+}
+.today_cal.event {
+  border-radius: 100%;
+  border-bottom: 1px solid #ee7171;
+  transition: all 0.3s ease;
+}
+.today_cal.event:hover,
+.event:hover {
+  border-color: #e26d2b;
+  color: #e26d2b;
+  transition: all 0.3s ease;
+}
+.week_event {
+  color: #ee7171;
+}
+#calendar_data {
+  margin: 0;
+  padding: 0;
+  display: block;
+  width: 50%;
+  float: left;
+  height: 300px;
+  background: #daffd8;
+  border: 1px solid #e6e6e6;
+  color: #c5c2c2;
+  font-size: 13px;
+  font-family: sans-serif;
+  font-weight: 700;
+}
+#calendar_data h3 {
+  text-align: center;
+  font-size: 20px;
+  padding: 5px 10px;
+  margin: 0;
+  color: #37a032;
+  border-bottom: 1px solid #eeebeb;
+  text-transform: capitalize;
+}
+#calendar_data dl {
+  padding: 0.5em;
+  margin-left: -1em;
+}
+#calendar_data dt {
+  float: left;
+  clear: left;
+  width: 100px;
+  text-align: right;
+  font-weight: bold;
+  color: #8f8f8f;
+}
+#calendar_data dd {
+  margin: 0 0 0 110px;
+  padding: 0 0 0.5em 0;
+}
+#calendar_data a {
+  color: #4aae44;
+  text-decoration: underline;
+}
+#json pre {
+  display: block;
+  clear: left;
+  margin-top: 21px;
+  word-wrap: break-word;
+  word-break: break-all;
+  overflow: auto;
+  height: 220px;
+  background: #e46868;
+  color: #fff;
+  border: 1px solid #e47b7b;
+}

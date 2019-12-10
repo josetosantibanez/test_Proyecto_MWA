@@ -3,6 +3,97 @@
 {%block title%}Inicio{%endblock%}
 {%load static%}
 {%block content%}
+    {% if request.user.profile.tipo_cuenta_id == 1 %}
+                    <div class="container">
+            <div class="box first">
+                <span class="icon-cont"><i class="fa fa-user-md"></i></span>
+                
+                <h3>Medicinal</h3>
+                
+                <ul class="hidden">
+                <li>Efecto analgésico y antiinflamatorio.</li>
+                <li>Terapia para Artritis y artrosis</li>
+                <li>Ansiedad y depresión</li>
+                </ul>
+                    
+                <a class="expand"><span class="plus">+</span><span class="minus">-</span></a>
+            </div>
+            
+            <div class="box second">
+                <span class="icon-cont"><i class="fa fa-cannabis"></i></span>
+                
+                <h3>Variedades</h3>
+                
+                <ul class="hidden">
+                <li>Sativa</li>
+                <li>Indica</li>
+                <li>Ruderalis</li>
+                </ul>
+                    
+                <a class="expand"><span class="plus">+</span><span class="minus">-</span></a>
+            </div>
+            
+            <div class="box third">
+                <span class="icon-cont"><i class="fa fa-graduation-cap"></i></span>
+                
+                <h3> Historia</h3>
+                
+                <ul class="hidden">
+                <li>Originaria Asia Central</li>
+                <li>Comienzos siglo XV en America del Sur</li>
+                <li>Legalizado en gran parte del mundo actualmente</li>
+                </ul>
+                    
+                <a class="expand"><span class="plus">+</span><span class="minus">-</span></a>
+            </div>
+            
+            <div class="box fourth">
+                <span class="icon-cont"><i class="fa fa-users"></i></span>
+                
+                <h3>Social</h3>
+                
+                <ul class="hidden">
+                <li>Mayor comunicacion en grupos</li>
+                <li>Medio para establecer nuevos intereses</li>
+                
+                </ul>
+                    
+                <a class="expand"><span class="plus">+</span><span class="minus">-</span></a>
+            </div>
+            </div>
 
+    {% elif request.user.profile.tipo_cuenta_id == 2 %}
+        <div class="to-do-list">
+            <div class="list-title">Tareas por hacer</div>
+            <hr>
+            
+            <div class="list-body"></div>
+            
+            <div class="list-footer">
+                <hr>
+                <input class="item-input" type="text" placeholder="Nueva tarea... max 21 caracteres" maxlength="21"/>
+                <span class="add-item" title="Add Item"></span>
+            </div>
+        </div>
+
+    {% elif request.user.profile.tipo_cuenta_id == 4 %}
+         <div class="wrapper">
+            <h1>Consultas para el día de Hoy.</h1>
+            <div id="calendar"></div>
+            <div id="calendar_data">
+            <h3>Consultas</h3>
+            <dl>
+                <dt><dfn>12:00:</dfn></dt><dd><a href=""> Cristian Brown / 19792429-2 </dd>
+                <dt><dfn>12:30:</dfn></dt><dd>José Santibañez / 19606331-5 </dd>
+                <dt><dfn>14:00:</dfn></dt><dd>Isabel Salinas / 11245677-5</dd>
+                <dt><dfn>14:30:</dfn></dt><dd>Nathaly Torres / 17286110-5</dd>
+                <dt><dfn>15:00:</dfn></dt><dd>Eduardo villa / 18428727-7</dd>
+            <hr style="width: 85%"/>
+            </dl>
+            </div>
+            <div class="clearfix"></div>
+
+         </div>
+    {% endif %}
             
 {%endblock%}

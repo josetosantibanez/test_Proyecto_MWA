@@ -1,0 +1,52 @@
+{% extends "core/base_layout_club.html" %}
+{% load static %}
+{% block content %}
+    <div>
+    <table class="table table-striped mt-3 mb-3 ml-3 mr-3">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido Paterno</th>
+      <th scope="col">Teléfono Contacto</th>
+      <th scope="col">Estado</th>
+      <th scope="col">Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">1</th>
+      <td>Juan</td>
+      <td>Soto</td>
+      <td>+56978445547</td>
+      <td><label class="badge badge-danger" style="width:80px;">Rechazado</label></td>
+      <td>🔎</td>
+    </tr>
+    <tr>
+      <th scope="row">2</th>
+      <td>Alison</td>
+      <td>Salinas</td>
+      <td>+56945778791</td>
+      <td><label class="badge badge-success" style="width:80px;">Aprobado</label></td>
+      <td>🔎</td>
+    </tr>
+    <tr>
+      <th scope="row">3</th>
+      <td>Alberto</td>
+      <td>Pereira</td>
+      <td>+56956885794</td>
+      <td><label class="badge badge-warning" style="width:80px;">Pendiente</label></td>
+      <td>🔎</td>
+    </tr>
+    <tr>
+      <th scope="row">4</th>
+      <td>Sofia</td>
+      <td>Hidalgo</td>
+      <td>+56968114930</td>
+      <td><label class="badge badge-warning" style="width:80px;">Pendiente</label></td>
+      <td>🔎</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+{% endblock %}

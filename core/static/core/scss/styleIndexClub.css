@@ -1,0 +1,179 @@
+.to-do-list {
+    position: absolute;
+  
+    left: 50%;
+  
+    transform: translateX(-50%);
+    text-align: center;
+    width: 100vh;
+    height: 90vh;
+  
+    max-width: 50em;
+  
+    padding: 2vh;
+  
+    border: 2px solid black;
+    border-radius: 10vh;
+  
+    font-family: Arial;
+  }
+  
+  .list-title {
+    font-family: Arial;
+    font-size: 6vh;
+    font-weight: 1000;
+  
+    margin-bottom: 3vh;
+  }
+  
+  .list-body {
+    position: relative;
+  
+    display: flex;
+  
+    height: 63vh;
+  
+    flex-direction: column;
+    flex-wrap: no-wrap;
+  
+    align-content: center;
+  
+    padding: 1vh;
+  
+    /*     border: 1px solid black;
+    border-radius: 2vh 0 0 2vh; */
+  
+    overflow-y: auto;
+  }
+  
+  .list-body:empty::before {
+    content: "Aun no tiene tareas creadas";
+  
+    text-align: center;
+    line-height: 63vh;
+  
+    font-size: 5vh;
+  }
+  
+  .list-item {
+    position: relative;
+  
+    height: 8vh;
+  
+    margin-bottom: 2vh;
+  
+    line-height: 8vh;
+  
+    border-bottom: 1px solid black;
+  }
+  
+  .status {
+    display: inline-block;
+  
+    width: 4vh;
+    height: 4vh;
+  
+    margin-left: 2vh;
+  
+    vertical-align: middle;
+  }
+  
+  .status:checked + .item {
+    text-decoration: line-through;
+    opacity: 0.5;
+  }
+  
+  .item {
+    display: inline-block;
+  
+    max-width: 57vh;
+  
+    margin-left: 4vh;
+  
+    line-height: 4vh;
+    font-size: 4vh;
+  
+    vertical-align: middle;
+  }
+  
+  .remove-item::before {
+    content: "\00D7";
+  
+    float: right;
+  
+    margin-right: 2vh;
+  
+    font-size: 8vh;
+    font-weight: bold;
+  
+    cursor: pointer;
+  
+    vertical-align: middle;
+  
+    transition: color 0.25s;
+  }
+  
+  .remove-item:hover::before {
+    color: red;
+  }
+  
+  .list-footer {
+    position: absolute;
+  
+    display: border-box;
+  
+    width: 100%;
+  
+    left: 0;
+    bottom: 2.5vh;
+  
+    text-align: right;
+  
+    /*     outline: 1px solid black; */
+  }
+  
+  .item-input {
+    position: relative;
+  
+    width: 75%;
+    height: 5vh;
+  
+    margin-top: 1vh;
+  
+    line-height: 5vh;
+  
+    font-size: 3vh;
+  }
+  
+  .add-item::before {
+    content: "+";
+  
+    position: relative;
+  
+    display: inline-block;
+  
+    margin-right: 3vh;
+  
+    width: 8vh;
+    height: 8vh;
+  
+    text-align: center;
+  
+    vertical-align: middle;
+  
+    line-height: 8vh;
+  
+    font-size: 8vh;
+    font-weight: bold;
+  
+    border-radius: 50%;
+  
+    transition: color 0.5s;
+  
+    cursor: pointer;
+  }
+  
+  .add-item:hover::before {
+    color: lime;
+  }
+  

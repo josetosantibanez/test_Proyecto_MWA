@@ -1,0 +1,169 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "brandon-grotesque", sans-serif;
+}
+
+#containerProducto {
+  background: #fff;
+  width: 650px;
+  height: 380px;
+  margin: 50px auto;
+  border: 1px solid;
+}
+
+#panel {
+  height: 410px;
+  padding: 20px;
+}
+
+#panel h1 {
+  margin: 0;
+}
+
+#panel-foot {
+  background: #333;
+  height: 30px;
+}
+
+.col {
+  width: 50%;
+  height: 100%;
+  float: left;
+  padding: 4px;
+}
+
+.col-left {
+  background-image: url();
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+h1,
+h2 {
+  color: #333;
+}
+
+.ratings {
+  padding-top: 10px;
+}
+
+.ratings p {
+  display: inline-block;
+  font-size: 16px;
+  margin: 0;
+  padding-left: 10px;
+  position: relative;
+  top: -2px;
+  color: #b3b3b3;
+}
+
+.descrip p {
+  display: inline-block;
+}
+
+.descrip img {
+  position: relative;
+  max-width: 50%;
+  top: 4px;
+  right: -4px;
+}
+
+.descrip img :hover {
+  cursor: pointer;
+}
+
+.price h2 {
+  font-size: 24px;
+  margin: 0;
+}
+
+.price span {
+  color: #b3b3b3;
+}
+
+.qty {
+  margin-top: 12px;
+}
+
+.qty h2 {
+  display: inline-block;
+  font-weight: 400;
+}
+
+.qty input[type="text"] {
+  display: inline-block;
+  text-align: center;
+  margin-left: 6px;
+  font-size: 24px;
+  position: relative;
+  top: 1px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding: 4px 6px;
+  border: 1px solid #e6e6e6;
+}
+
+.qty img {
+  position: relative;
+  top: 9px;
+  margin-left: 6px;
+}
+
+.add {
+  margin-top: 10px;
+}
+
+.add input[type="submit"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 56%;
+  border: none;
+  background: #e6e6e6;
+  color: #333;
+  font-size: 21px;
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.add input[type="submit"]:hover {
+  background: #b3b3b3;
+  color: #fff;
+  cursor: pointer;
+}
+
+.add input[type="submit"]:focus {
+  outline: none;
+}
+
+#pop {
+  display: none;
+  z-index: 1;
+  background: #e6e6e6;
+  height: 100%;
+  padding: 10px;
+}
+
+#pop h3 {
+  margin: 0;
+}
+
+#pop img {
+  float: right;
+  position: relative;
+  top: -20px;
+  left: 20px;
+}
+
+#pop img :hover {
+  cursor: pointer;
+}
+
+#info:hover,
+#close:hover,
+#minus:hover,
+#plus:hover {
+  cursor: pointer;
+}
+/*# sourceMappingURL=style_producto_list.css.map */

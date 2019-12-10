@@ -4,19 +4,20 @@
 
 {%block content%}
 <li style="list-style:none;">
-      <div class="container ml-4 " >
+      <div class="container ml-4 mb-4" >
         <div style="display:center;" >
           <tr>
             {% if request.user.is_staff %}
               {% include 'eventos/includes/eventos_menu.html' %}
             {% endif %}
-            <br/>
+
           </tr>
         </div>
         <div class="card-deck ml-2 mt-2">
+
 {%for evento in evento_list %} 
     
-  <div class="card">
+  {% comment %} <div class="card">
     <img src="{{evento.imagen.url}}" class="card-img-top" alt="...">
     <div class="card-body">
       <h5 class="card-title">{{evento.nombre}}</h5>
@@ -27,9 +28,27 @@
     <div class="card-footer" style="text-align:center;">
       <a class="btn btn-primary " type=submit href="{% url 'eventos:evento' evento.id %}" >Ver detalle</a>
     </div>
-  </div>
+  </div> {% endcomment %}
+  <div class="containerEvento">
+ 
+    <div class="card">
+        <img src="{{evento.imagen.url}}" alt="Mori" class="card-img-top">
+        <div class="card-body">
+            <h5 class="card-title">{{evento.nombre}}</h5>
+            <p class="card-text">{{evento.descripcion|safe}}</p>
+            <p class="card-text">{{evento.fecha}}</p>
+            {% if request.user.profile.tipo_cuenta_id == 1 %}
+              <a href="{% url 'eventos:evento' evento.id %}" class="btn">Confirmar Asistencia</a>
+            {% elif request.user.profile.tipo_cuenta_id == 2 %}
+              <a href="{% url 'eventos:evento' evento.id %}" class="btn">Modificar</a>
+              <a href="{% url 'eventos:evento' evento.id %}" class="btn">Eliminar</a>
+            {% endif %}            
+        </div>
+    </div>
+</div>
 
 {% endfor %}
    </div> 
-   
+   </div>
+   </li>
 {%endblock%}

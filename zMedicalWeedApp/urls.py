@@ -32,7 +32,7 @@ urlpatterns = [
     path('club/eventos/', include(eventos_patterns)),
 
     #Path de consultas
-    path('medico/buscar_paciente/', include(consultas_patterns)),
+    path('medico/', include(consultas_patterns)),
 
     #Path de horarios medicos
     path('medico/horarios/', include(horarios_patterns)),

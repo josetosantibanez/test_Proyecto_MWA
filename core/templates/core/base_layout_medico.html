@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 {% load static %}
 <head>
@@ -10,15 +10,19 @@
   <link rel="stylesheet" href="{% static 'core/vendor/base/vendor.bundle.base.css' %}">
   <link rel="stylesheet" href="{% static 'core/vendor/datatables.net-bs4/dataTables.bootstrap4.css' %}">
   <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'core/css/styleIndexMedico.css' %}">
+
   <link rel="shortcut icon" href="{% static 'core/img/favicon.png' %}" />
+
+
 </head>
 
 <div class="container-scroller">
   <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
           <div class="navbar-brand-wrapper d-flex justify-content-center">
       <div class="navbar-brand-inner-wrapper d-flex justify-content-between align-items-center w-100">  
-        <a class="navbar-brand brand-logo" href="inicioMedico.html"><img src="{% static 'core/img/logo.svg' %}" alt="logo"/></a>
-        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{% static 'core/img/logo-mini.svg' %}" alt="logo"/></a>
+        <a class="navbar-brand brand-logo" href="inicioMedico.html"><img src="{% static 'core/img/logoMwa.jpg' %}" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="index.html"><img src="{% static 'core/img/logoMwa.jpg' %}" alt="logo"/></a>
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
           <span class="mdi mdi-sort-variant"></span>
         </button>
@@ -127,11 +131,12 @@
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
           <li class="nav-item">
-            <a class="nav-link" href="inicioMedico.html">
+            <a class="nav-link" href="{% url 'consultas:mhome' %}">
               <i class="mdi mdi-home menu-icon"></i>
               <span class="menu-title">Inicio</span>
             </a>
           </li>
+          {% if request.user.profile.tipo_cuenta_id == 4 %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'consultas:buscar_paciente' %}">
               <i class="mdi mdi-view-headline menu-icon"></i>
@@ -144,8 +149,44 @@
               <span class="menu-title">Pacientes atendidos</span>
             </a>
           </li>
-           
-        
+           <li class="nav-item">
+            <a class="nav-link" href="{% url 'consultas:historial_p' %}">
+              <i class="mdi mdi-view-headline menu-icon"></i>
+              <span class="menu-title">Gestionar horario</span>
+            </a>
+          </li>
+          {% elif request.user.profile.tipo_cuenta_id == 1 %}
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'productos:productos'%}">
+              <i class="mdi mdi-view-headline menu-icon"></i>
+              <span class="menu-title">Productos</span>
+            </a>
+          </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'eventos:eventos' %}">
+            <i class="mdi mdi-chart-pie menu-icon"></i>
+            <span class="menu-title">Eventos</span>
+          </a>
+        </li>
+          <li class="nav-item">
+          <a class="nav-link" href="{% url 'noticias:noticias' %}">
+            <i class="mdi mdi-chart-pie menu-icon"></i>
+            <span class="menu-title">Noticias</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'productos:mis_reservas' %}">
+            <i class="mdi mdi-chart-pie menu-icon"></i>
+            <span class="menu-title">Mis Reservas</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'consultas:ficha' 11 %}">
+            <i class="mdi mdi-chart-pie menu-icon"></i>
+            <span class="menu-title">Ficha médica</span>
+          </a>
+        </li>
+          {% endif %}
           {% comment %} <li class="nav-item">
             <a class="nav-link" href="historialMedico.html">
               <i class="mdi mdi-view-headline menu-icon"></i>
@@ -162,10 +203,9 @@
          
         </ul>
       </nav>
-      <!-- partial -->
+     
+        {% block content %}{% endblock %}
       
-        {% block content %}{%endblock%}
-          
         </div>
         <!-- content-wrapper ends -->
         <!-- partial:partials/_footer.html -->
@@ -194,5 +234,7 @@
   <script src="{% static 'core/js/data-table.js' %}"></script>
   <script src="{% static 'core/js/jquery.dataTables.js' %}"></script>
   <script src="{% static 'core/js/dataTables.bootstrap4.js' %}"></script>
+  <script src="{% static 'core/js/styleIndexMedico.js' %}"></script>
+
 </body>
 </html>

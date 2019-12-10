@@ -11,6 +11,18 @@
   <link rel="stylesheet" href="{% static 'core/vendor/datatables.net-bs4/dataTables.bootstrap4.css' %}">
   <link rel="stylesheet" href="{% static 'core/css/style.css' %}">
   <link rel="shortcut icon" href="{% static 'core/img/logominimwa.jpg' %}" />
+  <link rel="stylesheet" href="{% static 'core/scss/style_evento_list.css' %}">
+  <link rel="stylesheet" href="{% static 'core/scss/style_noticias_list.css' %}">
+  <link rel="stylesheet" href="{% static 'core/scss/style_producto_list.css' %}">
+  <link rel="stylesheet" href="{% static 'core/scss/styleMiembrosList.css' %}">
+  <link rel="stylesheet" href="{% static 'core/scss/styleIndexMedico.css' %}">
+  <link rel="stylesheet" href="{% static 'core/scss/styleIndexPaciente.css' %}">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'core/scss/styleIndexClub.css' %}">
+
+
+ 
+
 </head>
 
 <div class="container-scroller">
@@ -134,13 +146,8 @@
             <span class="menu-title">Inicio</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="{%url 'productos:productos'%}">
-            <i class="mdi mdi-view-headline menu-icon"></i>
-            <span class="menu-title">Productos</span>
-          </a>
-        </li>
-        {% if request.user.is_staff %}
+        
+        {% if request.user.profile.tipo_cuenta_id == 2 %}
         <li class="nav-item">
           <a class="nav-link" href="{%url 'miembros:miembros'%}">
             <i class="mdi mdi-view-headline menu-icon"></i>
@@ -148,6 +155,13 @@
           </a>
         </li>
         {% endif %}
+        {% if request.user.profile.tipo_cuenta_id == 2 or request.user.profile.tipo_cuenta_id == 1 %}
+          <li class="nav-item">
+          <a class="nav-link" href="{%url 'productos:productos'%}">
+            <i class="mdi mdi-view-headline menu-icon"></i>
+            <span class="menu-title">Productos</span>
+          </a>
+        </li>
           <li class="nav-item">
           <a class="nav-link" href="{% url 'eventos:eventos' %}">
             <i class="mdi mdi-chart-pie menu-icon"></i>
@@ -160,6 +174,7 @@
             <span class="menu-title">Noticias</span>
           </a>
         </li>
+        {% endif %}
         {% if request.user.profile.tipo_cuenta_id == 2 or request.user.profile.tipo_cuenta_id == 3 %}
         <li class="nav-item">
           <a class="nav-link" href="{% url 'productos:reservas' %}">
@@ -174,7 +189,41 @@
             <span class="menu-title">Mis Reservas</span>
           </a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'consultas:ficha' 11 %}">
+            <i class="mdi mdi-chart-pie menu-icon"></i>
+            <span class="menu-title">Ficha médica</span>
+          </a>
+        </li>
         {%endif%}
+        {% if request.user.profile.tipo_cuenta_id == 2 %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'miembros:solicitudes' %}">
+              <i class="mdi mdi-chart-pie menu-icon"></i>
+              <span class="menu-title">Solicitudes pendientes</span>
+            </a>
+          </li>
+        {% endif %}
+        {% if request.user.profile.tipo_cuenta_id == 4 %}
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'consultas:buscar_paciente' %}">
+              <i class="mdi mdi-view-headline menu-icon"></i>
+              <span class="menu-title">Nueva Consulta</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'consultas:historial_p' %}">
+              <i class="mdi mdi-view-headline menu-icon"></i>
+              <span class="menu-title">Pacientes atendidos</span>
+            </a>
+          </li>
+           <li class="nav-item">
+            <a class="nav-link" href="{% url 'consultas:historial_p' %}">
+              <i class="mdi mdi-view-headline menu-icon"></i>
+              <span class="menu-title">Gestionar horario</span>
+            </a>
+          </li>
+          {% endif %}
       </ul>
     </nav>
 
@@ -210,5 +259,12 @@
   <script src="{% static 'core/js/data-table.js' %}"></script>
   <script src="{% static 'core/js/jquery.dataTables.js' %}"></script>
   <script src="{% static 'core/js/dataTables.bootstrap4.js' %}"></script>
+  <script src="{% static 'core/js/productList.js' %}"></script> 
+  <script src="{% static 'core/js/styleIndexMedico.js' %}"></script>
+  <script src="{% static 'core/js/styleIndexPaciente.js' %}"></script>
+  <script src="{% static 'core/js/styleIndexClub.js' %}"></script>
+
+  
+
 </body>
 </html>

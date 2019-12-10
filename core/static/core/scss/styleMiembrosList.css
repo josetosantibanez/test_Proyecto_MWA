@@ -1,0 +1,133 @@
+.profile-wrapper {
+    max-width: 500px;
+    width: 500px;
+    max-height: 150px;
+    height: 150px;
+    display: inline-block;
+  }
+  
+  .profile-body {
+    background: -moz-linear-gradient(
+      320deg,
+      rgba(31, 41, 125, 1) 0%,
+      rgba(0, 128, 128, 1) 100%
+    ); /* ff3.6+ */
+    background: -webkit-gradient(
+      linear,
+      left top,
+      right bottom,
+      color-stop(0%, rgba(31, 41, 125, 1)),
+      color-stop(100%, rgba(0, 128, 128, 1))
+    ); /* safari4+,chrome */
+    background: -webkit-linear-gradient(
+      320deg,
+      rgba(31, 41, 125, 1) 0%,
+      rgba(0, 128, 128, 1) 100%
+    ); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(
+      320deg,
+      rgba(54, 201, 85) 0%,
+      rgba(0, 128, 128, 1) 100%
+    ); /* opera 11.10+ */
+    background: -ms-linear-gradient(
+      320deg,
+      rgba(54, 201, 85) 0%,
+      rgba(0, 128, 128, 1) 100%
+    ); /* ie10+ */
+    background: linear-gradient(
+      130deg,
+      rgb(54, 201, 85),
+      rgba(0, 128, 128, 1) 100%
+    ); /* w3c */
+    height: 150px;
+  }
+  
+  .profile-body img {
+    margin: 15px 25px;
+    height: 60%;
+    border: 3px solid white;
+    border-radius: 100%;
+    vertical-align: top;
+    float: left;
+  }
+  
+  .profile-body img:after {
+    clear: both;
+  }
+  
+  .profile-details {
+    display: inline;
+    float: left;
+    overflow: hidden;
+    color: white;
+  }
+  
+  .profile-details:after {
+    clear: both;
+  }
+  
+  .profile-details h1 {
+    margin-bottom: 0.1em;
+  }
+  
+  .profile-details .description {
+    margin: 0;
+    padding-bottom: 0.3em;
+  }
+  
+  .profile-details ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .profile-details ul li,
+  .profile-details .item {
+    display: inline;
+  }
+  
+  .clearfix {
+    clear: both;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .actions {
+    height: 60px;
+  }
+  
+  .actions:after {
+    clear: both;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .actions {
+    text-align: center;
+    
+    
+  }
+  
+  .actions a {
+    background: none;
+    border: 3px;
+    width: 25%;
+    height: 40px;
+    color: black
+
+  }
+  
+  .actions a.primary {
+    background: rgb(61, 31, 192);
+    width: 400px;
+    
+  }
+  
+  .actions a.terciario {
+    background: #12182c;
+  }
+  
+  .actions a.secondary {
+    background: #2217bb;
+  }
+  

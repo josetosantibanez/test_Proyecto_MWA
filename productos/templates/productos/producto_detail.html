@@ -2,42 +2,56 @@
 {% load static %}
 {% block title %}{{producto.nombre}}{% endblock %}
 {% block content %}
+<form method='POST'>{% csrf_token %}
+<div id="containerProducto">
+          <div id="panel">
+            <div class="col col-left">
+                    <img src="{{producto.imagen.url}}" style="width:280px; height:325px;" >
 
-<div class="card mb-4 ml-3 mt-3" style="height:80%; width:50%;" >
-  <div class="row no-gutters">
-    <div class="col-md-4 " >
-      <img src="{{producto.imagen.url}}" class="card-img" alt="..." style="height:300px; width:250px;">
-    </div>
-    <div class="" style="margin-left:10px;">
-      <div class="card-body">
-        <h5 class="card-title">{{producto.nombre}}</h5>
-        <p class="card-text">{{producto.descripcion|safe}}</p>
-        <p class="card-text"><strong>{{producto.proporcion}}</strong></p>
-        <p class="card-text"><strong>Stock disponible: {{producto.stock}} gramos.</strong></p>
-        <p class="card-text"><strong>Precio por gramo: ${{producto.precio_gramo}} </strong></p>
-        {% if request.user.profile.tipo_cuenta_id == 1 %}
-          <form method="POST" class="form-inline">{% csrf_token %}
-            {{form.producto}}
-            {{form.usuario}}
-            {{form.estado}}
-            {{form.precio_total}}
-          <div class = "row">
-            {{form.cantidad_reservar}}
             
-            <input type="submit" class="btn btn-primary btn-rounded ml-2" value="Reservar" />
-          </div>
-          <p class="card-text"><small class="text-muted">Nota:Usted, {{m.nombres}} puede reservar un máximo de {{cmax}} gramos.</small></p>
-        {%endif%}
-        
-        </form>
-        {% if form.cantidad_reservar.errors %}
+            </div>
+            <div class="col col-right">
+              <div id="pop">
+                <img id="close" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/523617/close_circle_button.svg" width="20px">
+                <h3>{{producto.nombre}}</</h3>
+                <p>
+                  {{producto.descripcion|safe}}
+                </p>
+                <p>
+                Disponible: {{producto.stock}} grs. / precio</p>
+              </div>
+              <div id="main">
+                <h1>{{producto.nombre}}</h1>
+                <div class="ratings">
+                  <p>{{producto.club_id.nombre_org}} / {{producto.proporcion}}</p>
+                </div>
+                <div class="descrip">
+                  <p>Descripcion</p><img id="info" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/523617/info_icon_light.svg" width="16px">
+                </div>
+                <div class="price">
+                  <h2>${{producto.precio_gramo}}<span>/unidad</span></h2>
+                </div>
+                <div class="qty">
+                  <h2>Cantidad</h2>
+
+                  <img id="minus" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/523617/plus_minus-02.svg" width="30px" height="30px">
+                  <input id="id_cantidad_reservar" name="cantidad_reservar" type="text" value=0 size=1>
+                  <img id="plus" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/523617/plus_minus-01.svg" width="30px" height="30px">
+                </div>
+                <div class="add">
+                  <input type="submit" value="Reservar">
+                    {% if form.cantidad_reservar.errors %}
           <ul>
               <li style="list-style:none;" class="text-danger">{{form.cantidad_reservar.errors}}</li>
             
           </ul>
         {%endif%}
-      </div>
-    </div>
-  </div>
-</div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+          </div>
+</form>
+
 {% endblock %}
